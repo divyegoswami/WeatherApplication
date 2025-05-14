@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Divye Goswami" />
+    <meta name="last-modified" content="2025-03-11" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Landing Page - Cozy Skies</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="author" content="Divye Goswami">
-  <meta name="last-modified" content="2025-03-11">
-  <link rel="stylesheet" href="css/styles.css">
-  <title>Landing Page - Cozy Skies</title>
-</head>
+  <body>
+    <!-- Global Header -->
+    <header id="header">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Cozy Skies Logo" id="logo" />
+      </a>
+      <nav>
+        <ul>
 
-<body>
-  <!-- Global Header -->
-  <header id="header">
-    <a href="index.html">
-      <img src="images/logo.png" alt="Cozy Skies Logo" id="logo">
-    </a>
-    <nav>
-      <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="accessibility.html">Accessibility</a></li>
-      </ul>
-    </nav>
-  </header>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="forecast.html">Forecast</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <div class="container">
-    <main id="main-content">
-      <section id="hero">
-        <h1>Welcome to the Cozy Skies</h1>
-        <p>Find the latest weather updates for your area.</p>
-        <form action="home.html" method="get">
-          <label for="search">Search for a location:</label>
-          <input type="text" id="search" name="location">
-          <input type="submit" value="Search">
-        </form>
-      </section>
+    <div class="container">
+      <main id="main-content">
+        <section id="hero">
+          <h1>Welcome to the Cozy Skies</h1>
+          <p>Find the latest weather updates for your area.</p>
+          <form action="forecast.html" method="get">
+            <label for="search" class="search-label">Search for a location:</label>
+            <input type="search" class="search-button" placeholder="Search… " />
+          </form>
+        </section>
 
-      <section id="current-weather-preview">
-        <h2>Current Weather</h2>
-        <p>Location: <span>Default City</span></p>
-        <p>Temperature: <span>22°C</span></p>
-        <p>Conditions: <span>Partly Cloudy</span></p>
-        <p>Wind Speed: <span>10 km/h</span></p>
-
-      </section>
-
-    </main>
-  </div>
-  <!-- Global Footer -->
-  <footer id="footer">
-    <p>&copy; 2025 Cozy Skies. All rights reserved.</p>
-    <p>Weather Data Provided by <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
-    </p>
-    <a href="privacy-policy.html">Privacy Policy</a>
-  </footer>
-</body>
-
+        <section id="current-weather-preview">
+          <h2>Current Weather</h2>
+          <p>Location: <span>Default City</span></p>
+          <p>Temperature: <span>22°C</span></p>
+          <p>Conditions: <span>Partly Cloudy</span></p>
+          <p>Wind Speed: <span>10 km/h</span></p>
+        </section>
+      </main>
+    </div>
+    <!-- Global Footer -->
+    <footer id="footer">
+      <p>&copy; 2025 Cozy Skies. All rights reserved.</p>
+      <p>
+        Weather Data Provided by
+        <a href="https://openweathermap.org" target="_blank" rel="noopener"
+          >OpenWeatherMap</a
+        >
+      </p>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
 </html>

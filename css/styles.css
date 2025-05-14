@@ -223,3 +223,34 @@ caption {
   color: var(--primary-color);
   text-decoration: underline;
 }
+
+/* ──────────────────────────────────────────
+   Search Button
+────────────────────────────────────────── */
+.search-button {
+  /* size & shape */
+  width: 100%;
+  max-width: 400px;
+  height: 2.5rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 9999px;
+  box-sizing: border-box;
+
+  /* solid fill + icon */
+  background-color: var(--bg-light);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-position: 0%;
+}
+
+.search-button::placeholder {
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+.search-label {
+  color: white;
+  text-shadow: #333333;
+  font-weight: bold;
+}
