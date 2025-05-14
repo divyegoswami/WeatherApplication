@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Divye Goswami">
+  <meta name="last-modified" content="2025-03-11">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Home - Cozy Skies</title>
+</head>
+
+<body>
+
+ <!-- Global Header -->
+  <header id="header">
+    <a href="index.html">
+      <img src="images/logo.png" alt="Cozy Skies Logo" id="logo">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="accessibility.html">Accessibility</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <main id="main-content">
+      <section id="weather-search" class="section">
+        <h1>Weather Lookup</h1>
+        <form action="home.html" method="get">
+          <label for="location">Enter Location:</label>
+          <input type="text" id="location" name="location">
+          <input type="submit" value="Get Weather">
+        </form>
+      </section>
+
+      <section id="current-weather-preview" class="section">
+        <h2>Current Weather Details</h2>
+        <p>Location: <span>Default City</span></p>
+        <p>Temperature: <span>22°C</span></p>
+        <p>Conditions: <span>Clear</span></p>
+        <p>Wind Speed: <span>10 km/h</span></p>
+      </section>
+
+      <section id="weekly-forecast" class="section">
+        <h2>Weekly Forecast</h2>
+        <table>
+          <caption>7-Day Forecast</caption>
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Icon</th>
+              <th scope="col">High</th>
+              <th scope="col">Low</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monday</td>
+            <td><img src="images/sun.png" alt="Sunny Icon" style="height: 50px;"></td>
+              <td>25°C</td>
+              <td>15°C</td>
+            </tr>
+            <tr>
+              <td>Tuesday</td>
+            <td><img src="images/cloudy.png" alt="Partly Cloudy Icon" style="height: 50px;"></td>
+              <td>23°C</td>
+              <td>14°C</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- Global Footer -->
+  <footer id="footer">
+    <p>&copy; 2025 Cozy Skies. All rights reserved.</p>
+    <p>Weather Data Provided by <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
+    </p>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+  </footer>
+
+</body>
+
+</html>
