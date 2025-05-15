@@ -1,33 +1,7 @@
 /* styles.css */
 
-/* Sticky footer setup */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-/* Container expands to fill available space */
-.container {
-  flex: 1;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-/* Prevent footer from shrinking */
-#footer {
-  flex-shrink: 0;
-}
-
 /* 1. RESET & BOX-SIZING */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -42,25 +16,24 @@ body {
   --accent-color: #6cb2eb;
 }
 
-/* 3. BASE TYPOGRAPHY */
+/* 3. GLOBAL LAYOUT & TYPOGRAPHY */
+html,
 body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: sans-serif;
   color: var(--text-color);
   background-color: var(--bg-light);
   line-height: 1.6;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5em;
 }
-p,
-ul,
-ol,
-blockquote {
+p, ul, ol, blockquote {
   margin-bottom: 1em;
 }
 ul,
@@ -68,20 +41,32 @@ ol {
   padding-left: 1.25em;
 }
 
-/* 4. HEADER & NAVIGATION */
+/* 4. CONTAINER */
+.container {
+  flex: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* 5. HEADER & NAVIGATION */
 #header {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: var(--primary-color);
   padding: 1rem;
 }
 #header nav ul {
   display: flex;
-  gap: 1rem;
+  justify-content: flex-start; 
+  gap: 2rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 #header nav a {
+  font-size: 1.2rem;
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
@@ -91,20 +76,19 @@ ol {
   text-decoration: underline;
 }
 
-/* 5. LOGO */
+/* 6. LOGO */
 #logo {
-  display: block;
-  height: auto;
-  width: auto;
   max-height: 80px;
+  width: auto;
+  height: auto;
 }
 
-/* 6. MAIN SECTIONS */
+/* 7. MAIN SECTIONS */
 .section {
   margin-bottom: 2rem;
 }
 
-/* 7. FORMS & CONTROLS */
+/* 8. FORMS & CONTROLS */
 input[type="text"],
 input[type="email"],
 input[type="search"],
@@ -118,7 +102,7 @@ button {
 button {
   cursor: pointer;
   background-color: var(--accent-color);
-  color: #062b4c;
+  color: var(--primary-color);
   border: none;
 }
 button:hover,
@@ -133,7 +117,7 @@ legend {
   margin-bottom: 0.5em;
 }
 
-/* 8. TABLES */
+/* 9. TABLES */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -150,7 +134,7 @@ caption {
   margin-bottom: 0.5em;
 }
 
-/* 9. ACCESSIBILITY CONTROLS */
+/* 10. ACCESSIBILITY CONTROLS */
 .accessibility-controls {
   display: flex;
   gap: 0.5em;
@@ -170,48 +154,40 @@ caption {
   filter: contrast(150%);
 }
 
-/* 10. HERO SECTION */
+/* 11. HERO SECTION */
 #hero {
-  /* span full viewport width */
   position: relative;
+  width: 100vw;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  width: 100vw;
-
-  /* height + background as before */
   height: 60vh;
-  background: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
-    url("../images/hero-bg.png") no-repeat center/cover;
+  background: linear-gradient(rgba(6,43,76,0.6), rgba(6,43,76,0.6)),
+              url("../images/hero-bg.png") no-repeat center;
   background-size: cover;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-
   padding: 0 1rem;
-  box-sizing: border-box;
 }
-
 #hero h1 {
   font-size: 3.5rem;
   color: #ffffff;
-  margin: 0;
   line-height: 1.1;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
 }
 #hero p {
   font-size: 1.25rem;
   color: #f0f0f0;
   margin-top: 1rem;
   max-width: 600px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
-/* 11. FOOTER */
+/* 12. FOOTER */
 #footer {
   text-align: center;
   padding: 1rem;
@@ -224,33 +200,24 @@ caption {
   text-decoration: underline;
 }
 
-/* ──────────────────────────────────────────
-   Search Button
-────────────────────────────────────────── */
+/* 13. SEARCH BUTTON */
 .search-button {
-  /* size & shape */
   width: 100%;
   max-width: 400px;
   height: 2.5rem;
   border: 2px solid var(--accent-color);
   border-radius: 9999px;
   box-sizing: border-box;
-
-  /* solid fill + icon */
-  background-color: var(--bg-light);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-position: 0%;
+  padding: 0 1rem;
+  font: inherit;
 }
-
 .search-button::placeholder {
   color: var(--text-color);
   opacity: 0.6;
 }
-
 .search-label {
-  color: white;
-  text-shadow: #333333;
+  color: #ffffff;
   font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
 }
