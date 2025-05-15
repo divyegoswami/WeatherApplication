@@ -194,7 +194,7 @@ textarea::placeholder {
 /* White‑background override for the search button */
 #hero .search-button {
   background-color: #fff;
-  color: var(--primary-color);
+  color: var(--bg-dark);
   border: 1px solid var(--accent-color);
   border-radius: var(--button-radius);
   height: 3rem;
