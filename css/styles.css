@@ -200,10 +200,9 @@ textarea::placeholder {
   height: 3rem;
   width: 100%;
   max-width: 350px;
+  text-align: center;
 }
 #hero .search-button:hover {
-  background-color: var(--accent-color);
-  color: #fff;
   transform: translateY(-1px);
 }
 
