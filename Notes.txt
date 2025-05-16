@@ -8,3 +8,4 @@ https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp
 
 
 https://stackoverflow.com/questions/14799291/using-buttons-for-changing-font-size-for-the-whole-website-using-javascript
+https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f?comments_sort=latest
