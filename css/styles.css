@@ -23,6 +23,43 @@
   --button-radius:   40px;
 }
 
+:root {
+  /* Default Light Theme */
+  --primary-color: #062b4c;
+  --accent-color: #6cb2eb;
+  --text-color: #333333;
+  --bg-light: #ffffff;
+  --bg-dark: #222222;
+  --border-color: #cccccc;
+  --muted-bg: #f8f9fa;
+  --footer-bg: #f9f9f9;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --primary-color: #1e3a5f;
+  --accent-color: #4f9dda;
+  --text-color: #d0d6e0;
+  --bg-light: #121212;
+  --bg-dark: #0a0a0a;
+  --border-color: #3a3a3a;
+  --muted-bg: #2a2a2a;
+  --footer-bg: #181818;
+}
+
+/* High Contrast Mode */
+[data-theme="high-contrast"] {
+  --primary-color: #000000;
+  --accent-color: #ffd700;
+  --text-color: #ffffff;
+  --bg-light: #ffffff;
+  --bg-dark: #000000;
+  --border-color: #ffffff;
+  --muted-bg: #333333;
+  --footer-bg: #000000;
+}
+
+
 /*============================================
    3. BASE TYPOGRAPHY & LAYOUT
 ============================================*/
