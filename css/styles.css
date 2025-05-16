@@ -281,7 +281,7 @@ a {
   margin: 2rem auto;
   background: var(--bg-light);
   padding: 1.5rem 2rem;
-  border-radius: 8px;
+  border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
 }
 .contact-form fieldset {
