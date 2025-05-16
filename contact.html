@@ -1,103 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Divye Goswami" />
+    <meta name="last-modified" content="2025-03-11" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/form.js"></script>
+    <script src="js/toggle-theme.js"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="author" content="Divye Goswami" />
-  <meta name="last-modified" content="2025-03-11" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <script src="js/form.js"></script>
-  <title>Contact - Cozy Skies</title>
-</head>
+    <title>Contact - Cozy Skies</title>
+  </head>
 
-<body>
-  <!-- Global Header -->
-  <header id="header">
-    <a href="index.html">
-      <img src="images/logo.png" alt="Cozy Skies Logo" id="logo" />
-    </a>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="forecast.html">Forecast</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="accessibility.html">Accessibility</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Contact Page Content -->
-  <div class="container">
-    <main id="main-content">
-      <h1>Contact Us</h1>
-      <form name="contact-form" action="js/form.js" onsubmit="return validateForm()" method="post" class="contact-form">
-        <fieldset>
-          <legend>Feedback Form</legend>
-          <p>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter Name" required />
-          </p>
-          <p>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter Email" required />
-          </p>
-          <p>
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required />
-          </p>
-          <p>
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" placeholder="Enter Subject" required />
-          </p>
-
-          <p>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" cols="30" placeholder="Enter Message" required></textarea>
-          </p>
-          <p>
-            <input type="submit" value="Send Feedback" />
-          </p>
-        </fieldset>
-      </form>
-
-      <section id="contact-details">
-        <h2>Our Contact Details</h2>
-        <p>
-          Email:
-          <a href="mailto:dgoswami1@learn.athabascau.ca">Cozy Skies Team</a>
-        </p>
-        <p>
-          Follow us on:
-          <a href="https://example.com/" target="_blank" rel="noopener">Twitter</a>
-        </p>
-        <p>
-          Follow us on:
-          <a href="https://example.com/" target="_blank" rel="noopener">Instagram</a>
-        </p>
-      </section>
-
-      <section id="faq">
-        <h2>Frequently Asked Questions</h2>
+  <body>
+    <!-- Global Header -->
+    <header id="header">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Cozy Skies Logo" id="logo" />
+      </a>
+      <nav>
         <ul>
-          <li>
-            <strong>How often is the weather updated?</strong> Every 10
-            minutes.
-          </li>
-          <li><strong>How fast is support?</strong> Typically within 24 hours.</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="forecast.html">Forecast</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
         </ul>
-      </section>
-    </main>
-  </div>
-  <!-- Global Footer -->
-  <footer id="footer">
-    <p>&copy; 2025 Cozy Skies. All rights reserved.</p>
-    <p>
-      Weather Data Provided by
-      <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
-    </p>
-    <a href="privacy-policy.html">Privacy Policy</a>
-  </footer>
-</body>
+      </nav>
+    </header>
 
+    <!-- Contact Page Content -->
+    <div class="container">
+      <main id="main-content">
+        <h1>Contact Us</h1>
+        <form
+          name="contact-form"
+          action="js/form.js"
+          onsubmit="return validateForm()"
+          method="post"
+          class="contact-form"
+        >
+          <fieldset>
+            <legend>Feedback Form</legend>
+            <p>
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter Name"
+                required
+              />
+            </p>
+            <p>
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter Email"
+                required
+              />
+            </p>
+            <p>
+              <label for="phone">Phone Number:</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Enter Phone Number"
+                required
+              />
+            </p>
+            <p>
+              <label for="subject">Subject:</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="Enter Subject"
+                required
+              />
+            </p>
+
+            <p>
+              <label for="message">Message:</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                cols="30"
+                placeholder="Enter Message"
+                required
+              ></textarea>
+            </p>
+            <p>
+              <input type="submit" value="Send Feedback" />
+            </p>
+          </fieldset>
+        </form>
+
+        <section id="contact-details">
+          <h2>Our Contact Details</h2>
+          <p>
+            Email:
+            <a href="mailto:dgoswami1@learn.athabascau.ca">Cozy Skies Team</a>
+          </p>
+          <p>
+            Follow us on:
+            <a href="https://example.com/" target="_blank" rel="noopener"
+              >Twitter</a
+            >
+          </p>
+          <p>
+            Follow us on:
+            <a href="https://example.com/" target="_blank" rel="noopener"
+              >Instagram</a
+            >
+          </p>
+        </section>
+
+        <section id="faq">
+          <h2>Frequently Asked Questions</h2>
+          <ul>
+            <li>
+              <strong>How often is the weather updated?</strong> Every 10
+              minutes.
+            </li>
+            <li>
+              <strong>How fast is support?</strong> Typically within 24 hours.
+            </li>
+          </ul>
+        </section>
+      </main>
+    </div>
+    <!-- Global Footer -->
+    <footer id="footer">
+      <p>&copy; 2025 Cozy Skies. All rights reserved.</p>
+      <p>
+        Weather Data Provided by
+        <a href="https://openweathermap.org" target="_blank" rel="noopener"
+          >OpenWeatherMap</a
+        >
+      </p>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
 </html>

@@ -1,7 +1,9 @@
 /*============================================
    1. RESET & BOX-SIZING
 ============================================*/
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,20 +13,6 @@
    2. VARIABLES (THEME)
 ============================================*/
 :root {
-  --primary-color:   #062b4c;
-  --accent-color:    #6cb2eb;
-  --text-color:      #333333;
-  --bg-light:        #ffffff;
-  --bg-dark:         #222222;
-  --border-color:    #cccccc;
-  --muted-bg:        #f8f9fa;
-  --footer-bg:       #f9f9f9;
-  --transition-fast: 0.2s ease;
-  --button-radius:   40px;
-}
-
-:root {
-  /* Default Light Theme */
   --primary-color: #062b4c;
   --accent-color: #6cb2eb;
   --text-color: #333333;
@@ -33,37 +21,59 @@
   --border-color: #cccccc;
   --muted-bg: #f8f9fa;
   --footer-bg: #f9f9f9;
+  --button-text-color: #fff;
+  --transition-fast: 0.2s ease;
+  --button-radius: 40px;
 }
-
+/* Light Mode */
+[data-theme="light"] {
+  --primary-color: #062b4c;
+  --accent-color: #6cb2eb;
+  --text-color: #333333;
+  --placeholder-color: #333333;
+  --bg-light: #ffffff;
+  --bg-dark: #222222;
+  --border-color: #cccccc;
+  --button-text-color: #fff;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --muted-bg: #f8f9fa;
+  --footer-bg: #f9f9f9;
+}
 /* Dark Mode */
 [data-theme="dark"] {
-  --primary-color: #1e3a5f;
-  --accent-color: #4f9dda;
-  --text-color: #d0d6e0;
-  --bg-light: #121212;
-  --bg-dark: #0a0a0a;
-  --border-color: #3a3a3a;
-  --muted-bg: #2a2a2a;
-  --footer-bg: #181818;
+  --primary-color: #6cb2eb;
+  --accent-color: #ffd60a;
+  --text-color: #e5e5e5;
+  --placeholder-color: #aaa;
+  --bg-light: #1c1c1e;
+  --bg-dark: #2c2c2e;
+  --border-color: #3a3a3c;
+  --button-text-color: #062b4c;
+  --box-shadow: 0 2px 8px rgba(255, 255, 255, 0.047);
+  --muted-bg: #141414;
+  --footer-bg: #1c1c1e;
 }
 
 /* High Contrast Mode */
 [data-theme="high-contrast"] {
-  --primary-color: #000000;
-  --accent-color: #ffd700;
+  --primary-color: #ffff00;
+  --accent-color: #00ffff;
   --text-color: #ffffff;
-  --bg-light: #ffffff;
+  --placeholder-color: #000000;
+  --bg-light: #000000;
   --bg-dark: #000000;
   --border-color: #ffffff;
-  --muted-bg: #333333;
+  --button-text-color: #000000;
+  --box-shadow: 0 2px 8px rgba(255, 255, 255, 0.121);
+  --muted-bg: #000000;
   --footer-bg: #000000;
 }
-
 
 /*============================================
    3. BASE TYPOGRAPHY & LAYOUT
 ============================================*/
-html, body {
+html,
+body {
   height: 100%;
 }
 body {
@@ -75,13 +85,22 @@ body {
   background: var(--bg-light);
   line-height: 1.6;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: 0.5em;
 }
-p, ul, ol, blockquote {
+p,
+ul,
+ol,
+blockquote {
   margin-bottom: 1em;
 }
-ul, ol {
+ul,
+ol {
   padding-left: 1.25em;
 }
 
@@ -116,7 +135,7 @@ nav ul {
 nav a {
   font-size: 1.2rem;
   font-weight: 500;
-  color: #fff;
+  color: var(--button-text-color);
   text-decoration: none;
   transition: opacity var(--transition-fast);
 }
@@ -136,14 +155,15 @@ input[type="submit"],
   align-items: center;
   justify-content: center;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--button-text-color);
   border: none;
   border-radius: var(--button-radius);
   padding: 0.75rem 1.5rem;
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  transition: background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 button:hover,
 input[type="button"]:hover,
@@ -179,8 +199,7 @@ textarea {
 }
 input::placeholder,
 textarea::placeholder {
-  color: var(--text-color);
-  opacity: 0.6;
+  color: var(--placeholder-color);
 }
 
 /*============================================
@@ -190,15 +209,21 @@ textarea::placeholder {
   margin-bottom: 2rem;
 }
 
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
 /*============================================
    9. HERO (INDEX PAGE)
 ============================================*/
 #hero {
   position: relative;
-  width: 100vw; left: 50%; margin-left: -50vw;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
   height: 60vh;
-  background:
-    linear-gradient(rgba(6,43,76,0.6), rgba(6,43,76,0.6)),
+  background: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
     url("../images/hero-bg.png") center/cover no-repeat;
   display: flex;
   flex-direction: column;
@@ -210,12 +235,12 @@ textarea::placeholder {
 #hero h1 {
   font-size: 3.5rem;
   color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 #hero p {
   font-size: 1.25rem;
   color: #f0f0f0;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 #hero form {
   display: flex;
@@ -250,10 +275,10 @@ textarea::placeholder {
 .contact-form {
   max-width: 600px;
   margin: 2rem auto;
-  background: var(--muted-bg);
+  background: var(--bg-light);
   padding: 1.5rem 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
 }
 .contact-form fieldset {
   border: none;
@@ -272,6 +297,12 @@ textarea::placeholder {
   margin-bottom: 0.5rem;
 }
 
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-color);
+  opacity: 0.6; /* adjust for lighter look */
+}
+
 /*============================================
    11. TABLES
 ============================================*/
@@ -280,14 +311,15 @@ table {
   border-collapse: collapse;
   margin-bottom: 1em;
 }
-th, td {
+th,
+td {
   padding: 0.75rem;
   border: 1px solid var(--muted-bg);
   text-align: left;
 }
 th {
   background: var(--primary-color);
-  color: #fff;
+  color: var(--button-text-color);
 }
 tr:nth-child(even) {
   background: var(--muted-bg);
@@ -299,21 +331,21 @@ tr:nth-child(even) {
 #weather-search {
   max-width: 600px;
   margin: 0 auto;
-  background: rgba(255,255,255,0.9);
+  background: var(--bg-light);
   padding: 1.5rem;
   border-radius: var(--button-radius);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
   margin-bottom: 2rem;
   margin-top: 2rem;
 }
 #current-weather-preview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   background: var(--bg-light);
   padding: 2rem;
   border-radius: var(--button-radius);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
 }
 #current-weather-preview h2 {
   grid-column: 1 / -1;
@@ -324,7 +356,7 @@ tr:nth-child(even) {
   background: var(--bg-light);
   padding: 2rem;
   border-radius: var(--button-radius);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
 }
 
 /*============================================
@@ -336,7 +368,7 @@ tr:nth-child(even) {
   padding: 2rem;
   background: var(--muted-bg);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
 }
 #accessibility h1,
 #accessibility h2 {
@@ -379,7 +411,7 @@ tr:nth-child(even) {
     padding: 0 2rem 2rem;
   }
   #current-weather-preview {
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 @media (min-width: 1024px) {
