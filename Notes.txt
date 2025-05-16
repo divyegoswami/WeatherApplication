@@ -7,4 +7,4 @@ http://xion.io/post/code/js-mailto-urls.html
 https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp
 
 
-https://github.com/tiagoporto/accessibility-buttons
+https://stackoverflow.com/questions/14799291/using-buttons-for-changing-font-size-for-the-whole-website-using-javascript
