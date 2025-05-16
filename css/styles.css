@@ -24,6 +24,7 @@
   --button-text-color: #fff;
   --transition-fast: 0.2s ease;
   --button-radius: 40px;
+  --base-font-size: 1rem;
 }
 /* Light Mode */
 [data-theme="light"] {
@@ -72,6 +73,9 @@
 /*============================================
    3. BASE TYPOGRAPHY & LAYOUT
 ============================================*/
+html {
+  font-size: var(--base-font-size);
+}
 html,
 body {
   height: 100%;
