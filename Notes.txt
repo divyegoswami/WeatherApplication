@@ -1,3 +1,6 @@
 - With the current placement of script tag the validation sometimes not work for phone number. 
 - Had to use defer tag in head section to get the required results
 - works had to modify my form to validateform
+
+https://github.com/khushijain21200/Form_Validation
+http://xion.io/post/code/js-mailto-urls.html
