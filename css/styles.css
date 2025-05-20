@@ -1,6 +1,7 @@
 /*============================================
-   1. RESET & BOX-SIZING
+1. RESET & BOX-SIZING
 ============================================*/
+
 *,
 *::before,
 *::after {
@@ -10,8 +11,9 @@
 }
 
 /*============================================
-   2. VARIABLES (THEME)
+2. VARIABLES (THEME)
 ============================================*/
+
 :root {
   --primary-color: #062b4c;
   --accent-color: #6cb2eb;
@@ -24,8 +26,9 @@
   --button-text-color: #fff;
   --transition-fast: 0.2s ease;
   --button-radius: 40px;
-  --base-font-size: 1rem;
+  --base-font-size: 16px; /* Changed from rem to px for base declaration */
 }
+
 /* Light Mode */
 [data-theme="light"] {
   --primary-color: #062b4c;
@@ -40,6 +43,7 @@
   --muted-bg: #f8f9fa;
   --footer-bg: #f9f9f9;
 }
+
 /* Dark Mode */
 [data-theme="dark"] {
   --primary-color: #6cb2eb;
@@ -71,15 +75,18 @@
 }
 
 /*============================================
-   3. BASE TYPOGRAPHY & LAYOUT
+3. BASE TYPOGRAPHY & LAYOUT
 ============================================*/
+
 html {
   font-size: var(--base-font-size);
 }
+
 html,
 body {
   height: 100%;
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -89,6 +96,7 @@ body {
   background: var(--bg-light);
   line-height: 1.6;
 }
+
 h1,
 h2,
 h3,
@@ -97,45 +105,59 @@ h5,
 h6 {
   margin-bottom: 0.5em;
 }
+
 p,
 ul,
 ol,
 blockquote {
   margin-bottom: 1em;
 }
+
 ul,
 ol {
   padding-left: 1.25em;
 }
 
 /*============================================
-   4. CONTAINER
+4. CONTAINER
 ============================================*/
+
 .container {
   flex: 1;
-  max-width: max-content;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
   margin: 0 auto;
-  padding: 1rem;
+  box-sizing: border-box;
 }
 
 /*============================================
-   5. HEADER & NAVIGATION
+5. HEADER & NAVIGATION
 ============================================*/
+
 #header {
   display: flex;
+  flex-direction: column; /* Stack elements on mobile */
   align-items: center;
   background: var(--primary-color);
   padding: 1rem;
 }
+
 #header #logo {
-  max-height: 80px;
+  max-height: 60px; /* Smaller logo for mobile */
+  margin-bottom: 0.75rem;
 }
+
 nav ul {
   display: flex;
-  gap: 2rem;
+  flex-direction: column; /* Stack nav items on mobile */
+  align-items: center;
+  gap: 1rem; /* Smaller gap on mobile */
   list-style: none;
-  margin-left: auto;
+  margin-left: 0; /* Reset auto margin */
+  width: 100%;
 }
+
 nav a {
   font-size: 1.2rem;
   font-weight: 500;
@@ -143,14 +165,16 @@ nav a {
   text-decoration: none;
   transition: opacity var(--transition-fast);
 }
+
 nav a:hover,
 nav a:focus {
   opacity: 0.8;
 }
 
 /*============================================
-   6. GLOBAL BUTTONS
+6. GLOBAL BUTTONS
 ============================================*/
+
 button,
 input[type="button"],
 input[type="submit"],
@@ -163,12 +187,14 @@ input[type="submit"],
   border: none;
   border-radius: var(--button-radius);
   padding: 0.75rem 1.5rem;
+  min-height: 44px; /* Better touch target */
   font: inherit;
   font-weight: 600;
   cursor: pointer;
   transition: background-color var(--transition-fast),
-    transform var(--transition-fast);
+              transform var(--transition-fast);
 }
+
 button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
@@ -176,6 +202,7 @@ input[type="submit"]:hover,
   background: var(--accent-color);
   transform: translateY(-1px);
 }
+
 button:focus,
 input[type="button"]:focus,
 input[type="submit"]:focus,
@@ -185,11 +212,13 @@ input[type="submit"]:focus,
 }
 
 /*============================================
-   7. GLOBAL FORM CONTROLS
+7. GLOBAL FORM CONTROLS
 ============================================*/
+
 label {
   font-weight: bold;
 }
+
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -197,18 +226,21 @@ textarea {
   font: inherit;
   padding: 0.75rem;
   border: 1px solid var(--border-color);
-  border-radius: var(--button-radius);
+  border-radius: calc(var(--button-radius) / 2);
   width: 100%;
-  max-width: 400px;
+  max-width: 100%; /* Full width on mobile */
+  font-size: 16px; /* 16px prevents iOS zoom */
 }
+
 input::placeholder,
 textarea::placeholder {
   color: var(--placeholder-color);
 }
 
 /*============================================
-   8. GLOBAL SECTIONS
+8. GLOBAL SECTIONS
 ============================================*/
+
 .section {
   margin-bottom: 2rem;
 }
@@ -219,14 +251,15 @@ a {
 }
 
 /*============================================
-   9. HERO (INDEX PAGE)
+9. HERO (INDEX PAGE)
 ============================================*/
+
 #hero {
   position: relative;
   width: 100vw;
   left: 50%;
   margin-left: -50vw;
-  height: 60vh;
+  height: 40vh; /* Reduced height for mobile */
   background: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
     url("../images/hero-bg.png") center/cover no-repeat;
   display: flex;
@@ -236,28 +269,36 @@ a {
   text-align: center;
   padding: 0 1rem;
 }
+
 #hero h1 {
-  font-size: 3.5rem;
+  font-size: 2rem; /* Smaller font for mobile */
   color: #fff;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  margin-bottom: 0.5rem;
 }
+
 #hero p {
-  font-size: 1.25rem;
+  font-size: 1rem; /* Smaller font for mobile */
   color: #f0f0f0;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
+
 #hero form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
+  width: 100%; /* Full width on mobile */
+  max-width: 350px;
 }
+
 #hero .search-label {
   color: #fff;
   font-size: 1.2rem;
   text-align: center;
 }
+
 /* White‑background override for the search button */
 #hero .search-button {
   background-color: #fff;
@@ -269,33 +310,39 @@ a {
   max-width: 350px;
   text-align: center;
 }
+
 #hero .search-button:hover {
   transform: translateY(-1px);
 }
 
 /*============================================
-   10. CONTACT PAGE – FEEDBACK FORM
+10. CONTACT PAGE – FEEDBACK FORM
 ============================================*/
+
 .contact-form {
   max-width: 600px;
   margin: 2rem auto;
   background: var(--bg-light);
-  padding: 1.5rem 2rem;
+  padding: 1rem; /* Reduced padding for mobile */
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
 }
+
 .contact-form fieldset {
   border: none;
   padding: 0;
 }
+
 .contact-form legend {
   font-size: 1.8rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
 }
+
 .contact-form p {
   margin-bottom: 1.25rem;
 }
+
 .contact-form label {
   display: block;
   margin-bottom: 0.5rem;
@@ -308,30 +355,38 @@ a {
 }
 
 /*============================================
-   11. TABLES
+11. TABLES
 ============================================*/
+
 table {
+  display: block; /* Make tables scrollable on mobile */
+  overflow-x: auto;
+  white-space: nowrap;
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1em;
 }
+
 th,
 td {
   padding: 0.75rem;
   border: 1px solid var(--muted-bg);
   text-align: left;
 }
+
 th {
   background: var(--primary-color);
   color: var(--button-text-color);
 }
+
 tr:nth-child(even) {
   background: var(--muted-bg);
 }
 
 /*============================================
-   12. FORECAST PAGE
+12. FORECAST PAGE
 ============================================*/
+
 #weather-search {
   max-width: 600px;
   margin: 0 auto;
@@ -342,59 +397,68 @@ tr:nth-child(even) {
   margin-bottom: 2rem;
   margin-top: 2rem;
 }
+
 #current-weather-preview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr; /* Single column for mobile */
+  gap: 1rem;
   background: var(--bg-light);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
 }
+
 #current-weather-preview h2 {
   grid-column: 1 / -1;
   margin-bottom: 1rem;
 }
+
 #weekly-forecast {
   overflow-x: auto;
   background: var(--bg-light);
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
 }
 
 /*============================================
-   13. ACCESSIBILITY PAGE
+13. ACCESSIBILITY PAGE
 ============================================*/
+
 #accessibility {
   max-width: 800px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 1.5rem; /* Reduced padding for mobile */
   background: var(--muted-bg);
   border-radius: 8px;
   box-shadow: var(--box-shadow);
 }
+
 #accessibility h1,
 #accessibility h2 {
   text-align: center;
   color: var(--primary-color);
   margin-bottom: 1rem;
 }
+
 #accessibility p {
   text-align: center;
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
+
 .accessibility-controls {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  flex-direction: column; /* Stack controls on mobile */
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
 /*============================================
-   14. FOOTER
+14. FOOTER
 ============================================*/
+
 #footer {
   text-align: center;
   padding: 1rem;
@@ -402,31 +466,138 @@ tr:nth-child(even) {
   background: var(--footer-bg);
   font-size: 0.9em;
 }
+
 #footer a {
   color: var(--primary-color);
   text-decoration: underline;
 }
 
 /*============================================
-   15. RESPONSIVE BREAKPOINTS
+15. RESPONSIVE BREAKPOINTS
 ============================================*/
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  #current-weather-preview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .slide {
+    flex: 0 0 calc(100% - 2rem);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .container {
     padding: 0 2rem 2rem;
+    width: 90%;
   }
+
+  #header {
+    flex-direction: row;
+    padding: 1rem;
+  }
+
+  #header #logo {
+    margin-bottom: 0;
+    max-height: 70px;
+  }
+
+  nav ul {
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-left: auto;
+    width: auto;
+    gap: 1.5rem;
+  }
+
+  #current-weather-preview {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .contact-form {
+    padding: 1.5rem 2rem;
+  }
+
+  table {
+    display: table;
+    white-space: normal;
+  }
+
+  #hero {
+    height: 50vh;
+  }
+  
+  #hero h1 {
+    font-size: 2.75rem;
+  }
+  
+  #hero p {
+    font-size: 1.2rem;
+  }
+
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+
+  .accessibility-controls {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    max-width: 400px;
+  }
+
+  .slide {
+    flex: 0 0 calc(50% - 1.5rem);
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .slider-nav {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
   #current-weather-preview {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  .slide {
+    flex: 0 0 calc(33.333% - 1rem);
+  }
 }
+
+/* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1024px) {
   #main-content {
     max-width: 1200px;
     margin: 0 auto;
   }
-}
-/* Fix for the slider container - update in styles.css */
-/* Find the existing slider styles and replace with these */
+  
+  #hero {
+    height: 60vh;
+  }
+  
+  #hero h1 {
+    font-size: 3.5rem;
+  }
 
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+}
+
+/* Slider styles */
 #comment-slider {
   max-width: 1200px;
   width: 100%;
@@ -451,17 +622,17 @@ tr:nth-child(even) {
 .slides {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 1.5rem;
+  gap: 1rem; /* Reduced for mobile */
   width: 100%;
   padding: 0.75rem 0;
 }
 
 .slide {
-  flex: 0 0 calc(100% - 3rem);
+  flex: 0 0 calc(100% - 2rem);
   min-width: 0; /* Remove fixed width calculation */
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.25rem; /* Reduced padding for mobile */
   margin: 0.5rem 0;
-  background: var(--muted-bg);
+  background: var(--bg-light);
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
   opacity: 0;
@@ -475,25 +646,6 @@ tr:nth-child(even) {
   visibility: visible;
 }
 
-/* Responsive Adjustments with proper calculations */
-@media (min-width: 768px) {
-  .slide {
-    flex: 0 0 calc(50% - 0.75rem); /* Account for the gap */
-  }
-}
-
-@media (min-width: 1024px) {
-  .slide {
-    flex: 0 0 calc(33.333% - 1rem); /* Account for the gap */
-  }
-}
-
-@media (min-width: 1200px) {
-  .slide {
-    flex: 0 0 calc(25% - 1.125rem); /* Account for the gap */
-  }
-}
-
 .slider-nav {
   position: absolute;
   top: 50%;
@@ -502,9 +654,9 @@ tr:nth-child(even) {
   color: var(--button-text-color);
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 1.2rem;
+  width: 28px; /* Smaller for mobile */
+  height: 28px;
+  font-size: 1rem;
   cursor: pointer;
   z-index: 10;
   display: flex;
@@ -519,19 +671,20 @@ tr:nth-child(even) {
   transform: translateY(-50%) scale(1.1);
 }
 
-/* Position the buttons outside the slides */
-.slider-nav.prev { left: -16px; }
-.slider-nav.next { right: -16px; }
+/* Position the buttons */
+.slider-nav.prev { left: 5px; }
+.slider-nav.next { right: 5px; }
 
-/* Adjust for smaller screens */
-@media (max-width: 768px) {
-  .slider-nav.prev { left: 5px; }
-  .slider-nav.next { right: 5px; }
-  
-  /* Make buttons smaller on mobile */
-  .slider-nav {
-    width: 24px;
-    height: 24px;
-    font-size: 1rem;
+@media (min-width: 768px) {
+  .slider-nav.prev { left: -16px; }
+  .slider-nav.next { right: -16px; }
+  .slides {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .slide {
+    flex: 0 0 calc(25% - 1.125rem);
   }
 }

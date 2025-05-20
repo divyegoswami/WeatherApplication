@@ -1,101 +1,93 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const slidesEl = document.querySelector(".slides");
-  const slides = document.querySelectorAll(".slide");
-  const prevBtn = document.querySelector(".slider-nav.prev");
-  const nextBtn = document.querySelector(".slider-nav.next");
+  const elements = {
+    slidesContainer: document.querySelector(".slides"),
+    slides: document.querySelectorAll(".slide"),
+    prevBtn: document.querySelector(".slider-nav.prev"),
+    nextBtn: document.querySelector(".slider-nav.next")
+  };
+  
+  if (!elements.slides.length || !elements.slidesContainer) return;
+  
   let index = 0;
   let isAnimating = false;
-
-  if (!slides.length || !slidesEl) return;
-
-  function calculateDimensions() {
-    const sliderWrapper = slidesEl.parentElement;
-    const containerWidth = sliderWrapper.clientWidth;
-    const computedStyle = getComputedStyle(slidesEl);
-    const gap = parseInt(computedStyle.gap) || 24;
+  
+  // Calculate dimensions based on viewport
+  const calculateDimensions = () => {
+    const wrapper = elements.slidesContainer.parentElement;
+    const containerWidth = wrapper.clientWidth;
+    const gap = parseInt(getComputedStyle(elements.slidesContainer).gap) || 24;
     
-    // Calculate slide width based on responsive design
+    // Determine slides per view based on screen width
     let slidesPerView = 1;
-    if (window.innerWidth >= 1200) {
-      slidesPerView = 4;
-    } else if (window.innerWidth >= 1024) {
-      slidesPerView = 3;
-    } else if (window.innerWidth >= 768) {
-      slidesPerView = 2;
-    }
+    if (window.innerWidth >= 1200) slidesPerView = 4;
+    else if (window.innerWidth >= 1024) slidesPerView = 3;
+    else if (window.innerWidth >= 768) slidesPerView = 2;
     
-    // Add padding for the navigation buttons (left and right)
-    const navButtonPadding = 16;
-    
-    // Calculate slide width including gap and accounting for button padding
-    const availableWidth = containerWidth - (2 * navButtonPadding);
+    // Calculate slide width accounting for gap and navigation padding
+    const navPadding = 16;
+    const availableWidth = containerWidth - (2 * navPadding);
     const slideWidth = (availableWidth - (gap * (slidesPerView - 1))) / slidesPerView;
     
     // Apply calculated width to each slide
-    slides.forEach(slide => {
+    elements.slides.forEach(slide => {
       slide.style.width = `${slideWidth}px`;
       slide.style.minWidth = `${slideWidth}px`;
       slide.style.maxWidth = `${slideWidth}px`;
     });
     
     return { slideWidth, gap, slidesPerView };
-  }
-
-  function updateVisibility() {
+  };
+  
+  // Update which slides are visible
+  const updateVisibility = () => {
     const { slidesPerView } = calculateDimensions();
-    
-    slides.forEach((slide, i) => {
-      const shouldShow = i >= index && i < index + slidesPerView;
-      slide.classList.toggle('active', shouldShow);
+    elements.slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i >= index && i < index + slidesPerView);
     });
-  }
-
-  function handleNavigation(newIndex) {
+  };
+  
+  // Handle navigation between slides
+  const navigateTo = (newIndex) => {
     if (isAnimating) return;
-    
     isAnimating = true;
+    
     const { slideWidth, gap, slidesPerView } = calculateDimensions();
-    const maxIndex = Math.max(0, slides.length - slidesPerView);
+    const maxIndex = Math.max(0, elements.slides.length - slidesPerView);
     index = Math.max(0, Math.min(newIndex, maxIndex));
     
-    // Calculate the exact position
-    const totalMove = index * (slideWidth + gap);
-    
-    slidesEl.style.transform = `translateX(-${totalMove}px)`;
+    elements.slidesContainer.style.transform = `translateX(-${index * (slideWidth + gap)}px)`;
     updateVisibility();
     
-    setTimeout(() => {
-      isAnimating = false;
-    }, 500);
-  }
-
-  // Event Listeners
-  window.addEventListener('resize', () => {
+    setTimeout(() => { isAnimating = false; }, 500);
+  };
+  
+  // Initialize the slider
+  const initSlider = () => {
     calculateDimensions();
-    handleNavigation(index);
-  });
-
-  prevBtn.addEventListener('click', () => handleNavigation(index - 1));
-  nextBtn.addEventListener('click', () => handleNavigation(index + 1));
-
-  // Initialization
-  function initSlider() {
-    calculateDimensions();
-    slidesEl.style.transform = 'translateX(0)';
+    elements.slidesContainer.style.transform = 'translateX(0)';
     updateVisibility();
     
-    // Add edge case handling for small screens
+    // Adjust button positioning for small screens
     if (window.innerWidth < 500) {
-      prevBtn.style.left = '0';
-      nextBtn.style.right = '0';
+      elements.prevBtn.style.left = '0';
+      elements.nextBtn.style.right = '0';
     }
     
-    // Handle initial active state
+    // Add transition after initial positioning
     setTimeout(() => {
-      slidesEl.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      elements.slidesContainer.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
     }, 50);
-  }
-
-  // Start with shorter delay
+  };
+  
+  // Event listeners
+  window.addEventListener('resize', () => {
+    calculateDimensions();
+    navigateTo(index);
+  });
+  
+  elements.prevBtn.addEventListener('click', () => navigateTo(index - 1));
+  elements.nextBtn.addEventListener('click', () => navigateTo(index + 1));
+  
+  // Initialize with a short delay
   setTimeout(initSlider, 300);
 });
