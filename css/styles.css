@@ -424,56 +424,114 @@ tr:nth-child(even) {
     margin: 0 auto;
   }
 }
+/* Fix for the slider container - update in styles.css */
+/* Find the existing slider styles and replace with these */
 
-/* ==== Comment Slider ====
-   1-2-4 layout and card styling all in one */
+#comment-slider {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+#comment-slider h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
 
 .slider-wrapper {
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Change to visible to allow buttons outside */
+  width: 100%;
+  margin: 2rem 0;
+  padding: 0 1rem; /* Add padding to account for outside buttons */
+  border-radius: var(--button-radius);
 }
 
 .slides {
   display: flex;
-  gap: 1.5rem;                  /* space between cards */
-  transition: transform 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 1.5rem;
+  width: 100%;
+  padding: 0.75rem 0;
 }
 
 .slide {
-  flex: 0 0 100%;
-  max-width: 100%;
+  flex: 0 0 calc(100% - 3rem);
+  min-width: 0; /* Remove fixed width calculation */
+  padding: 1.5rem 2rem;
+  margin: 0.5rem 0;
+  background: var(--muted-bg);
+  border-radius: var(--button-radius);
+  box-shadow: var(--box-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
   box-sizing: border-box;
-
-  /* “card” styling */
-  background: var(--container-bg);
-  border-radius: var(--border-radius);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 1.5rem;
 }
 
-/* Tablet: two slides per view */
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive Adjustments with proper calculations */
 @media (min-width: 768px) {
-  .slide { flex: 0 0 50%; max-width: 50%; }
+  .slide {
+    flex: 0 0 calc(50% - 0.75rem); /* Account for the gap */
+  }
 }
 
-/* Desktop: four slides per view */
 @media (min-width: 1024px) {
-  .slide { flex: 0 0 25%; max-width: 25%; }
+  .slide {
+    flex: 0 0 calc(33.333% - 1rem); /* Account for the gap */
+  }
 }
 
-/* Nav buttons (unchanged) */
+@media (min-width: 1200px) {
+  .slide {
+    flex: 0 0 calc(25% - 1.125rem); /* Account for the gap */
+  }
+}
+
 .slider-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--container-bg);
+  background: var(--primary-color);
+  color: var(--button-text-color);
   border: none;
-  font-size: 2rem;
-  padding: 0 0.5rem;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
   cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0.7;
-  transition: opacity 0.2s;
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
-.slider-nav:hover { opacity: 1; }
-.prev { left: 0.5rem; }
-.next { right: 0.5rem; }
+
+.slider-nav:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Position the buttons outside the slides */
+.slider-nav.prev { left: -16px; }
+.slider-nav.next { right: -16px; }
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+  .slider-nav.prev { left: 5px; }
+  .slider-nav.next { right: 5px; }
+  
+  /* Make buttons smaller on mobile */
+  .slider-nav {
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+  }
+}
