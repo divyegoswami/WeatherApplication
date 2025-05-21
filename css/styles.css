@@ -338,7 +338,7 @@ tr:nth-child(even) {
  * ----------------------------- */
 
 .contact-form {
-  max-width: 600px;
+  max-width: 500px;
   margin: 2rem auto;
   background: var(--bg-light);
   padding: 1rem;
