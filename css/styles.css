@@ -1,6 +1,6 @@
-/*============================================
-1. RESET & BOX-SIZING
-============================================*/
+/* -----------------------------
+ * 1. RESET & FOUNDATION
+ * ----------------------------- */
 
 *,
 *::before,
@@ -10,11 +10,12 @@
   box-sizing: border-box;
 }
 
-/*============================================
-2. VARIABLES (THEME)
-============================================*/
+/* -----------------------------
+ * 2. THEME VARIABLES
+ * ----------------------------- */
 
 :root {
+  /* Core design tokens */
   --primary-color: #062b4c;
   --accent-color: #6cb2eb;
   --text-color: #333333;
@@ -26,10 +27,10 @@
   --button-text-color: #fff;
   --transition-fast: 0.2s ease;
   --button-radius: 40px;
-  --base-font-size: 16px; /* Changed from rem to px for base declaration */
+  --base-font-size: 16px; /* Base size in px */
 }
 
-/* Light Mode */
+/* Light theme settings */
 [data-theme="light"] {
   --primary-color: #062b4c;
   --accent-color: #6cb2eb;
@@ -44,7 +45,7 @@
   --footer-bg: #f9f9f9;
 }
 
-/* Dark Mode */
+/* Dark theme settings */
 [data-theme="dark"] {
   --primary-color: #6cb2eb;
   --accent-color: #ffd60a;
@@ -59,7 +60,7 @@
   --footer-bg: #1c1c1e;
 }
 
-/* High Contrast Mode */
+/* High contrast accessibility theme */
 [data-theme="high-contrast"] {
   --primary-color: #ffff00;
   --accent-color: #00ffff;
@@ -74,53 +75,50 @@
   --footer-bg: #000000;
 }
 
-/*============================================
-3. BASE TYPOGRAPHY & LAYOUT
-============================================*/
+/* -----------------------------
+ * 3. BASE TYPOGRAPHY & LAYOUT
+ * ----------------------------- */
 
 html {
   font-size: var(--base-font-size);
 }
 
-html,
-body {
+html, body {
   height: 100%;
 }
 
 body {
-  display: flex;
+  display: flex; /* Enable flexbox layout */
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* Full viewport height */
   font-family: sans-serif;
   color: var(--text-color);
   background: var(--bg-light);
   line-height: 1.6;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* Basic typography spacing */
+h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5em;
 }
 
-p,
-ul,
-ol,
-blockquote {
+p, ul, ol, blockquote {
   margin-bottom: 1em;
 }
 
-ul,
-ol {
+ul, ol {
   padding-left: 1.25em;
 }
 
-/*============================================
-4. CONTAINER
-============================================*/
+/* Link styling */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* -----------------------------
+ * 4. LAYOUT CONTAINERS
+ * ----------------------------- */
 
 .container {
   flex: 1;
@@ -129,32 +127,38 @@ ol {
   padding-right: 1rem;
   margin: 0 auto;
   box-sizing: border-box;
+  align-items: center;
 }
 
-/*============================================
-5. HEADER & NAVIGATION
-============================================*/
+.section {
+  margin-bottom: 2rem; /* Standard section spacing */
+}
+
+/* -----------------------------
+ * 5. HEADER & NAVIGATION
+ * ----------------------------- */
 
 #header {
   display: flex;
-  flex-direction: column; /* Stack elements on mobile */
+  flex-direction: column; /* Mobile-first stack */
   align-items: center;
   background: var(--primary-color);
   padding: 1rem;
 }
 
 #header #logo {
-  max-height: 60px; /* Smaller logo for mobile */
+  max-height: 60px; /* Mobile logo size */
   margin-bottom: 0.75rem;
 }
 
+/* Navigation menu */
 nav ul {
   display: flex;
-  flex-direction: column; /* Stack nav items on mobile */
+  flex-direction: column; /* Stacked on mobile */
   align-items: center;
-  gap: 1rem; /* Smaller gap on mobile */
+  gap: 1rem;
   list-style: none;
-  margin-left: 0; /* Reset auto margin */
+  margin-left: 0;
   width: 100%;
 }
 
@@ -166,14 +170,13 @@ nav a {
   transition: opacity var(--transition-fast);
 }
 
-nav a:hover,
-nav a:focus {
-  opacity: 0.8;
+nav a:hover, nav a:focus {
+  opacity: 0.8; /* Subtle hover effect */
 }
 
-/*============================================
-6. GLOBAL BUTTONS
-============================================*/
+/* -----------------------------
+ * 6. BUTTON STYLES
+ * ----------------------------- */
 
 button,
 input[type="button"],
@@ -187,7 +190,7 @@ input[type="submit"],
   border: none;
   border-radius: var(--button-radius);
   padding: 0.75rem 1.5rem;
-  min-height: 44px; /* Better touch target */
+  min-height: 44px; /* Accessibility touch target */
   font: inherit;
   font-weight: 600;
   cursor: pointer;
@@ -200,20 +203,20 @@ input[type="button"]:hover,
 input[type="submit"]:hover,
 .accessibility-controls button:hover {
   background: var(--accent-color);
-  transform: translateY(-1px);
+  transform: translateY(-1px); /* Subtle lift effect */
 }
 
 button:focus,
 input[type="button"]:focus,
 input[type="submit"]:focus,
 .accessibility-controls button:focus {
-  outline: 2px dashed var(--accent-color);
+  outline: 2px dashed var(--accent-color); /* Accessible focus */
   outline-offset: 2px;
 }
 
-/*============================================
-7. GLOBAL FORM CONTROLS
-============================================*/
+/* -----------------------------
+ * 7. FORM ELEMENTS
+ * ----------------------------- */
 
 label {
   font-weight: bold;
@@ -229,7 +232,7 @@ textarea {
   border-radius: calc(var(--button-radius) / 2);
   width: 100%;
   max-width: 100%; /* Full width on mobile */
-  font-size: 16px; /* 16px prevents iOS zoom */
+  font-size: 16px; /* Prevents mobile zoom */
 }
 
 input::placeholder,
@@ -237,31 +240,46 @@ textarea::placeholder {
   color: var(--placeholder-color);
 }
 
-/*============================================
-8. GLOBAL SECTIONS
-============================================*/
+/* -----------------------------
+ * 8. TABLE STYLES
+ * ----------------------------- */
 
-.section {
-  margin-bottom: 2rem;
+table {
+  display: block; /* Scrollable on mobile */
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
 }
 
-a {
-  color: var(--primary-color);
-  text-decoration: none;
+th, td {
+  padding: 0.75rem;
+  border: 1px solid var(--muted-bg);
+  text-align: left;
 }
 
-/*============================================
-9. HERO (INDEX PAGE)
-============================================*/
+th {
+  background: var(--primary-color);
+  color: var(--button-text-color);
+}
+
+tr:nth-child(even) {
+  background: var(--muted-bg); /* Zebra striping */
+}
+
+/* -----------------------------
+ * 9. HERO SECTION
+ * ----------------------------- */
 
 #hero {
   position: relative;
   width: 100vw;
   left: 50%;
-  margin-left: -50vw;
-  height: 40vh; /* Reduced height for mobile */
+  margin-left: -50vw; /* Full-width trick */
+  height: 40vh;
   background: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
-    url("../images/hero-bg.png") center/cover no-repeat;
+              url("../images/hero-bg.png") center/cover no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -271,14 +289,14 @@ a {
 }
 
 #hero h1 {
-  font-size: 2rem; /* Smaller font for mobile */
+  font-size: 2rem; /* Mobile size */
   color: #fff;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   margin-bottom: 0.5rem;
 }
 
 #hero p {
-  font-size: 1rem; /* Smaller font for mobile */
+  font-size: 1rem;
   color: #f0f0f0;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
@@ -289,7 +307,7 @@ a {
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
-  width: 100%; /* Full width on mobile */
+  width: 100%;
   max-width: 350px;
 }
 
@@ -299,9 +317,9 @@ a {
   text-align: center;
 }
 
-/* White‑background override for the search button */
+/* Custom search button */
 #hero .search-button {
-  background-color: #fff;
+  background-color: #fff; /* White override */
   color: var(--bg-dark);
   border: 1px solid var(--accent-color);
   border-radius: var(--button-radius);
@@ -315,17 +333,18 @@ a {
   transform: translateY(-1px);
 }
 
-/*============================================
-10. CONTACT PAGE – FEEDBACK FORM
-============================================*/
+/* -----------------------------
+ * 10. CONTACT PAGE
+ * ----------------------------- */
 
 .contact-form {
   max-width: 600px;
   margin: 2rem auto;
   background: var(--bg-light);
-  padding: 1rem; /* Reduced padding for mobile */
+  padding: 1rem;
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
+  text-align: center; /* Added for simple center alignment */
 }
 
 .contact-form fieldset {
@@ -351,56 +370,25 @@ a {
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
   color: var(--text-color);
-  opacity: 0.6; /* adjust for lighter look */
+  opacity: 0.6; /* Lighter appearance */
 }
 
-/*============================================
-11. TABLES
-============================================*/
-
-table {
-  display: block; /* Make tables scrollable on mobile */
-  overflow-x: auto;
-  white-space: nowrap;
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1em;
-}
-
-th,
-td {
-  padding: 0.75rem;
-  border: 1px solid var(--muted-bg);
-  text-align: left;
-}
-
-th {
-  background: var(--primary-color);
-  color: var(--button-text-color);
-}
-
-tr:nth-child(even) {
-  background: var(--muted-bg);
-}
-
-/*============================================
-12. FORECAST PAGE
-============================================*/
+/* -----------------------------
+ * 11. FORECAST PAGE
+ * ----------------------------- */
 
 #weather-search {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 2rem auto;
   background: var(--bg-light);
   padding: 1.5rem;
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
-  margin-bottom: 2rem;
-  margin-top: 2rem;
 }
 
 #current-weather-preview {
   display: grid;
-  grid-template-columns: 1fr; /* Single column for mobile */
+  grid-template-columns: 1fr; /* Single column mobile */
   gap: 1rem;
   background: var(--bg-light);
   padding: 1rem;
@@ -409,26 +397,26 @@ tr:nth-child(even) {
 }
 
 #current-weather-preview h2 {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1; /* Full width header */
   margin-bottom: 1rem;
 }
 
 #weekly-forecast {
-  overflow-x: auto;
+  overflow-x: auto; /* Horizontal scroll */
   background: var(--bg-light);
   padding: 1.5rem;
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
 }
 
-/*============================================
-13. ACCESSIBILITY PAGE
-============================================*/
+/* -----------------------------
+ * 12. ACCESSIBILITY PAGE
+ * ----------------------------- */
 
 #accessibility {
   max-width: 800px;
   margin: 2rem auto;
-  padding: 1.5rem; /* Reduced padding for mobile */
+  padding: 1.5rem;
   background: var(--muted-bg);
   border-radius: 8px;
   box-shadow: var(--box-shadow);
@@ -449,15 +437,97 @@ tr:nth-child(even) {
 
 .accessibility-controls {
   display: flex;
-  flex-direction: column; /* Stack controls on mobile */
+  flex-direction: column; /* Stacked on mobile */
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
-/*============================================
-14. FOOTER
-============================================*/
+/* -----------------------------
+ * 13. COMMENT SLIDER
+ * ----------------------------- */
+
+#comment-slider {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+#comment-slider h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.slider-wrapper {
+  position: relative;
+  overflow: visible; /* Allow nav buttons outside */
+  width: 100%;
+  margin: 2rem 0;
+  padding: 0 1rem;
+  border-radius: var(--button-radius);
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 1rem;
+  width: 100%;
+  padding: 0.75rem 0;
+}
+
+.slide {
+  flex: 0 0 calc(100% - 2rem); /* Full width on mobile */
+  min-width: 0;
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0;
+  background: var(--bg-light);
+  border-radius: var(--button-radius);
+  box-shadow: var(--box-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  box-sizing: border-box;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Slider navigation buttons */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.slider-nav:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1); /* Grow effect */
+}
+
+/* Button positioning */
+.slider-nav.prev { left: 5px; }
+.slider-nav.next { right: 5px; }
+
+/* -----------------------------
+ * 14. FOOTER
+ * ----------------------------- */
 
 #footer {
   text-align: center;
@@ -472,14 +542,14 @@ tr:nth-child(even) {
   text-decoration: underline;
 }
 
-/*============================================
-15. RESPONSIVE BREAKPOINTS
-============================================*/
+/* -----------------------------
+ * 15. RESPONSIVE BREAKPOINTS
+ * ----------------------------- */
 
-/* Small devices (landscape phones, 576px and up) */
+/* Small devices (576px+) */
 @media (min-width: 576px) {
   #current-weather-preview {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
   }
 
   .slide {
@@ -487,7 +557,7 @@ tr:nth-child(even) {
   }
 }
 
-/* Medium devices (tablets, 768px and up) */
+/* Medium devices (768px+) */
 @media (min-width: 768px) {
   .container {
     padding: 0 2rem 2rem;
@@ -495,7 +565,7 @@ tr:nth-child(even) {
   }
 
   #header {
-    flex-direction: row;
+    flex-direction: row; /* Horizontal layout */
     padding: 1rem;
   }
 
@@ -512,33 +582,34 @@ tr:nth-child(even) {
     gap: 1.5rem;
   }
 
+  /* Improved layout for larger screens */
   #current-weather-preview {
-    grid-template-columns: repeat(2, 1fr);
     padding: 1.5rem;
     gap: 1.5rem;
   }
 
   .contact-form {
-    padding: 1.5rem 2rem;
+    padding: 2rem 2rem;
   }
 
   table {
-    display: table;
+    display: table; /* Normal table display */
     white-space: normal;
   }
 
   #hero {
     height: 50vh;
   }
-  
+
   #hero h1 {
     font-size: 2.75rem;
   }
-  
+
   #hero p {
     font-size: 1.2rem;
   }
 
+  /* Typography scaling */
   h1 { font-size: 2.25rem; }
   h2 { font-size: 1.75rem; }
   h3 { font-size: 1.5rem; }
@@ -555,136 +626,61 @@ tr:nth-child(even) {
     max-width: 400px;
   }
 
+  /* Slider improvements */
   .slide {
-    flex: 0 0 calc(50% - 1.5rem);
+    flex: 0 0 calc(50% - 1.5rem); /* Two per row */
     padding: 1.25rem 1.5rem;
   }
-  
+
   .slider-nav {
     width: 32px;
     height: 32px;
   }
-}
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  #current-weather-preview {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .slide {
-    flex: 0 0 calc(33.333% - 1rem);
-  }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1024px) {
-  #main-content {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  #hero {
-    height: 60vh;
-  }
-  
-  #hero h1 {
-    font-size: 3.5rem;
-  }
-
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.75rem; }
-}
-
-/* Slider styles */
-#comment-slider {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-#comment-slider h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.slider-wrapper {
-  position: relative;
-  overflow: visible; /* Change to visible to allow buttons outside */
-  width: 100%;
-  margin: 2rem 0;
-  padding: 0 1rem; /* Add padding to account for outside buttons */
-  border-radius: var(--button-radius);
-}
-
-.slides {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 1rem; /* Reduced for mobile */
-  width: 100%;
-  padding: 0.75rem 0;
-}
-
-.slide {
-  flex: 0 0 calc(100% - 2rem);
-  min-width: 0; /* Remove fixed width calculation */
-  padding: 1rem 1.25rem; /* Reduced padding for mobile */
-  margin: 0.5rem 0;
-  background: var(--bg-light);
-  border-radius: var(--button-radius);
-  box-shadow: var(--box-shadow);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  box-sizing: border-box;
-}
-
-.slide.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.slider-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--primary-color);
-  color: var(--button-text-color);
-  border: none;
-  border-radius: 50%;
-  width: 28px; /* Smaller for mobile */
-  height: 28px;
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.7;
-  transition: opacity 0.3s ease, transform 0.2s ease;
-}
-
-.slider-nav:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.1);
-}
-
-/* Position the buttons */
-.slider-nav.prev { left: 5px; }
-.slider-nav.next { right: 5px; }
-
-@media (min-width: 768px) {
+  /* Move buttons outside */
   .slider-nav.prev { left: -16px; }
   .slider-nav.next { right: -16px; }
+
   .slides {
     gap: 1.5rem;
   }
 }
 
+/* Large devices (992px+) */
+@media (min-width: 992px) {
+  #current-weather-preview {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  }
+
+  .slide {
+    flex: 0 0 calc(33.333% - 1rem); /* Three per row */
+  }
+}
+
+/* Extra large devices (1024px+) */
+@media (min-width: 1024px) {
+  #main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #hero {
+    height: 60vh;
+  }
+
+  #hero h1 {
+    font-size: 3.5rem;
+  }
+
+  /* Larger typography */
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+}
+
+/* XXL devices (1200px+) */
 @media (min-width: 1200px) {
   .slide {
-    flex: 0 0 calc(25% - 1.125rem);
+    flex: 0 0 calc(25% - 1.125rem); /* Four per row */
   }
 }
