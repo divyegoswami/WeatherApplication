@@ -6,7 +6,8 @@
     <meta name="last-modified" content="2025-03-11" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="js/toggle-theme.js"></script>
+    <script src="js/toggle-theme.js" defer></script>
+    <script src="js/weather.js" defer></script>
     <title>Landing Page - Cozy Skies</title>
   </head>
 
@@ -32,26 +33,42 @@
         <section id="hero" class="section">
           <h1>Welcome to the Cozy Skies</h1>
           <p>Find the latest weather updates for your area.</p>
+          <!-- The form here navigates to forecast.html where the main search logic is -->
           <form action="forecast.html" method="get">
-            <label for="search" class="search-label"
+            <label for="search-hero" class="search-label"
               >Search for a location:</label
             >
-            <input type="search" class="search-button" placeholder="Search… " />
+            <!--
+                The input name "location" should match what forecast.html expects,
+                if you want the value to be pre-filled on the forecast page.
+                The weather.js on forecast.html will pick up this query parameter.
+            -->
+            <input
+              type="search"
+              id="search-hero"
+              name="location"
+              class="search-button"
+              placeholder="Enter City and press Enter"
+            />
+            <!-- You might want a submit button here or rely on Enter key -->
+            <!-- <input type="submit" value="Search" class="some-button-style"> -->
           </form>
         </section>
 
         <section id="current-weather-preview">
           <h2>Current Weather</h2>
-          <p>Location: <span>Hamilton, Ontario</span></p>
-          <p>Temperature: <span>22°C</span></p>
-          <p>Conditions: <span>Partly Cloudy</span></p>
-          <p>Wind Speed: <span>10 km/h</span></p>
+          <p>Location: <span></span></p>
+          <p>Temperature: <span></span></p>
+          <p>Conditions: <span></span></p>
+          <!-- Icon will be inserted near here by JS -->
+          <p>Wind Speed: <span></span></p>
         </section>
       </main>
     </div>
     <!-- Global Footer -->
     <footer id="footer">
-      <p>&copy; 2025 Cozy Skies. All rights reserved.</p>
+      <p>© 2025 Cozy Skies. All rights reserved.</p>
+      <!-- Consider dynamic year -->
       <p>
         Weather Data Provided by
         <a href="https://openweathermap.org" target="_blank" rel="noopener"

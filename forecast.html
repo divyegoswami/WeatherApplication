@@ -1,330 +1,112 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Divye Goswami" />
+    <meta name="last-modified" content="2025-03-11" />
+    <!-- Consider updating this if you modify significantly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/toggle-theme.js" defer></script>
+    <!-- Added defer -->
+    <script src="js/slider.js" defer></script>
+    <script src="js/weather.js" defer></script>
+    <!-- Added weather.js -->
+    <title>Forecast - Cozy Skies</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="author" content="Divye Goswami">
-  <meta name="last-modified" content="2025-03-11">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="js/toggle-theme.js"></script>
-  <script src="js/slider.js" defer></script>
-  <title>forecast - Cozy Skies</title>
-</head>
+  <body>
+    <!-- Global Header -->
+    <header id="header">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Cozy Skies Logo" id="logo" />
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="forecast.html">Forecast</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
+    <div class="container">
+      <main id="main-content">
+        <section id="weather-search" class="section">
+          <h1>Weather Lookup</h1>
+          <form action="forecast.html" method="get">
+            <!-- Method can be removed if JS handles all -->
+            <label for="location">Enter Location:</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="E.g., London, GB"
+            />
+            <input type="submit" value="Get Weather" />
+          </form>
+        </section>
 
- <!-- Global Header -->
-  <header id="header">
-    <a href="index.html">
-      <img src="images/logo.png" alt="Cozy Skies Logo" id="logo">
-    </a>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="forecast.html">Forecast</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="accessibility.html">Accessibility</a></li>
-      </ul>
-    </nav>
-  </header>
+        <section id="current-weather-preview" class="section">
+          <h2>Current Weather Details</h2>
+          <p>Location: <span></span></p>
+          <p>Temperature: <span></span></p>
+          <p>Conditions: <span></span></p>
+          <!-- Icon will be inserted near here by JS -->
+          <p>Wind Speed: <span></span></p>
+        </section>
 
-  <div class="container">
-    <main id="main-content">
-      <section id="weather-search" class="section">
-        <h1>Weather Lookup</h1>
-        <form action="forecast.html" method="get">
-          <label for="location">Enter Location:</label>
-          <input type="text" id="location" name="location">
-          <input type="submit" value="Get Weather">
-        </form>
-      </section>
+        <section id="weekly-forecast" class="section">
+          <h2>Weekly Forecast</h2>
+          <table>
+            <caption>
+              7-Day Forecast
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Sky Conditions</th>
+                <th scope="col">High</th>
+                <th scope="col">Low</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Weather data will be populated here by weather.js -->
+            </tbody>
+          </table>
+        </section>
 
-      <section id="current-weather-preview" class="section">
-        <h2>Current Weather Details</h2>
-        <p>Location: <span>Hamilton, Ontario</span></p>
-        <p>Temperature: <span>22°C</span></p>
-        <p>Conditions: <span>Clear</span></p>
-        <p>Wind Speed: <span>10 km/h</span></p>
-      </section>
-
-      <section id="weekly-forecast" class="section">
-        <h2>Weekly Forecast</h2>
-        <table>
-          <caption>7-Day Forecast</caption>
-          <thead>
-            <tr>
-              <th scope="col">Day</th>
-              <th scope="col">Sky Conditions</th>
-              <th scope="col">High</th>
-              <th scope="col">Low</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Monday</td>
-            <td><img src="images/sun.png" alt="Sunny Icon" style="height: 50px;"></td>
-              <td>25°C</td>
-              <td>15°C</td>
-            </tr>
-            <tr>
-              <td>Tuesday</td>
-            <td><img src="images/cloudy.png" alt="Partly Cloudy Icon" style="height: 50px;"></td>
-              <td>23°C</td>
-              <td>14°C</td>
-            </tr>
-                        <tr>
-              <td>Wednesday</td>
-            <td><img src="images/cloudy.png" alt="Partly Cloudy Icon" style="height: 50px;"></td>
-              <td>20°C</td>
-              <td>12°C</td>
-            </tr>
-            <tr>
-              <td>Thursday</td>
-            <td><img src="images/cloudy.png" alt="Partly Cloudy Icon" style="height: 50px;"></td>
-              <td>21°C</td>
-              <td>15°C</td>
-            </tr>
-            <tr>
-              <td>Friday</td>
-            <td><img src="images/sun.png" alt="Sunny Icon" style="height: 50px;"></td>
-              <td>26°C</td>
-              <td>19°C</td>
-            </tr>
-            <tr>
-              <td>Saturday</td>
-            <td><img src="images/cloudy.png" alt="Partly Cloudy Icon" style="height: 50px;"></td>
-              <td>22°C</td>
-              <td>11°C</td>
-            </tr>
-            <tr>
-              <td>Sunday</td>
-            <td><img src="images/sun.png" alt="Sunny Icon" style="height: 50px;"></td>
-              <td>21°C</td>
-              <td>15°C</td>
-            </tr>
-
-          </tbody>
-        </table>
-      </section>
-
-    <!-- Hourly Forecast Slider -->
-    <section id="hourly-forecast" class="section">
-      <h2>Hourly Forecast</h2>
-      <div class="slider-wrapper">
-        <button class="slider-nav prev" aria-label="Previous hour">‹</button>
-        <div class="slider-window">
-          <div class="slides">
-            <div class="slide">
-              <time>12 AM</time>
-              <img src="images/clear-night.png" alt="Weather icon for 12 AM" />
-              <div class="temps">
-                <span class="temp-high">15 °C</span>
-                <span class="temp-low">10 °C</span>
+        <!-- Hourly Forecast Slider -->
+        <section id="hourly-forecast" class="section">
+          <h2>Hourly Forecast</h2>
+          <div class="slider-wrapper">
+            <button class="slider-nav prev" aria-label="Previous hour">
+              ‹
+            </button>
+            <div class="slider-window">
+              <div class="slides">
+                <!-- Hourly forecast slides will be populated here by weather.js -->
               </div>
             </div>
-            <div class="slide">
-              <time>1 AM</time>
-              <img src="images/clear-night.png" alt="Weather icon for 1 AM" />
-              <div class="temps">
-                <span class="temp-high">14 °C</span>
-                <span class="temp-low">9 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>2 AM</time>
-              <img src="images/partly-cloudy-night.png" alt="Weather icon for 2 AM" />
-              <div class="temps">
-                <span class="temp-high">14 °C</span>
-                <span class="temp-low">9 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>3 AM</time>
-              <img src="images/cloudy.png" alt="Weather icon for 3 AM" />
-              <div class="temps">
-                <span class="temp-high">13 °C</span>
-                <span class="temp-low">8 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>4 AM</time>
-              <img src="images/cloudy.png" alt="Weather icon for 4 AM" />
-              <div class="temps">
-                <span class="temp-high">13 °C</span>
-                <span class="temp-low">8 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>5 AM</time>
-              <img src="images/fog.png" alt="Weather icon for 5 AM" />
-              <div class="temps">
-                <span class="temp-high">12 °C</span>
-                <span class="temp-low">7 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>6 AM</time>
-              <img src="images/fog.png" alt="Weather icon for 6 AM" />
-              <div class="temps">
-                <span class="temp-high">12 °C</span>
-                <span class="temp-low">7 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>7 AM</time>
-              <img src="images/sunrise.png" alt="Weather icon for 7 AM" />
-              <div class="temps">
-                <span class="temp-high">13 °C</span>
-                <span class="temp-low">8 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>8 AM</time>
-              <img src="images/sunny.png" alt="Weather icon for 8 AM" />
-              <div class="temps">
-                <span class="temp-high">16 °C</span>
-                <span class="temp-low">10 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>9 AM</time>
-              <img src="images/sunny.png" alt="Weather icon for 9 AM" />
-              <div class="temps">
-                <span class="temp-high">18 °C</span>
-                <span class="temp-low">12 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>10 AM</time>
-              <img src="images/partly-cloudy.png" alt="Weather icon for 10 AM" />
-              <div class="temps">
-                <span class="temp-high">20 °C</span>
-                <span class="temp-low">13 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>11 AM</time>
-              <img src="images/partly-cloudy.png" alt="Weather icon for 11 AM" />
-              <div class="temps">
-                <span class="temp-high">22 °C</span>
-                <span class="temp-low">14 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>12 PM</time>
-              <img src="images/sunny.png" alt="Weather icon for 12 PM" />
-              <div class="temps">
-                <span class="temp-high">24 °C</span>
-                <span class="temp-low">16 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>1 PM</time>
-              <img src="images/sunny.png" alt="Weather icon for 1 PM" />
-              <div class="temps">
-                <span class="temp-high">25 °C</span>
-                <span class="temp-low">17 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>2 PM</time>
-              <img src="images/partly-cloudy.png" alt="Weather icon for 2 PM" />
-              <div class="temps">
-                <span class="temp-high">24 °C</span>
-                <span class="temp-low">17 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>3 PM</time>
-              <img src="images/rain.png" alt="Weather icon for 3 PM" />
-              <div class="temps">
-                <span class="temp-high">22 °C</span>
-                <span class="temp-low">15 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>4 PM</time>
-              <img src="images/rain.png" alt="Weather icon for 4 PM" />
-              <div class="temps">
-                <span class="temp-high">21 °C</span>
-                <span class="temp-low">14 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>5 PM</time>
-              <img src="images/cloudy.png" alt="Weather icon for 5 PM" />
-              <div class="temps">
-                <span class="temp-high">20 °C</span>
-                <span class="temp-low">13 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>6 PM</time>
-              <img src="images/cloudy.png" alt="Weather icon for 6 PM" />
-              <div class="temps">
-                <span class="temp-high">18 °C</span>
-                <span class="temp-low">12 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>7 PM</time>
-              <img src="images/sunset.png" alt="Weather icon for 7 PM" />
-              <div class="temps">
-                <span class="temp-high">17 °C</span>
-                <span class="temp-low">11 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>8 PM</time>
-              <img src="images/clear-night.png" alt="Weather icon for 8 PM" />
-              <div class="temps">
-                <span class="temp-high">16 °C</span>
-                <span class="temp-low">10 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>9 PM</time>
-              <img src="images/clear-night.png" alt="Weather icon for 9 PM" />
-              <div class="temps">
-                <span class="temp-high">15 °C</span>
-                <span class="temp-low">9 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>10 PM</time>
-              <img src="images/partly-cloudy-night.png" alt="Weather icon for 10 PM" />
-              <div class="temps">
-                <span class="temp-high">14 °C</span>
-                <span class="temp-low">8 °C</span>
-              </div>
-            </div>
-            <div class="slide">
-              <time>11 PM</time>
-              <img src="images/clear-night.png" alt="Weather icon for 11 PM" />
-              <div class="temps">
-                <span class="temp-high">13 °C</span>
-                <span class="temp-low">7 °C</span>
-              </div>
-            </div>
+            <button class="slider-nav next" aria-label="Next hour">›</button>
           </div>
-        </div>
-        <button class="slider-nav next" aria-label="Next hour">›</button>
-      </div>
-    </section>
-    </main>
-  </div>
+        </section>
+      </main>
+    </div>
 
-  <!-- Global Footer -->
-  <footer id="footer">
-    <p>&copy; 2025 Cozy Skies. All rights reserved.</p>
-    <p>Weather Data Provided by <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
-    </p>
-    <a href="privacy-policy.html">Privacy Policy</a>
-  </footer>
-  </footer>
-
-</body>
-
+    <!-- Global Footer -->
+    <footer id="footer">
+      <p>© 2025 Cozy Skies. All rights reserved.</p>
+      <!-- Consider dynamic year if desired -->
+      <p>
+        Weather Data Provided by
+        <a href="https://openweathermap.org" target="_blank" rel="noopener"
+          >OpenWeatherMap</a
+        >
+      </p>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </footer>
+  </body>
 </html>
