@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/toggle-theme.js"></script>
+  <script src="js/slider.js" defer></script>
   <title>forecast - Cozy Skies</title>
 </head>
 
@@ -107,6 +108,211 @@
           </tbody>
         </table>
       </section>
+
+    <!-- Hourly Forecast Slider -->
+    <section id="hourly-forecast" class="section">
+      <h2>Hourly Forecast</h2>
+      <div class="slider-wrapper">
+        <button class="slider-nav prev" aria-label="Previous hour">‹</button>
+        <div class="slider-window">
+          <div class="slides">
+            <div class="slide">
+              <time>12 AM</time>
+              <img src="images/clear-night.png" alt="Weather icon for 12 AM" />
+              <div class="temps">
+                <span class="temp-high">15 °C</span>
+                <span class="temp-low">10 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>1 AM</time>
+              <img src="images/clear-night.png" alt="Weather icon for 1 AM" />
+              <div class="temps">
+                <span class="temp-high">14 °C</span>
+                <span class="temp-low">9 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>2 AM</time>
+              <img src="images/partly-cloudy-night.png" alt="Weather icon for 2 AM" />
+              <div class="temps">
+                <span class="temp-high">14 °C</span>
+                <span class="temp-low">9 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>3 AM</time>
+              <img src="images/cloudy.png" alt="Weather icon for 3 AM" />
+              <div class="temps">
+                <span class="temp-high">13 °C</span>
+                <span class="temp-low">8 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>4 AM</time>
+              <img src="images/cloudy.png" alt="Weather icon for 4 AM" />
+              <div class="temps">
+                <span class="temp-high">13 °C</span>
+                <span class="temp-low">8 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>5 AM</time>
+              <img src="images/fog.png" alt="Weather icon for 5 AM" />
+              <div class="temps">
+                <span class="temp-high">12 °C</span>
+                <span class="temp-low">7 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>6 AM</time>
+              <img src="images/fog.png" alt="Weather icon for 6 AM" />
+              <div class="temps">
+                <span class="temp-high">12 °C</span>
+                <span class="temp-low">7 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>7 AM</time>
+              <img src="images/sunrise.png" alt="Weather icon for 7 AM" />
+              <div class="temps">
+                <span class="temp-high">13 °C</span>
+                <span class="temp-low">8 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>8 AM</time>
+              <img src="images/sunny.png" alt="Weather icon for 8 AM" />
+              <div class="temps">
+                <span class="temp-high">16 °C</span>
+                <span class="temp-low">10 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>9 AM</time>
+              <img src="images/sunny.png" alt="Weather icon for 9 AM" />
+              <div class="temps">
+                <span class="temp-high">18 °C</span>
+                <span class="temp-low">12 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>10 AM</time>
+              <img src="images/partly-cloudy.png" alt="Weather icon for 10 AM" />
+              <div class="temps">
+                <span class="temp-high">20 °C</span>
+                <span class="temp-low">13 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>11 AM</time>
+              <img src="images/partly-cloudy.png" alt="Weather icon for 11 AM" />
+              <div class="temps">
+                <span class="temp-high">22 °C</span>
+                <span class="temp-low">14 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>12 PM</time>
+              <img src="images/sunny.png" alt="Weather icon for 12 PM" />
+              <div class="temps">
+                <span class="temp-high">24 °C</span>
+                <span class="temp-low">16 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>1 PM</time>
+              <img src="images/sunny.png" alt="Weather icon for 1 PM" />
+              <div class="temps">
+                <span class="temp-high">25 °C</span>
+                <span class="temp-low">17 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>2 PM</time>
+              <img src="images/partly-cloudy.png" alt="Weather icon for 2 PM" />
+              <div class="temps">
+                <span class="temp-high">24 °C</span>
+                <span class="temp-low">17 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>3 PM</time>
+              <img src="images/rain.png" alt="Weather icon for 3 PM" />
+              <div class="temps">
+                <span class="temp-high">22 °C</span>
+                <span class="temp-low">15 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>4 PM</time>
+              <img src="images/rain.png" alt="Weather icon for 4 PM" />
+              <div class="temps">
+                <span class="temp-high">21 °C</span>
+                <span class="temp-low">14 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>5 PM</time>
+              <img src="images/cloudy.png" alt="Weather icon for 5 PM" />
+              <div class="temps">
+                <span class="temp-high">20 °C</span>
+                <span class="temp-low">13 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>6 PM</time>
+              <img src="images/cloudy.png" alt="Weather icon for 6 PM" />
+              <div class="temps">
+                <span class="temp-high">18 °C</span>
+                <span class="temp-low">12 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>7 PM</time>
+              <img src="images/sunset.png" alt="Weather icon for 7 PM" />
+              <div class="temps">
+                <span class="temp-high">17 °C</span>
+                <span class="temp-low">11 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>8 PM</time>
+              <img src="images/clear-night.png" alt="Weather icon for 8 PM" />
+              <div class="temps">
+                <span class="temp-high">16 °C</span>
+                <span class="temp-low">10 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>9 PM</time>
+              <img src="images/clear-night.png" alt="Weather icon for 9 PM" />
+              <div class="temps">
+                <span class="temp-high">15 °C</span>
+                <span class="temp-low">9 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>10 PM</time>
+              <img src="images/partly-cloudy-night.png" alt="Weather icon for 10 PM" />
+              <div class="temps">
+                <span class="temp-high">14 °C</span>
+                <span class="temp-low">8 °C</span>
+              </div>
+            </div>
+            <div class="slide">
+              <time>11 PM</time>
+              <img src="images/clear-night.png" alt="Weather icon for 11 PM" />
+              <div class="temps">
+                <span class="temp-high">13 °C</span>
+                <span class="temp-low">7 °C</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="slider-nav next" aria-label="Next hour">›</button>
+      </div>
+    </section>
     </main>
   </div>
 

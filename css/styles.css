@@ -460,7 +460,131 @@ tr:nth-child(even) {
 }
 
 /* -----------------------------
- * 13. COMMENT SLIDER
+ * 13. IMPROVED SLIDER SYSTEM
+ * ----------------------------- */
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 2rem 0;
+  padding: 0 40px; /* Space for navigation buttons */
+}
+
+.slider-window {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--button-radius);
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.slide {
+  flex-shrink: 0;
+  padding: 1rem;
+  background: var(--bg-light);
+  border-radius: var(--button-radius);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Slider navigation buttons */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.slider-nav:hover:not(:disabled) {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+  background: var(--accent-color);
+}
+
+.slider-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: var(--border-color);
+}
+
+.slider-nav.prev {
+  left: 8px;
+}
+
+.slider-nav.next {
+  right: 8px;
+}
+
+/* -----------------------------
+ * 14. HOURLY FORECAST SPECIFIC STYLES
+ * ----------------------------- */
+
+#hourly-forecast .slide {
+  min-height: 140px;
+  justify-content: space-between;
+  padding: 0.75rem 0.5rem;
+}
+
+#hourly-forecast .slide time {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+#hourly-forecast .slide img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin: 0.5rem 0;
+}
+
+#hourly-forecast .temps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+#hourly-forecast .temp-high {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+#hourly-forecast .temp-low {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  opacity: 0.8;
+}
+
+/* -----------------------------
+ * 15. COMMENT SLIDER SPECIFIC STYLES
  * ----------------------------- */
 
 #comment-slider {
@@ -475,78 +599,27 @@ tr:nth-child(even) {
   margin-bottom: 1.5rem;
 }
 
-.slider-wrapper {
-  position: relative;
-  overflow: visible; /* Allow nav buttons outside */
-  width: 100%;
-  margin: 2rem 0;
-  padding: 0 1rem;
-  border-radius: var(--button-radius);
-}
-
-.slides {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 1rem;
-  width: 100%;
-  padding: 0.75rem 0;
-}
-
-.slide {
-  flex: 0 0 calc(100% - 2rem); /* Full width on mobile */
-  min-width: 0;
-  padding: 1rem 1.25rem;
-  margin: 0.5rem 0;
-  background: var(--bg-light);
-  border-radius: var(--button-radius);
-  box-shadow: var(--box-shadow);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  box-sizing: border-box;
-}
-
-.slide.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Slider navigation buttons */
-.slider-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--primary-color);
-  color: var(--button-text-color);
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
+#comment-slider .slide {
+  min-height: 120px;
   justify-content: center;
-  opacity: 0.7;
-  transition: opacity 0.3s ease, transform 0.2s ease;
+  padding: 1.5rem;
 }
 
-.slider-nav:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.1); /* Grow effect */
+#comment-slider .slide p {
+  margin-bottom: 0.5rem;
+  font-style: italic;
+  line-height: 1.4;
 }
 
-/* Button positioning */
-.slider-nav.prev {
-  left: 5px;
-}
-.slider-nav.next {
-  right: 5px;
+#comment-slider .slide .author {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-style: normal;
+  margin-bottom: 0;
 }
 
 /* -----------------------------
- * 14. FOOTER
+ * 16. FOOTER
  * ----------------------------- */
 
 #footer {
@@ -563,7 +636,7 @@ tr:nth-child(even) {
 }
 
 /* -----------------------------
- * 15. RESPONSIVE BREAKPOINTS
+ * 17. RESPONSIVE BREAKPOINTS
  * ----------------------------- */
 
 /* Small devices (576px+) */
@@ -572,8 +645,21 @@ tr:nth-child(even) {
     grid-template-columns: repeat(2, 1fr); /* 2 columns */
   }
 
-  .slide {
-    flex: 0 0 calc(100% - 2rem);
+  .slider-wrapper {
+    padding: 0 50px;
+  }
+
+  .slider-nav {
+    width: 36px;
+    height: 36px;
+  }
+
+  .slider-nav.prev {
+    left: 12px;
+  }
+
+  .slider-nav.next {
+    right: 12px;
   }
 }
 
@@ -652,27 +738,21 @@ tr:nth-child(even) {
     max-width: 400px;
   }
 
-  /* Slider improvements */
-  .slide {
-    flex: 0 0 calc(50% - 1.5rem); /* Two per row */
-    padding: 1.25rem 1.5rem;
+  #hourly-forecast .slide {
+    min-height: 160px;
   }
 
-  .slider-nav {
-    width: 32px;
-    height: 32px;
+  #hourly-forecast .slide img {
+    width: 50px;
+    height: 50px;
   }
 
-  /* Move buttons outside */
-  .slider-nav.prev {
-    left: -16px;
-  }
-  .slider-nav.next {
-    right: -16px;
+  #hourly-forecast .temp-high {
+    font-size: 1rem;
   }
 
-  .slides {
-    gap: 1.5rem;
+  #hourly-forecast .temp-low {
+    font-size: 0.9rem;
   }
 }
 
@@ -682,8 +762,22 @@ tr:nth-child(even) {
     grid-template-columns: repeat(4, 1fr); /* 4 columns */
   }
 
-  .slide {
-    flex: 0 0 calc(33.333% - 1rem); /* Three per row */
+  .slider-wrapper {
+    padding: 0 60px;
+  }
+
+  .slider-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+
+  .slider-nav.prev {
+    left: 16px;
+  }
+
+  .slider-nav.next {
+    right: 16px;
   }
 }
 
@@ -716,7 +810,7 @@ tr:nth-child(even) {
 
 /* XXL devices (1200px+) */
 @media (min-width: 1200px) {
-  .slide {
-    flex: 0 0 calc(25% - 1.125rem); /* Four per row */
+  .slider-wrapper {
+    padding: 0 70px;
   }
 }
