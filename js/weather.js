@@ -1,226 +1,167 @@
-// weather.js
+// weather.js - Weather data management and UI updates
+
 document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = 'c6e99cc6626de28d89826cee75d11a3c'; // Your API key
-    const LAST_WEATHER_DATA_KEY = 'cozySkies_lastWeatherData';
-    const DATA_EXPIRY_MS = 30 * 60 * 1000; // 30 minutes
+    const API_KEY = 'c6e99cc6626de28d89826cee75d11a3c';
+    const CACHE_KEY = 'cachedWeather';
+    const CACHE_DURATION = 1800000; // 30 minutes in milliseconds
 
-    // UI Elements
-    const currentLocElement = document.querySelector('#current-weather-preview p:nth-of-type(1) span');
-    const currentTempElement = document.querySelector('#current-weather-preview p:nth-of-type(2) span');
-    const currentCondElement = document.querySelector('#current-weather-preview p:nth-of-type(3) span');
-    const currentIconImgElement = document.getElementById('current-weather-icon-img');
-    const currentWindElement = document.querySelector('#current-weather-preview p:nth-of-type(4) span');
+    // DOM element references
+    const $ = selector => document.querySelector(selector);
+    const elements = {
+        loc: $('#current-weather-preview p:nth-of-type(1) span'),
+        temp: $('#current-weather-preview p:nth-of-type(2) span'),
+        cond: $('#current-weather-preview p:nth-of-type(3) span'),
+        wind: $('#current-weather-preview p:nth-of-type(4) span'),
+        icon: $('#current-weather-icon-img'),
+        form: $('#weather-search form'),
+        locInput: $('#location'),
+        heroInput: $('#search-hero'),
+        weekly: $('#weekly-forecast tbody'),
+        hourly: $('#hourly-forecast .slides'),
+        slider: $('#hourly-forecast .slider-wrapper'),
+    };
 
-    const weatherSearchForm = document.querySelector('#weather-search form'); // Forecast page search form
-    const locationInput = document.getElementById('location'); // Forecast page search input
-    const heroLocationInput = document.getElementById('search-hero'); // Index page hero search input
+    // Generate weather icon URL
+    const iconUrl = (code, size = "@2x.png") => `https://openweathermap.org/img/wn/${code}${size}`;
 
-    const weeklyForecastTableBody = document.querySelector('#weekly-forecast tbody');
-    const hourlyForecastSlidesContainer = document.querySelector('#hourly-forecast .slides');
-    const hourlySliderWrapper = document.querySelector('#hourly-forecast .slider-wrapper');
-
-    // --- Local Storage ---
-    function saveWeatherDataToStorage(resolvedName, data) {
-        const weatherInfo = { query: resolvedName, data: data, timestamp: Date.now() };
-        try {
-            localStorage.setItem(LAST_WEATHER_DATA_KEY, JSON.stringify(weatherInfo));
-        } catch (e) {
-            console.error("Error saving to localStorage:", e);
-        }
+    // Store weather data in localStorage
+    function cacheWeather(name, data) {
+        const record = { name, data, time: Date.now() };
+        localStorage.setItem(CACHE_KEY, JSON.stringify(record));
     }
 
-    function loadWeatherDataFromStorage() {
+    // Retrieve cached data if it hasn't expired
+    function getCachedWeather() {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
         try {
-            const storedInfo = localStorage.getItem(LAST_WEATHER_DATA_KEY);
-            if (!storedInfo) return null;
-            const weatherInfo = JSON.parse(storedInfo);
-            if (Date.now() - weatherInfo.timestamp > DATA_EXPIRY_MS) {
-                localStorage.removeItem(LAST_WEATHER_DATA_KEY);
-                return null;
-            }
-            return weatherInfo;
-        } catch (e) {
-            localStorage.removeItem(LAST_WEATHER_DATA_KEY); // Clear potentially corrupt data
+            const { name, data, time } = JSON.parse(raw);
+            if (Date.now() - time > CACHE_DURATION) throw 'Expired';
+            return { name, data };
+        } catch {
+            localStorage.removeItem(CACHE_KEY);
             return null;
         }
     }
 
-    // --- UI Update Utilities ---
-    function getOpenWeatherMapIconUrl(iconCode, size = "@2x.png") {
-        return `https://openweathermap.org/img/wn/${iconCode}${size}`;
-    }
-
-    function clearUI(locMessage = "Loading...", forecastMessage = "Loading forecast...") {
-        if (currentLocElement) currentLocElement.textContent = locMessage;
-        if (currentTempElement) currentTempElement.textContent = 'N/A';
-        if (currentCondElement) currentCondElement.textContent = 'N/A';
-        if (currentWindElement) currentWindElement.textContent = 'N/A';
-        if (currentIconImgElement) {
-            currentIconImgElement.src = '';
-            currentIconImgElement.alt = '';
-            currentIconImgElement.style.display = 'none';
+    // Reset all weather display elements to a loading or default state
+    function resetUI(locText = "Loading...", forecastText = "Loading...") {
+        ['temp', 'cond', 'wind'].forEach(k => elements[k] && (elements[k].textContent = 'N/A'));
+        elements.loc && (elements.loc.textContent = locText);
+        if (elements.icon) Object.assign(elements.icon, { src: '', alt: '', style: 'display:none' });
+        if (elements.weekly) {
+            elements.weekly.innerHTML = `<tr><td colspan="4" style="text-align:center;">${forecastText}</td></tr>`;
         }
-
-        if (weeklyForecastTableBody) {
-            weeklyForecastTableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">${forecastMessage}</td></tr>`;
-        }
-        if (hourlyForecastSlidesContainer) {
-            hourlyForecastSlidesContainer.innerHTML = `<div class="slide" style="text-align:center;width:100%;"><p>${forecastMessage}</p></div>`;
-            if (typeof window.initializeSlider === 'function' && hourlySliderWrapper) {
-                window.initializeSlider(hourlySliderWrapper); // Re-init slider for empty/loading state
-            }
+        if (elements.hourly) {
+            elements.hourly.innerHTML = `<div class="slide" style="text-align:center;width:100%;"><p>${forecastText}</p></div>`;
+            window.initializeSlider?.(elements.slider);
         }
     }
 
-    function updateCurrentWeatherUI(currentData, locationName) {
-        if (currentLocElement) currentLocElement.textContent = locationName || 'N/A';
-        if (!currentData || !currentData.weather || !currentData.weather[0]) {
-            if (currentTempElement) currentTempElement.textContent = 'N/A';
-            if (currentCondElement) currentCondElement.textContent = 'Data unavailable';
-            if (currentWindElement) currentWindElement.textContent = 'N/A';
-            if (currentIconImgElement) currentIconImgElement.style.display = 'none';
-            return;
-        }
-        if (currentTempElement) currentTempElement.textContent = `${Math.round(currentData.temp)}°C`;
-        if (currentCondElement) currentCondElement.textContent = currentData.weather[0].description.replace(/\b\w/g, l => l.toUpperCase());
-        if (currentWindElement) currentWindElement.textContent = `${Math.round(currentData.wind_speed * 3.6)} km/h`;
-        if (currentIconImgElement) {
-            currentIconImgElement.src = getOpenWeatherMapIconUrl(currentData.weather[0].icon, ".png");
-            currentIconImgElement.alt = currentData.weather[0].description;
-            currentIconImgElement.style.display = 'inline';
+    // Populate the UI with current weather data
+    function updateCurrent(data, name) {
+        if (!data || !data.weather) return;
+        elements.loc && (elements.loc.textContent = name || 'N/A');
+        elements.temp && (elements.temp.textContent = `${Math.round(data.temp)}°C`);
+        elements.cond && (elements.cond.textContent = data.weather[0].description.replace(/\b\w/g, l => l.toUpperCase()));
+        elements.wind && (elements.wind.textContent = `${Math.round(data.wind_speed * 3.6)} km/h`);
+        if (elements.icon) {
+            elements.icon.src = iconUrl(data.weather[0].icon, ".png");
+            elements.icon.alt = data.weather[0].description;
+            elements.icon.style.display = 'inline';
         }
     }
 
-    function updateWeeklyForecastUI(dailyData) {
-        if (!weeklyForecastTableBody) return;
-        if (!dailyData || dailyData.length === 0) {
-            weeklyForecastTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Weekly data unavailable.</td></tr>';
-            return;
-        }
-        weeklyForecastTableBody.innerHTML = ''; // Clear previous
-        const daysToShow = Math.min(dailyData.length, 7);
-        dailyData.slice(0, daysToShow).forEach(day => {
-            const date = new Date(day.dt * 1000);
-            const dayName = date.toLocaleDateString(navigator.language || 'en-US', { weekday: 'short' });
-            const condition = day.weather[0].description.replace(/\b\w/g, l => l.toUpperCase());
-            weeklyForecastTableBody.insertRow().innerHTML = `
-                <td>${dayName}</td>
-                <td><img src="${getOpenWeatherMapIconUrl(day.weather[0].icon, '.png')}" alt="${condition}" style="height:25px;vertical-align:middle;margin-right:5px;">${condition}</td>
+    // Populate the weekly forecast table
+    function updateWeekly(forecast) {
+        if (!elements.weekly || !forecast?.length) return;
+        elements.weekly.innerHTML = '';
+        forecast.slice(0, 7).forEach(day => {
+            const d = new Date(day.dt * 1000);
+            const weekday = d.toLocaleDateString(undefined, { weekday: 'short' });
+            const desc = day.weather[0].description.replace(/\b\w/g, l => l.toUpperCase());
+            elements.weekly.insertRow().innerHTML = `
+                <td>${weekday}</td>
+                <td><img src="${iconUrl(day.weather[0].icon)}" alt="${desc}" style="height:25px;"> ${desc}</td>
                 <td>${Math.round(day.temp.max)}°C</td>
                 <td>${Math.round(day.temp.min)}°C</td>
             `;
         });
     }
 
-    function updateHourlyForecastUI(hourlyData) {
-        if (!hourlyForecastSlidesContainer) return;
-        if (!hourlyData || hourlyData.length === 0) {
-            hourlyForecastSlidesContainer.innerHTML = '<div class="slide" style="text-align:center;width:100%;"><p>Hourly data unavailable.</p></div>';
-        } else {
-            hourlyForecastSlidesContainer.innerHTML = ''; // Clear previous
-            const hoursToShow = Math.min(hourlyData.length, 24);
-            hourlyData.slice(0, hoursToShow).forEach(hour => {
-                const date = new Date(hour.dt * 1000);
-                const time = date.toLocaleTimeString(navigator.language || 'en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-                const slide = document.createElement('div');
-                slide.className = 'slide';
-                slide.style.cssText = `display:flex; flex-direction:column; align-items:center; justify-content:space-around; text-align:center; padding:10px 5px; box-sizing:border-box; min-height:150px; min-width:100px;`;
-                slide.innerHTML = `
-                    <time style="font-weight:bold;font-size:0.9em;">${time}</time>
-                    <img src="${getOpenWeatherMapIconUrl(hour.weather[0].icon)}" alt="${hour.weather[0].description}" style="width:50px;height:50px;" />
-                    <div style="font-size:0.9em;">
-                        <span style="font-size:1.1em;font-weight:bold;">${Math.round(hour.temp)}°C</span><br>
-                        <span style="opacity:0.8;">Feels: ${Math.round(hour.feels_like)}°C</span>
-                    </div>
-                `;
-                hourlyForecastSlidesContainer.appendChild(slide);
-            });
-        }
-        if (typeof window.initializeSlider === 'function' && hourlySliderWrapper) {
-            window.initializeSlider(hourlySliderWrapper);
-        }
-    }
-
-    function displayFullWeatherData(weatherAPIData, resolvedLocationName) {
-        updateCurrentWeatherUI(weatherAPIData.current, resolvedLocationName);
-        // Only update forecast sections if their containers exist (i.e., on forecast.html)
-        if (weeklyForecastTableBody) updateWeeklyForecastUI(weatherAPIData.daily);
-        if (hourlyForecastSlidesContainer) updateHourlyForecastUI(weatherAPIData.hourly);
-    }
-
-    // --- Core Fetch & Display Logic ---
-    async function fetchAndDisplayWeather(locationQuery) {
-        clearUI("Loading weather...", "Fetching forecast...");
-        try {
-            // 1. Geocode location query to lat/lon
-            const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(locationQuery)}&limit=1&appid=${apiKey}`;
-            const geoResponse = await fetch(geoUrl);
-            if (!geoResponse.ok) throw new Error(`Geocoding error: ${geoResponse.statusText}`);
-            const geoData = await geoResponse.json();
-            if (!geoData || geoData.length === 0) throw new Error(`Location "${locationQuery}" not found.`);
-            
-            const { lat, lon, name, state, country } = geoData[0];
-            const resolvedName = `${name}${state ? ', ' + state : ''}, ${country || ''}`.trim().replace(/,$/, '');
-
-            // 2. Fetch weather data using lat/lon
-            const weatherUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${apiKey}&units=metric`;
-            const weatherResponse = await fetch(weatherUrl);
-            if (!weatherResponse.ok) throw new Error(`Weather data error: ${weatherResponse.statusText}`);
-            const weatherData = await weatherResponse.json();
-
-            // 3. Display data and cache it
-            displayFullWeatherData(weatherData, resolvedName);
-            saveWeatherDataToStorage(resolvedName, weatherData);
-
-            // 4. Update search input fields with resolved name for consistency
-            if (locationInput) locationInput.value = resolvedName;
-            if (heroLocationInput) heroLocationInput.value = resolvedName;
-
-        } catch (error) {
-            console.error("Fetch Weather Error:", error.message);
-            alert(`Error: ${error.message}`);
-            clearUI("Error", "Could not load data.");
-            if (currentCondElement) currentCondElement.textContent = error.message.substring(0, 50); // Show brief error
-        }
-    }
-
-    // --- Initialization on Page Load ---
-    function initializeApp() {
-        const queryFromUrl = new URLSearchParams(window.location.search).get('location');
-
-        if (queryFromUrl) {
-            if (locationInput) locationInput.value = queryFromUrl;
-            if (heroLocationInput) heroLocationInput.value = queryFromUrl;
-            fetchAndDisplayWeather(queryFromUrl);
-            return;
-        }
-
-        const cachedWeather = loadWeatherDataFromStorage();
-        if (cachedWeather) {
-            displayFullWeatherData(cachedWeather.data, cachedWeather.query);
-            if (locationInput) locationInput.value = cachedWeather.query;
-            if (heroLocationInput) heroLocationInput.value = cachedWeather.query;
-            return;
-        }
-        
-        // Default state if no URL query and no cache
-        clearUI("Cozy Skies", "Enter a location to see the weather.");
-    }
-
-    // --- Event Listeners ---
-    if (weatherSearchForm && locationInput) { // Forecast page search
-        weatherSearchForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const query = locationInput.value.trim();
-            if (query) {
-                fetchAndDisplayWeather(query);
-            } else {
-                alert('Please enter a location.');
-            }
+    // Render the hourly forecast slider
+    function updateHourly(forecast) {
+        if (!elements.hourly || !forecast?.length) return;
+        elements.hourly.innerHTML = '';
+        forecast.slice(0, 24).forEach(hour => {
+            const d = new Date(hour.dt * 1000);
+            const time = d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.style = `display:flex; flex-direction:column; align-items:center; padding:10px 5px; min-height:150px; min-width:100px; text-align:center;`;
+            slide.innerHTML = `
+                <time style="font-weight:bold;">${time}</time>
+                <img src="${iconUrl(hour.weather[0].icon)}" alt="${hour.weather[0].description}" style="width:50px;height:50px;" />
+                <div><strong>${Math.round(hour.temp)}°C</strong><br><small>Feels: ${Math.round(hour.feels_like)}°C</small></div>
+            `;
+            elements.hourly.appendChild(slide);
         });
+        window.initializeSlider?.(elements.slider);
     }
-    // index.html hero form submission is handled by standard form action navigating to forecast.html
 
-    // --- Start ---
-    initializeApp();
+    // Dispatch updates to all sections
+    function showWeather(data, name) {
+        updateCurrent(data.current, name);
+        updateWeekly(data.daily);
+        updateHourly(data.hourly);
+    }
+
+    // Fetch weather data based on user query
+    async function getWeather(query) {
+        resetUI("Getting weather...", "Please wait...");
+        try {
+            const geoRes = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=1&appid=${API_KEY}`);
+            const geo = await geoRes.json();
+            if (!geo.length) throw new Error(`No data for "${query}"`);
+            const { lat, lon, name, state, country } = geo[0];
+            const locName = `${name}${state ? ', ' + state : ''}, ${country}`.trim();
+
+            const weatherRes = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${API_KEY}&units=metric`);
+            const weather = await weatherRes.json();
+
+            showWeather(weather, locName);
+            cacheWeather(locName, weather);
+            [elements.locInput, elements.heroInput].forEach(el => el && (el.value = locName));
+        } catch (err) {
+            console.error(err);
+            alert("Failed to fetch weather. Try again.");
+            resetUI("Error", "Unable to load forecast.");
+            elements.cond && (elements.cond.textContent = (err.message || 'Unknown error').substring(0, 50));
+        }
+    }
+
+    // Initialize application on page load
+    function init() {
+        const urlQuery = new URLSearchParams(window.location.search).get('location');
+        if (urlQuery) return getWeather(urlQuery);
+
+        const cache = getCachedWeather();
+        if (cache) {
+            showWeather(cache.data, cache.name);
+            [elements.locInput, elements.heroInput].forEach(el => el && (el.value = cache.name));
+        } else {
+            resetUI("Cozy Skies", "Enter a location to begin.");
+        }
+    }
+
+    // Attach event listener to the search form
+    elements.form?.addEventListener('submit', e => {
+        e.preventDefault();
+        const q = elements.locInput?.value.trim();
+        if (q) getWeather(q);
+        else alert('Enter a location.');
+    });
+
+    // Trigger initial logic
+    init();
 });
