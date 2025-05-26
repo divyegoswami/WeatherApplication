@@ -4,14 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="author" content="Divye Goswami" />
     <meta name="last-modified" content="2025-03-11" />
-    <!-- Consider updating this if you modify significantly -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <script src="js/toggle-theme.js" defer></script>
-    <!-- Added defer -->
     <script src="js/slider.js" defer></script>
     <script src="js/weather.js" defer></script>
-    <!-- Added weather.js -->
     <title>Forecast - Cozy Skies</title>
   </head>
 
@@ -36,8 +33,8 @@
       <main id="main-content">
         <section id="weather-search" class="section">
           <h1>Weather Lookup</h1>
-          <form action="forecast.html" method="get">
-            <!-- Method can be removed if JS handles all -->
+          <!-- Form submission will be handled by weather.js -->
+          <form> 
             <label for="location">Enter Location:</label>
             <input
               type="text"
@@ -51,10 +48,10 @@
 
         <section id="current-weather-preview" class="section">
           <h2>Current Weather Details</h2>
-          <p>Location: <span></span></p>
+          <p>Location: <span>Loading...</span></p>
           <p>Temperature: <span></span></p>
-          <p>Conditions: <span></span></p>
-          <!-- Icon will be inserted near here by JS -->
+          <!-- Added img tag for icon -->
+          <p>Conditions: <span></span><img id="current-weather-icon-img" src="" alt="Weather icon" style="vertical-align: middle; margin-left: 5px; height: 30px; display: none;"></p>
           <p>Wind Speed: <span></span></p>
         </section>
 
@@ -67,13 +64,14 @@
             <thead>
               <tr>
                 <th scope="col">Day</th>
-                <th scope="col">Sky Conditions</th>
+                <th scope="col">Conditions</th>
                 <th scope="col">High</th>
                 <th scope="col">Low</th>
               </tr>
             </thead>
             <tbody>
               <!-- Weather data will be populated here by weather.js -->
+              <tr><td colspan="4" style="text-align:center;">Loading forecast...</td></tr>
             </tbody>
           </table>
         </section>
@@ -88,6 +86,7 @@
             <div class="slider-window">
               <div class="slides">
                 <!-- Hourly forecast slides will be populated here by weather.js -->
+                <div class="slide" style="text-align:center; width:100%;"><p>Loading hourly forecast...</p></div>
               </div>
             </div>
             <button class="slider-nav next" aria-label="Next hour">›</button>
@@ -99,7 +98,6 @@
     <!-- Global Footer -->
     <footer id="footer">
       <p>© 2025 Cozy Skies. All rights reserved.</p>
-      <!-- Consider dynamic year if desired -->
       <p>
         Weather Data Provided by
         <a href="https://openweathermap.org" target="_blank" rel="noopener"

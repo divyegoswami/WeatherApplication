@@ -33,16 +33,10 @@
         <section id="hero" class="section">
           <h1>Welcome to the Cozy Skies</h1>
           <p>Find the latest weather updates for your area.</p>
-          <!-- The form here navigates to forecast.html where the main search logic is -->
           <form action="forecast.html" method="get">
             <label for="search-hero" class="search-label"
               >Search for a location:</label
             >
-            <!--
-                The input name "location" should match what forecast.html expects,
-                if you want the value to be pre-filled on the forecast page.
-                The weather.js on forecast.html will pick up this query parameter.
-            -->
             <input
               type="search"
               id="search-hero"
@@ -50,17 +44,17 @@
               class="search-button"
               placeholder="Enter City and press Enter"
             />
-            <!-- You might want a submit button here or rely on Enter key -->
+            <!-- Optional: Add a visible submit button if desired, though Enter key works -->
             <!-- <input type="submit" value="Search" class="some-button-style"> -->
           </form>
         </section>
 
         <section id="current-weather-preview">
           <h2>Current Weather</h2>
-          <p>Location: <span></span></p>
+          <p>Location: <span>Loading...</span></p>
           <p>Temperature: <span></span></p>
-          <p>Conditions: <span></span></p>
-          <!-- Icon will be inserted near here by JS -->
+          <!-- Added img tag for icon -->
+          <p>Conditions: <span></span><img id="current-weather-icon-img" src="" alt="Weather icon" style="vertical-align: middle; margin-left: 5px; height: 30px; display: none;"></p>
           <p>Wind Speed: <span></span></p>
         </section>
       </main>
@@ -68,7 +62,6 @@
     <!-- Global Footer -->
     <footer id="footer">
       <p>© 2025 Cozy Skies. All rights reserved.</p>
-      <!-- Consider dynamic year -->
       <p>
         Weather Data Provided by
         <a href="https://openweathermap.org" target="_blank" rel="noopener"
