@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <!-- Global Header -->
+    <!-- Site Header with Logo and Navigation -->
     <header id="header">
       <a href="index.html">
         <img src="images/logo.png" alt="Cozy Skies Logo" id="logo" />
@@ -28,15 +28,17 @@
       </nav>
     </header>
 
+    <!-- Main Content Section -->
     <div class="container">
       <main id="main-content">
+        <!-- Hero Search Section -->
         <section id="hero" class="section">
           <h1>Welcome to the Cozy Skies</h1>
           <p>Find the latest weather updates for your area.</p>
           <form action="forecast.html" method="get">
-            <label for="search-hero" class="search-label"
-              >Search for a location:</label
-            >
+            <label for="search-hero" class="search-label">
+              Search for a location:
+            </label>
             <input
               type="search"
               id="search-hero"
@@ -44,29 +46,36 @@
               class="search-button"
               placeholder="Enter City and press Enter"
             />
-            <!-- Optional: Add a visible submit button if desired, though Enter key works -->
-            <!-- <input type="submit" value="Search" class="some-button-style"> -->
           </form>
         </section>
 
+        <!-- Current Weather Overview -->
         <section id="current-weather-preview">
           <h2>Current Weather</h2>
           <p>Location: <span>Loading...</span></p>
           <p>Temperature: <span></span></p>
-          <!-- Added img tag for icon -->
-          <p>Conditions: <span></span><img id="current-weather-icon-img" src="" alt="Weather icon" style="vertical-align: middle; margin-left: 5px; height: 30px; display: none;"></p>
+          <p>
+            Conditions: <span></span>
+            <img
+              id="current-weather-icon-img"
+              src=""
+              alt="Weather icon"
+              style="vertical-align: middle; margin-left: 5px; height: 30px; display: none;"
+            />
+          </p>
           <p>Wind Speed: <span></span></p>
         </section>
       </main>
     </div>
-    <!-- Global Footer -->
+
+    <!-- Site Footer -->
     <footer id="footer">
       <p>© 2025 Cozy Skies. All rights reserved.</p>
       <p>
         Weather Data Provided by
-        <a href="https://openweathermap.org" target="_blank" rel="noopener"
-          >OpenWeatherMap</a
-        >
+        <a href="https://openweathermap.org" target="_blank" rel="noopener">
+          OpenWeatherMap
+        </a>
       </p>
       <a href="privacy-policy.html">Privacy Policy</a>
     </footer>
