@@ -6,8 +6,9 @@
     <meta name="last-modified" content="2025-03-11" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="js/form.js"></script>
-    <script src="js/toggle-theme.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/toggle-theme.js" defer></script>
+    <script src="js/jquery-enhancements.js" defer></script>
     <title>Contact - Cozy Skies</title>
   </head>
 
@@ -36,32 +37,31 @@
         <!-- User Feedback Form -->
         <form
           name="contact-form"
-          action="js/form.js"
-          onsubmit="return validateForm()"
           method="post"
           class="contact-form"
+          id="feedback-form"
         >
           <fieldset>
             <legend>Feedback Form</legend>
             <p>
               <label for="name">Name:</label>
-              <input type="text" id="name" name="name" placeholder="Enter Name" required />
+              <input type="text" id="name" name="name" placeholder="Enter Name" />
             </p>
             <p>
               <label for="email">Email:</label>
-              <input type="email" id="email" name="email" placeholder="Enter Email" required />
+              <input type="email" id="email" name="email" placeholder="Enter Email" />
             </p>
             <p>
               <label for="phone">Phone Number:</label>
-              <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required />
+              <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" />
             </p>
             <p>
               <label for="subject">Subject:</label>
-              <input type="text" id="subject" name="subject" placeholder="Enter Subject" required />
+              <input type="text" id="subject" name="subject" placeholder="Enter Subject" />
             </p>
             <p>
               <label for="message">Message:</label>
-              <textarea id="message" name="message" rows="5" cols="30" placeholder="Enter Message" required></textarea>
+              <textarea id="message" name="message" rows="5" cols="30" placeholder="Enter Message"></textarea>
             </p>
             <p>
               <input type="submit" value="Send Feedback" />
@@ -89,22 +89,32 @@
         <!-- Frequently Asked Questions -->
         <section id="faq">
           <h2>Frequently Asked Questions</h2>
-          <ul>
-            <li><strong>How often is the weather updated?</strong> Every 10 minutes.</li>
-            <li><strong>How fast is support?</strong> Typically within 24 hours.</li>
-          </ul>
+          <div class="faq-item">
+            <h3 class="faq-question">How often is the weather updated?</h3>
+            <div class="faq-answer">
+              <p>Every 10 minutes.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">How fast is support?</h3>
+            <div class="faq-answer">
+              <p>Typically within 24 hours.</p>
+            </div>
+          </div>
         </section>
       </main>
     </div>
 
     <!-- Site Footer -->
     <footer id="footer">
-      <p>&copy; 2025 Cozy Skies. All rights reserved.</p>
+      <p>© 2025 Cozy Skies. All rights reserved.</p>
       <p>
         Weather Data Provided by
         <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
       </p>
-      <a href="privacy-policy.html">Privacy Policy</a>
+      <p><a href="privacy-policy.html">Privacy Policy</a></p>
+      <div id="live-announcer" class="sr-only" aria-live="polite"></div>
+      <p>Current time: <span id="clock"></span></p>
     </footer>
   </body>
 </html>

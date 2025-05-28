@@ -6,8 +6,10 @@
     <meta name="last-modified" content="2025-03-11" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="js/toggle-theme.js" defer></script>
     <script src="js/weather.js" defer></script>
+    <script src="js/jquery-enhancements.js" defer></script>
     <title>Landing Page - Cozy Skies</title>
   </head>
 
@@ -77,7 +79,9 @@
           OpenWeatherMap
         </a>
       </p>
-      <a href="privacy-policy.html">Privacy Policy</a>
+      <p><a href="privacy-policy.html">Privacy Policy</a></p>
+      <div id="live-announcer" class="sr-only" aria-live="polite"></div>
+      <p>Current time: <span id="clock"></span></p>
     </footer>
   </body>
 </html>
