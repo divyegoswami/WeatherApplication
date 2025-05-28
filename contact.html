@@ -6,7 +6,11 @@
     <meta name="last-modified" content="2025-03-11" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script src="js/toggle-theme.js" defer></script>
     <script src="js/jquery-enhancements.js" defer></script>
     <title>Contact - Cozy Skies</title>
@@ -45,23 +49,49 @@
             <legend>Feedback Form</legend>
             <p>
               <label for="name">Name:</label>
-              <input type="text" id="name" name="name" placeholder="Enter Name" />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter Name"
+              />
             </p>
             <p>
               <label for="email">Email:</label>
-              <input type="email" id="email" name="email" placeholder="Enter Email" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter Email"
+              />
             </p>
             <p>
               <label for="phone">Phone Number:</label>
-              <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" />
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Enter Phone Number"
+              />
             </p>
             <p>
               <label for="subject">Subject:</label>
-              <input type="text" id="subject" name="subject" placeholder="Enter Subject" />
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="Enter Subject"
+              />
             </p>
             <p>
               <label for="message">Message:</label>
-              <textarea id="message" name="message" rows="5" cols="30" placeholder="Enter Message"></textarea>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                cols="30"
+                placeholder="Enter Message"
+              ></textarea>
             </p>
             <p>
               <input type="submit" value="Send Feedback" />
@@ -78,11 +108,15 @@
           </p>
           <p>
             Follow us on:
-            <a href="https://example.com/" target="_blank" rel="noopener">Twitter</a>
+            <a href="https://example.com/" target="_blank" rel="noopener"
+              >Twitter</a
+            >
           </p>
           <p>
             Follow us on:
-            <a href="https://example.com/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://example.com/" target="_blank" rel="noopener"
+              >Instagram</a
+            >
           </p>
         </section>
 
@@ -101,6 +135,104 @@
               <p>Typically within 24 hours.</p>
             </div>
           </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Where does the weather data come from?</h3>
+            <div class="faq-answer">
+              <p>
+                Our data is sourced from the OpenWeather API, a reliable and
+                globally recognized weather provider.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Can I search for international cities?</h3>
+            <div class="faq-answer">
+              <p>
+                Yes, you can search for weather updates in cities around the
+                world using their name and country code.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">What do the weather icons represent?</h3>
+            <div class="faq-answer">
+              <p>
+                The icons represent different weather conditions such as clear
+                skies, rain, snow, and thunderstorms. Hover over the icons for a
+                description.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">
+              How do I change between dark, light, and high contrast modes?
+            </h3>
+            <div class="faq-answer">
+              <p>
+                You can toggle the theme using the icon in the header. The
+                selected theme will be remembered on your next visit.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Why is the temperature in Celsius?</h3>
+            <div class="faq-answer">
+              <p>
+                We default to Celsius, but you can change to Fahrenheit in your
+                settings or by clicking the unit toggle if available.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">
+              What do I do if the location isn’t found?
+            </h3>
+            <div class="faq-answer">
+              <p>
+                Double-check the spelling and try adding a country code. If the
+                issue persists, contact support.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">
+              Does the app store any personal information?
+            </h3>
+            <div class="faq-answer">
+              <p>
+                No personal data is stored. We only save your last searched
+                location using browser localStorage for convenience.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Can I use the app offline?</h3>
+            <div class="faq-answer">
+              <p>
+                Some basic features may be visible, but live weather data
+                requires an internet connection.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">
+              Is the app accessible for screen readers?
+            </h3>
+            <div class="faq-answer">
+              <p>
+                Yes, we use ARIA live regions and keyboard-friendly navigation
+                to ensure accessibility for assistive technologies.
+              </p>
+            </div>
+          </div>
         </section>
       </main>
     </div>
@@ -110,7 +242,9 @@
       <p>© 2025 Cozy Skies. All rights reserved.</p>
       <p>
         Weather Data Provided by
-        <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
+        <a href="https://openweathermap.org" target="_blank" rel="noopener"
+          >OpenWeatherMap</a
+        >
       </p>
       <p><a href="privacy-policy.html">Privacy Policy</a></p>
       <div id="live-announcer" class="sr-only" aria-live="polite"></div>
