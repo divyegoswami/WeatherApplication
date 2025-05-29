@@ -30,6 +30,14 @@
   --base-font-size: 16px; /* Base size in px */
   --hero-bg: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
     url("../images/hero-bg.png") center/cover no-repeat;
+
+  /* AQI Colors */
+  --aqi-good: #4CAF50;
+  --aqi-fair: #8BC34A;
+  --aqi-moderate: #FFC107;
+  --aqi-poor: #FF9800;
+  --aqi-very-poor: #f44336;
+  --aqi-unknown: var(--text-color);
 }
 
 /* Light theme settings */
@@ -45,6 +53,13 @@
   --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --muted-bg: #f8f9fa;
   --footer-bg: #f9f9f9;
+
+  --aqi-good: #4CAF50;
+  --aqi-fair: #8BC34A;
+  --aqi-moderate: #FFC107;
+  --aqi-poor: #FF9800;
+  --aqi-very-poor: #f44336;
+  --aqi-unknown: var(--text-color);
 }
 
 /* Dark theme settings */
@@ -62,6 +77,13 @@
   --footer-bg: #1c1c1e;
   --hero-bg: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
     url("../images/hero-bg-dark.png") center/cover no-repeat;
+
+  --aqi-good: #66BB6A; /* Lighter green for dark mode */
+  --aqi-fair: #9CCC65; /* Lighter lime for dark mode */
+  --aqi-moderate: #FFEE58; /* Lighter yellow for dark mode */
+  --aqi-poor: #FFA726; /* Lighter orange for dark mode */
+  --aqi-very-poor: #EF5350; /* Lighter red for dark mode */
+  --aqi-unknown: var(--text-color);
 }
 
 /* High contrast accessibility theme */
@@ -78,6 +100,13 @@
   --muted-bg: #000000;
   --footer-bg: #000000;
   --hero-bg: url("../images/hero-bg-high-contrast.png") center/cover no-repeat;
+
+  --aqi-good: #00FF00; /* Bright green */
+  --aqi-fair: #ADFF2F; /* GreenYellow */
+  --aqi-moderate: #FFFF00; /* Bright yellow */
+  --aqi-poor: #FFA500; /* Bright orange */
+  --aqi-very-poor: #FF0000; /* Bright red */
+  --aqi-unknown: var(--text-color);
 }
 
 /* -----------------------------
@@ -456,7 +485,7 @@ tr:nth-child(even) {
 
 
 /* -----------------------------
- * 11. FORECAST PAGE
+ * 11. FORECAST PAGE & CURRENT WEATHER
  * ----------------------------- */
 
 #weather-search {
@@ -481,6 +510,10 @@ tr:nth-child(even) {
 #current-weather-preview h2 {
   grid-column: 1 / -1; /* Full width header */
   margin-bottom: 1rem;
+}
+
+#current-weather-preview p {
+  margin-bottom: 0.5rem; /* Adjust spacing between lines */
 }
 
 #weekly-forecast {
@@ -965,4 +998,68 @@ tr:nth-child(even) {
   background-color: var(--text-color);
   color: var(--bg-light);
   border: 1px solid var(--bg-light);
+}
+
+/* -----------------------------
+ * 19. AQI STYLES
+ * ----------------------------- */
+
+.aqi-value {
+  font-weight: bold; /* Make the AQI text stand out a bit */
+  padding: 0.1em 0.4em; /* Add a little padding for a badge-like feel */
+  border-radius: 4px;   /* Slightly rounded corners */
+  color: var(--button-text-color); /* Default text color for badges, assuming dark text on light bg */
+  background-color: var(--aqi-unknown); /* Default background */
+}
+
+/*
+  Dynamically add these classes in weather.js based on the AQI value.
+  Example: if (aqi === 1) element.classList.add('aqi-good');
+*/
+.aqi-value.aqi-good {
+  background-color: var(--aqi-good);
+  color: #fff; /* White text on darker backgrounds */
+}
+[data-theme="high-contrast"] .aqi-value.aqi-good {
+  color: #000; /* Black text for high contrast green */
+}
+
+
+.aqi-value.aqi-fair {
+  background-color: var(--aqi-fair);
+  color: #fff;
+}
+[data-theme="high-contrast"] .aqi-value.aqi-fair {
+  color: #000;
+}
+
+.aqi-value.aqi-moderate {
+  background-color: var(--aqi-moderate);
+  color: #000; /* Black text on yellow/orange often more readable */
+}
+
+.aqi-value.aqi-poor {
+  background-color: var(--aqi-poor);
+  color: #000;
+}
+
+.aqi-value.aqi-very-poor {
+  background-color: var(--aqi-very-poor);
+  color: #fff;
+}
+
+.aqi-value.aqi-unknown,
+.aqi-value.aqi-na { /* For N/A or loading states */
+  background-color: var(--border-color);
+  color: var(--text-color);
+}
+[data-theme="dark"] .aqi-value.aqi-unknown,
+[data-theme="dark"] .aqi-value.aqi-na {
+  background-color: var(--border-color);
+  color: var(--text-color);
+}
+[data-theme="high-contrast"] .aqi-value.aqi-unknown,
+[data-theme="high-contrast"] .aqi-value.aqi-na {
+  background-color: var(--border-color);
+  color: #000;
 }
