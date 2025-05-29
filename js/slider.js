@@ -124,5 +124,5 @@ function initializeSlider(sliderWrapper) {
   });
 
   // Initialize slider after DOM is fully ready
-  setTimeout(initSlider, 100);
+  setTimeout(initSlider, 150);
 }
