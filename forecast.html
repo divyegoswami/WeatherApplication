@@ -6,15 +6,23 @@
     <meta name="last-modified" content="2025-03-11" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <!-- Leaflet JS (defer to load after DOM) -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin="" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+      defer
+    ></script>
     <script src="js/toggle-theme.js" defer></script>
     <script src="js/slider.js" defer></script>
     <script src="js/weather.js" defer></script>
@@ -55,7 +63,9 @@
                 placeholder="E.g., London, GB or use map"
               />
               <input type="submit" value="Get Weather" />
-              <button type="button" id="select-on-map-btn">Select on Map</button>
+              <button type="button" id="select-on-map-btn">
+                Select on Map
+              </button>
             </div>
           </form>
         </section>
@@ -71,7 +81,12 @@
               id="current-weather-icon-img"
               src=""
               alt="Weather icon"
-              style="vertical-align: middle; margin-left: 5px; height: 30px; display: none;"
+              style="
+                vertical-align: middle;
+                margin-left: 5px;
+                height: 30px;
+                display: none;
+              "
             />
           </p>
           <p>Wind Speed: <span></span></p>
@@ -82,7 +97,9 @@
         <section id="weekly-forecast" class="section">
           <h2>Weekly Forecast</h2>
           <table>
-            <caption>7-Day Forecast</caption>
+            <caption>
+              7-Day Forecast
+            </caption>
             <thead>
               <tr>
                 <th scope="col">Day</th>
@@ -92,7 +109,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td colspan="4" style="text-align:center;">Loading forecast...</td></tr>
+              <tr>
+                <td colspan="4" style="text-align: center">
+                  Loading forecast...
+                </td>
+              </tr>
             </tbody>
           </table>
         </section>
@@ -101,10 +122,12 @@
         <section id="hourly-forecast" class="section">
           <h2>Hourly Forecast</h2>
           <div class="slider-wrapper">
-            <button class="slider-nav prev" aria-label="Previous hour">‹</button>
+            <button class="slider-nav prev" aria-label="Previous hour">
+              ‹
+            </button>
             <div class="slider-window">
               <div class="slides">
-                <div class="slide" style="text-align:center; width:100%;">
+                <div class="slide" style="text-align: center; width: 100%">
                   <p>Loading hourly forecast...</p>
                 </div>
               </div>
@@ -116,7 +139,7 @@
     </div>
 
     <!-- Map Modal -->
-    <div id="map-modal" class="modal" style="display: none;">
+    <div id="map-modal" class="modal" style="display: none">
       <div class="modal-content">
         <span class="close-modal-btn" id="close-map-modal-btn">×</span>
         <h2>Click on the map to select a location</h2>
@@ -129,7 +152,9 @@
       <p>© 2025 Cozy Skies. All rights reserved.</p>
       <p>
         Weather Data Provided by
-        <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
+        <a href="https://openweathermap.org" target="_blank" rel="noopener"
+          >OpenWeatherMap</a
+        >
       </p>
       <p><a href="privacy-policy.html">Privacy Policy</a></p>
       <div id="live-announcer" class="sr-only" aria-live="polite"></div>
