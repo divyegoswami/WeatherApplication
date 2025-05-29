@@ -765,15 +765,6 @@ tr:nth-child(even) {
   #hourly-forecast .temp-high { font-size: 1rem; }
   #hourly-forecast .temp-low { font-size: 0.9rem; }
 
-  /* Weather search form on larger screens */
-  #weather-search form {
-    /* Can revert to row if label is short or handled differently */
-    /* flex-direction: row; 
-    align-items: flex-end; */ /* Align items to bottom if label is next to input */
-  }
-  .form-controls-wrapper input[type="text"] {
-     /* max-width: 300px; /* Optionally cap width */
-  }
 }
 
 @media (min-width: 992px) {
