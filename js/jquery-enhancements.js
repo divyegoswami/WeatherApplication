@@ -21,16 +21,6 @@ $(function() {
         });
     }
 
-    // Sticky header when scrolling
-    function stickyHeader() {
-        const $header = $('#header');
-        if ($header.length === 0) return;
-
-        $(window).on('scroll', function() {
-            $(window).scrollTop() > 100 ? $header.addClass('sticky') : $header.removeClass('sticky');
-        });
-    }
-
     // Validate contact form inputs
     function setupFormValidation() {
         const $form = $('#feedback-form');
