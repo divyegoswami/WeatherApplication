@@ -6,7 +6,15 @@
     <meta name="last-modified" content="2025-03-11" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Leaflet JS (defer to load after DOM) -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin="" defer></script>
     <script src="js/toggle-theme.js" defer></script>
     <script src="js/slider.js" defer></script>
     <script src="js/weather.js" defer></script>
@@ -39,13 +47,16 @@
           <h1>Weather Lookup</h1>
           <form>
             <label for="location">Enter Location:</label>
-            <input
-              type="text"
-              id="location"
-              name="location"
-              placeholder="E.g., London, GB"
-            />
-            <input type="submit" value="Get Weather" />
+            <div class="form-controls-wrapper">
+              <input
+                type="text"
+                id="location"
+                name="location"
+                placeholder="E.g., London, GB or use map"
+              />
+              <input type="submit" value="Get Weather" />
+              <button type="button" id="select-on-map-btn">Select on Map</button>
+            </div>
           </form>
         </section>
 
@@ -64,7 +75,7 @@
             />
           </p>
           <p>Wind Speed: <span></span></p>
-          <p>Air Quality: <span class="aqi-value"></span></p> <!-- Added AQI display -->
+          <p>Air Quality: <span class="aqi-value"></span></p>
         </section>
 
         <!-- Weekly Forecast Table -->
@@ -102,6 +113,15 @@
           </div>
         </section>
       </main>
+    </div>
+
+    <!-- Map Modal -->
+    <div id="map-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close-modal-btn" id="close-map-modal-btn">×</span>
+        <h2>Click on the map to select a location</h2>
+        <div id="leaflet-map-container"></div>
+      </div>
     </div>
 
     <!-- Site Footer -->
