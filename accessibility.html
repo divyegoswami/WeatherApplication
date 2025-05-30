@@ -5,19 +5,20 @@
     <meta name="author" content="Divye Goswami" />
     <meta name="last-modified" content="2025-03-11" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="js/toggle-theme.js" defer></script>
-    <script src="js/jquery-enhancements.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css" /> <!-- Main website stylesheet -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!-- jQuery library -->
+    <script src="js/toggle-theme.js" defer></script> <!-- Script for theme toggling -->
+    <script src="js/jquery-enhancements.js" defer></script> <!-- Script for jQuery-based UI enhancements -->
     <title>Accessibility - Cozy Skies</title>
   </head>
 
   <body>
-    <!-- Site Header -->
+    <!-- Site header with logo and navigation -->
     <header id="header">
       <a href="index.html">
         <img src="images/logo.png" alt="Cozy Skies Logo" id="logo" />
       </a>
+      <!-- Main navigation menu -->
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -29,13 +30,15 @@
       </nav>
     </header>
 
-    <!-- Accessibility Preferences Section -->
+    <!-- Main content container for accessibility settings -->
     <div class="container">
+      <!-- Primary content section of the page -->
       <main id="main-content">
         <h1>Accessibility Settings</h1>
 
-        <!-- Interface Controls -->
+        <!-- Container for accessibility control buttons -->
         <div class="accessibility-controls">
+          <!-- Button to toggle between dark and light themes -->
           <button
             id="toggle-theme-control"
             type="button"
@@ -44,12 +47,15 @@
           >
             🌙 Switch Theme
           </button>
+          <!-- Button to increase text font size -->
           <button id="increase-font" type="button" aria-label="Increase Font Size">
             A+
           </button>
+          <!-- Button to decrease text font size -->
           <button id="decrease-font" type="button" aria-label="Decrease Font Size">
             A-
           </button>
+          <!-- Button to toggle high contrast mode -->
           <button
             id="high-contrast"
             type="button"
@@ -60,7 +66,7 @@
           </button>
         </div>
 
-        <!-- Keyboard Navigation Help -->
+        <!-- Section detailing keyboard navigation instructions -->
         <section id="keyboard-navigation">
           <h2>Keyboard Navigation Instructions</h2>
           <p>
@@ -71,7 +77,7 @@
       </main>
     </div>
 
-    <!-- Site Footer -->
+    <!-- Site footer with copyright, attributions, and utility links -->
     <footer id="footer">
       <p>© 2025 Cozy Skies. All rights reserved.</p>
       <p>
@@ -81,7 +87,9 @@
         </a>
       </p>
       <p><a href="privacy-policy.html">Privacy Policy</a></p>
+      <!-- ARIA live region for accessibility announcements -->
       <div id="live-announcer" class="sr-only" aria-live="polite"></div>
+      <!-- Placeholder for current time display (updated by JavaScript) -->
       <p>Current time: <span id="clock"></span></p>
     </footer>
   </body>

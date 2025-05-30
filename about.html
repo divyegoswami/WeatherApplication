@@ -5,20 +5,21 @@
     <meta name="author" content="Divye Goswami" />
     <meta name="last-modified" content="2025-03-11" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="js/toggle-theme.js" defer></script>
-    <script src="js/slider.js" defer></script>
-    <script src="js/jquery-enhancements.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css" /> <!-- Main website stylesheet -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> <!-- jQuery library -->
+    <script src="js/toggle-theme.js" defer></script> <!-- Script for theme toggling -->
+    <script src="js/slider.js" defer></script> <!-- Script for slider/carousel functionality -->
+    <script src="js/jquery-enhancements.js" defer></script> <!-- Script for jQuery-based UI enhancements -->
     <title>About - Cozy Skies</title>
   </head>
 
   <body>
-    <!-- Site Header -->
+    <!-- Site header with logo and navigation -->
     <header id="header">
       <a href="index.html">
         <img src="images/logo.png" alt="Cozy Skies Logo" id="logo" />
       </a>
+      <!-- Main navigation menu -->
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -30,8 +31,9 @@
       </nav>
     </header>
 
-    <!-- About Section -->
+    <!-- Main content container for the About page -->
     <div class="container">
+      <!-- Primary content section of the page -->
       <main id="main-content">
         <h1>About Our Cozy Skies</h1>
         <p>
@@ -39,7 +41,7 @@
           trusted data sources.
         </p>
 
-        <!-- Features Overview -->
+        <!-- Lists key features of the website -->
         <h2>Key Features</h2>
         <ul>
           <li>Real-Time Weather Updates</li>
@@ -48,7 +50,7 @@
           <li>User-Friendly Interface</li>
         </ul>
 
-        <!-- Data Provider Acknowledgment -->
+        <!-- Provides information about the data API source -->
         <h2>API Information</h2>
         <p>
           Weather data is provided by
@@ -59,10 +61,12 @@
       </main>
     </div>
 
-    <!-- User Testimonials Slider -->
+    <!-- Section for user testimonials slider -->
     <section id="comment-slider" class="container">
       <h2>What Our Users Say</h2>
+      <!-- Wrapper for the testimonial slider -->
       <div class="slider-wrapper">
+        <!-- Container for all testimonial slides -->
         <div class="slides">
           <div class="slide"><p>“Cozy Skies nailed the forecast for my weekend hike—absolutely spot on!”</p><p class="author">— Priya M.</p></div>
           <div class="slide"><p>“I love how fast the data loads, even on slow connections. Super reliable!”</p><p class="author">— Marcus L.</p></div>
@@ -75,12 +79,13 @@
           <div class="slide"><p>“The design is so clean and intuitive—never been easier to find severe-weather alerts.”</p><p class="author">— Chloe B.</p></div>
           <div class="slide"><p>“Fantastic app! The background animations are subtle but really elevate the experience.”</p><p class="author">— Oliver H.</p></div>
         </div>
-        <button class="slider-nav prev" aria-label="Previous slide">‹</button>
-        <button class="slider-nav next" aria-label="Next slide">›</button>
+        <!-- Navigation controls for the testimonial slider -->
+        <button class="slider-nav prev" aria-label="Previous testimonial slide">‹</button>
+        <button class="slider-nav next" aria-label="Next testimonial slide">›</button>
       </div>
     </section>
 
-    <!-- Site Footer -->
+    <!-- Site footer with copyright, attributions, and utility links -->
     <footer id="footer">
       <p>© 2025 Cozy Skies. All rights reserved.</p>
       <p>
@@ -90,7 +95,9 @@
         </a>
       </p>
       <p><a href="privacy-policy.html">Privacy Policy</a></p>
+      <!-- ARIA live region for accessibility announcements -->
       <div id="live-announcer" class="sr-only" aria-live="polite"></div>
+      <!-- Placeholder for current time display (updated by JavaScript) -->
       <p>Current time: <span id="clock"></span></p>
     </footer>
   </body>
