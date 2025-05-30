@@ -1,3 +1,4 @@
+/* Reset and Root Variables */
 *,
 *::before,
 *::after {
@@ -7,61 +8,48 @@
 }
 
 :root {
-  --primary-color: #062b4c;
-  --accent-color: #6cb2eb;
-  --text-color: #333333;
-  --bg-light: #ffffff;
-  --bg-dark: #222222;
-  --border-color: #cccccc;
-  --muted-bg: #f8f9fa;
-  --footer-bg: #f9f9f9;
-  --button-text-color: #fff;
-  --transition-fast: 0.2s ease;
-  --button-radius: 40px;
-  --base-font-size: 16px;
-  --hero-bg: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
-    url("../images/hero-bg.png") center/cover no-repeat;
-
-  --aqi-good: #4CAF50;
-  --aqi-fair: #8BC34A;
-  --aqi-moderate: #FFC107;
-  --aqi-poor: #FF9800;
-  --aqi-very-poor: #f44336;
-  --aqi-unknown: var(--text-color);
-  --aqi-unknown-bg: #9e9e9e;
-}
-
-[data-theme="light"] {
+  /* Color Palette - Default (Light Theme) */
   --primary-color: #062b4c;
   --accent-color: #6cb2eb;
   --text-color: #333333;
   --placeholder-color: #757575;
   --bg-light: #ffffff;
-  --bg-dark: #222222;
+  --bg-dark: #222222; /* Reference for components like tooltips in light theme */
   --border-color: #cccccc;
-  --button-text-color: #fff;
-  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --muted-bg: #f8f9fa;
   --footer-bg: #f9f9f9;
+  --button-text-color: #fff;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
+  /* Hero Background - Default (Light Theme) */
+  --hero-bg: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
+    url("../images/hero-bg.png") center/cover no-repeat;
+
+  /* AQI Colors - Default (Light Theme) */
   --aqi-good: #4CAF50;
   --aqi-fair: #8BC34A;
   --aqi-moderate: #FFC107;
   --aqi-poor: #FF9800;
   --aqi-very-poor: #f44336;
-  --aqi-unknown: var(--text-color);
-  --aqi-unknown-bg: #bdbdbd;
+  --aqi-unknown: var(--text-color); /* Text color for unknown AQI badge */
+  --aqi-unknown-bg: #bdbdbd;      /* Background for unknown AQI badge */
+
+  /* Global Settings */
+  --transition-fast: 0.2s ease;
+  --button-radius: 40px;
+  --base-font-size: 16px;
 }
 
+/* Dark Theme */
 [data-theme="dark"] {
   --primary-color: #6cb2eb;
   --accent-color: #ffd60a;
   --text-color: #e5e5e5;
   --placeholder-color: #aaa;
-  --bg-light: #1c1c1e;
-  --bg-dark: #2c2c2e;
+  --bg-light: #1c1c1e;       /* Apparent background (e.g., body) */
+  --bg-dark: #2c2c2e;        /* Slightly darker elements or alternative backgrounds */
   --border-color: #3a3a3c;
-  --button-text-color: #062b4c;
+  --button-text-color: #062b4c; /* Dark text for light primary buttons */
   --box-shadow: 0 2px 8px rgba(255, 255, 255, 0.047);
   --muted-bg: #141414;
   --footer-bg: #1c1c1e;
@@ -73,76 +61,76 @@
   --aqi-moderate: #FFEE58;
   --aqi-poor: #FFA726;
   --aqi-very-poor: #EF5350;
-  --aqi-unknown: var(--text-color);
+  --aqi-unknown: var(--text-color); /* Inherits dark theme text color */
   --aqi-unknown-bg: #424242;
 }
 
+/* High Contrast Theme */
 [data-theme="high-contrast"] {
-  --primary-color: #ffff00;
-  --accent-color: #00ffff;
-  --text-color: #ffffff;
+  --primary-color: #ffff00; /* Yellow */
+  --accent-color: #00ffff;  /* Cyan */
+  --text-color: #ffffff;    /* White */
   --placeholder-color: #bbbbbb;
-  --bg-light: #000000;
-  --bg-dark: #000000;
-  --border-color: #ffffff;
-  --button-text-color: #000000;
-  --box-shadow: 0 0 0 2px var(--text-color);
+  --bg-light: #000000;       /* Black background */
+  --bg-dark: #000000;        /* Also black, for consistency if referenced */
+  --border-color: #ffffff;    /* White borders */
+  --button-text-color: #000000; /* Black text for yellow/cyan buttons */
+  --box-shadow: 0 0 0 2px var(--text-color); /* White outline as shadow */
   --muted-bg: #000000;
   --footer-bg: #000000;
-  --hero-bg: url("../images/hero-bg-high-contrast.png") center/cover no-repeat;
+  --hero-bg: url("../images/hero-bg-high-contrast.png") center/cover no-repeat; /* No gradient overlay */
 
-  --aqi-good: #00FF00;
-  --aqi-fair: #ADFF2F;
-  --aqi-moderate: #FFFF00;
-  --aqi-poor: #FFA500;
-  --aqi-very-poor: #FF0000;
-  --aqi-unknown: #000000;
-  --aqi-unknown-bg: #ffffff;
+  --aqi-good: #00FF00;      /* Bright Green */
+  --aqi-fair: #ADFF2F;      /* GreenYellow */
+  --aqi-moderate: #FFFF00;  /* Yellow */
+  --aqi-poor: #FFA500;      /* Orange */
+  --aqi-very-poor: #FF0000;  /* Red */
+  --aqi-unknown: #000000;      /* Black text for unknown AQI badge */
+  --aqi-unknown-bg: #ffffff;  /* White background for unknown AQI badge */
 }
 
+/* Base HTML Styles */
 html {
   font-size: var(--base-font-size);
-}
-
-html,
-body {
-  height: 100%;
+  height: 100%; /* Ensure HTML element takes full height for potential %-based body height */
 }
 
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* Ensure body takes at least full viewport height */
   font-family: sans-serif;
   color: var(--text-color);
   background: var(--bg-light);
   line-height: 1.6;
 }
 
+/* Typography Defaults */
 h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; }
 p, ul, ol, blockquote { margin-bottom: 1em; }
-ul, ol { padding-left: 1.25em; }
+ul, ol { padding-left: 1.25em; } /* Default list indentation */
 a {
   color: var(--primary-color);
   text-decoration: none;
 }
 
+/* Layout Styles */
 .container {
-  flex: 1;
+  flex: 1; /* Allow container to grow and push footer down */
   width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
   margin: 0 auto;
-  box-sizing: border-box;
 }
 
 .section {
   margin-bottom: 2rem;
 }
 
+/* Header Styles */
 #header {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack logo and nav on small screens */
   align-items: center;
   background: var(--primary-color);
   padding: 1rem;
@@ -151,46 +139,48 @@ a {
 
 #header #logo {
   max-height: 60px;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.75rem; /* Space below logo on small screens */
 }
 
-nav ul {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  list-style: none;
-  padding-left: 0;
-  width: 100%;
-}
-
-nav a {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--button-text-color);
-  text-decoration: none;
-  transition: opacity var(--transition-fast);
-}
-
-nav a:hover,
-nav a:focus {
-  opacity: 0.8;
-}
-
-#header.sticky {
+#header.sticky { /* Styles for sticky header */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Specific shadow for sticky state */
 }
 
+/* Navigation Styles */
+nav ul {
+  display: flex;
+  flex-direction: column; /* Nav items stacked on small screens */
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  padding-left: 0; /* Remove default ul padding */
+  width: 100%;
+}
+
+nav a {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--button-text-color); /* Uses button text color for contrast on primary bg */
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+nav a:hover,
+nav a:focus {
+  opacity: 0.8; /* Slight fade on hover/focus */
+}
+
+/* Button Styles */
 button,
 input[type="button"],
 input[type="submit"],
-.accessibility-controls button {
+.accessibility-controls button { /* Common styling for all button types */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -199,14 +189,13 @@ input[type="submit"],
   border: none;
   border-radius: var(--button-radius);
   padding: 0.75rem 1.5rem;
-  min-height: 44px;
-  font: inherit;
+  min-height: 44px; /* Accessibility: minimum touch target size */
+  font: inherit; /* Inherit font from body */
   font-weight: 600;
   cursor: pointer;
-  transition: background-color var(--transition-fast),
-    transform var(--transition-fast);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
   text-align: center;
-  white-space: nowrap;
+  white-space: nowrap; /* Prevent text wrapping in buttons */
 }
 
 button:hover,
@@ -214,19 +203,21 @@ input[type="button"]:hover,
 input[type="submit"]:hover,
 .accessibility-controls button:hover {
   background: var(--accent-color);
-  transform: translateY(-1px);
+  transform: translateY(-1px); /* Subtle lift effect */
 }
+
+/* Theme-specific button hover text colors for better contrast */
 [data-theme="dark"] button:hover,
 [data-theme="dark"] input[type="button"]:hover,
 [data-theme="dark"] input[type="submit"]:hover,
 [data-theme="dark"] .accessibility-controls button:hover {
-    color: var(--bg-light);
+    color: var(--bg-light); /* Dark theme: light-ish button text on accent bg */
 }
 [data-theme="high-contrast"] button:hover,
 [data-theme="high-contrast"] input[type="button"]:hover,
 [data-theme="high-contrast"] input[type="submit"]:hover,
 [data-theme="high-contrast"] .accessibility-controls button:hover {
-    color: var(--bg-light);
+    color: var(--bg-light); /* HC theme: black button text on accent bg */
 }
 
 button:focus,
@@ -237,26 +228,27 @@ input[type="submit"]:focus,
   outline-offset: 2px;
 }
 
+/* Icon Button Styles */
 .icon-button {
   background-color: transparent;
   border: 1px solid var(--border-color);
   color: var(--primary-color);
-  padding: 0.5rem;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  padding: 0.5rem; /* Internal padding around icon */
+  border-radius: 50%; /* Circular shape */
+  width: 44px; /* Accessibility: minimum touch target size */
+  height: 44px; /* Accessibility: minimum touch target size */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent shrinking in flex layouts */
 }
 
 .icon-button svg {
   width: 20px;
   height: 20px;
-  fill: currentColor;
+  fill: currentColor; /* SVG color inherits from button's text color */
 }
 
 .icon-button:hover,
@@ -265,9 +257,10 @@ input[type="submit"]:focus,
   color: var(--button-text-color);
   border-color: var(--accent-color);
   transform: translateY(-1px);
-  outline: none;
+  outline: none; /* Custom focus usually handled by :focus or :focus-visible */
 }
 
+/* Theme-specific icon button styles */
 [data-theme="dark"] .icon-button {
     border-color: var(--border-color);
     color: var(--text-color);
@@ -275,27 +268,28 @@ input[type="submit"]:focus,
 [data-theme="dark"] .icon-button:hover,
 [data-theme="dark"] .icon-button:focus {
     background-color: var(--accent-color);
-    color: var(--bg-light);
+    color: var(--bg-light); /* Matches general button hover text color */
     border-color: var(--accent-color);
 }
 
 [data-theme="high-contrast"] .icon-button {
-    border-color: var(--text-color);
-    color: var(--text-color);
-    background-color: var(--bg-light);
+    border-color: var(--text-color); /* White border */
+    color: var(--text-color);       /* White icon */
+    background-color: var(--bg-light); /* Black background */
 }
 [data-theme="high-contrast"] .icon-button:hover,
 [data-theme="high-contrast"] .icon-button:focus {
-    background-color: var(--text-color);
-    color: var(--bg-light);
+    background-color: var(--text-color); /* White background on hover */
+    color: var(--bg-light);             /* Black icon on hover */
     border-color: var(--text-color);
 }
 
-.icon-button:focus-visible {
+.icon-button:focus-visible { /* More specific focus indicator for keyboard users */
     outline: 2px dashed var(--accent-color);
     outline-offset: 2px;
 }
 
+/* Form Element Styles */
 label {
   font-weight: bold;
   display: block;
@@ -306,13 +300,12 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 textarea,
-input[type="search"] {
+input[type="search"] { /* Common styling for text-based inputs */
   font: inherit;
   padding: 0.75rem;
   border: 1px solid var(--border-color);
-  border-radius: calc(var(--button-radius) / 2);
+  border-radius: calc(var(--button-radius) / 2); /* Half of button radius for a softer look */
   width: 100%;
-  max-width: 100%;
   font-size: 1rem;
   background-color: var(--bg-light);
   color: var(--text-color);
@@ -321,131 +314,138 @@ input[type="search"] {
 input::placeholder,
 textarea::placeholder {
   color: var(--placeholder-color);
-  opacity: 1;
+  opacity: 1; /* Ensure placeholder is fully visible */
 }
 
-.error-msg {
-  color: #d9534f;
+/* Form Validation Styles */
+.error-msg { /* For displaying error messages below inputs */
+  color: #d9534f; /* Standard error red */
   font-size: 0.875em;
   display: block;
   margin-top: 5px;
 }
-input.valid, textarea.valid {
-  border-color: #5cb85c !important;
+input.valid, textarea.valid { /* Style for valid inputs */
+  border-color: #5cb85c !important; /* Standard success green, !important to override other border styles */
 }
-input.invalid, textarea.invalid {
-  border-color: #d9534f !important;
+input.invalid, textarea.invalid { /* Style for invalid inputs */
+  border-color: #d9534f !important; /* Standard error red, !important to override */
 }
 
+/* Table Styles */
 table {
-  display: block;
+  display: block; /* Allows overflow-x for responsiveness on small screens */
   overflow-x: auto;
-  white-space: nowrap;
+  white-space: nowrap; /* Keep table content on one line when scrolling */
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1em;
 }
 th, td {
   padding: 0.75rem;
-  border: 1px solid var(--muted-bg);
+  border: 1px solid var(--border-color); /* Use theme border color for cells */
   text-align: left;
 }
-th {
+th { /* Table header cells */
   background: var(--primary-color);
   color: var(--button-text-color);
 }
-tr:nth-child(even) {
+tr:nth-child(even) { /* Zebra striping for table rows */
   background: var(--muted-bg);
 }
 
+/* Hero Section Styles */
 #hero {
   position: relative;
-  width: 100vw;
+  width: 100vw; /* Full viewport width */
   left: 50%;
-  margin-left: -50vw;
-  height: 40vh;
-  background: var(--hero-bg);
+  margin-left: -50vw; /* Technique to center a full-width element */
+  height: 40vh; /* Default height, responsive overrides below */
+  background: var(--hero-bg); /* Themed background image and gradient */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0 1rem;
+  padding: 0 1rem; /* Horizontal padding for content inside */
 }
 #hero h1 {
   font-size: 2rem;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  color: #fff; /* White text, assuming dark hero background/overlay */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); /* Shadow for legibility */
   margin-bottom: 0.5rem;
 }
 #hero p {
   font-size: 1rem;
-  color: #f0f0f0;
+  color: #f0f0f0; /* Slightly off-white text for subheading */
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-.hero-actions {
+.hero-actions { /* Container for buttons and forms within the hero section */
     display: flex;
     gap: 0.75rem;
     align-items: center;
     margin-top: 1rem;
     width: 100%;
-    max-width: 450px;
+    max-width: 450px; /* Limit width of the action group */
     justify-content: center;
 }
 
-#hero .hero-search-form {
-    flex-grow: 1;
-    margin-top: 0;
-    display: flex;
+#hero .hero-search-form { /* Specific search form in the hero */
+    flex-grow: 1; /* Allows the form to take available space */
+    margin-top: 0; /* Override general form margins if any */
+    display: flex; /* Align input and button if it were a multi-part form */
 }
 
-#hero .search-label {
+#hero .search-label { /* Label for the hero search input */
   color: #fff;
   font-size: 1.2rem;
   text-align: center;
 }
-#hero .search-button {
+#hero .search-button { /* Search input styled as a button-like field */
   background-color: #fff;
-  color: var(--text-color);
+  color: var(--text-color); /* Default theme text color (dark gray on white) */
   border: 1px solid var(--accent-color);
   border-radius: var(--button-radius);
-  height: 3rem;
+  height: 3rem; /* Consistent height */
   width: 100%;
   text-align: center;
   padding: 0.75rem;
 }
 #hero .search-button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1px); /* Subtle hover effect */
 }
+
+/* Theme-specific hero search input styling */
 [data-theme="dark"] #hero .search-button {
-    color: var(--text-color);
+    color: var(--text-color); /* Dark theme text color (light gray) on white bg */
 }
 [data-theme="dark"] #hero .search-button::placeholder {
     color: var(--placeholder-color);
 }
 [data-theme="high-contrast"] #hero .search-button {
-    color: var(--text-color);
-    background-color: var(--bg-dark);
-    border-color: var(--text-color);
+    color: var(--text-color); /* White text */
+    background-color: var(--bg-dark); /* Black background */
+    border-color: var(--text-color); /* White border */
 }
 [data-theme="high-contrast"] #hero .search-button::placeholder {
     color: var(--placeholder-color);
 }
 
+/* Hero "Get Current Location" Button (Icon Button) */
 #get-current-location-hero-btn {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
     border: 1px solid #fff;
-    color: var(--primary-color);
+    color: var(--primary-color); /* Default theme primary color for icon */
 }
 #get-current-location-hero-btn:hover,
 #get-current-location-hero-btn:focus {
-    background-color: #fff;
-    color: var(--accent-color);
+    background-color: #fff; /* Solid white on hover/focus */
+    color: var(--accent-color); /* Accent color for icon on hover/focus */
 }
 
+/* Theme-specific hero "Get Current Location" button */
 [data-theme="dark"] #get-current-location-hero-btn {
-    background-color: rgba(70, 70, 70, 0.8);
+    background-color: rgba(70, 70, 70, 0.8); /* Semi-transparent dark gray */
     border-color: var(--border-color);
     color: var(--text-color);
 }
@@ -456,76 +456,72 @@ tr:nth-child(even) {
 }
 
 [data-theme="high-contrast"] #get-current-location-hero-btn {
-    background-color: var(--bg-light);
-    border-color: var(--text-color);
-    color: var(--text-color);
+    background-color: var(--bg-light); /* Black background */
+    border-color: var(--text-color);   /* White border */
+    color: var(--text-color);          /* White icon/text */
 }
 [data-theme="high-contrast"] #get-current-location-hero-btn:hover,
 [data-theme="high-contrast"] #get-current-location-hero-btn:focus {
-    background-color: var(--text-color);
-    color: var(--bg-light);
+    background-color: var(--text-color); /* White background */
+    color: var(--bg-light);             /* Black icon/text */
 }
 
-
+/* Contact Form Styles */
 .contact-form {
   max-width: 500px;
-  margin: 2rem auto;
+  margin: 2rem auto; /* Centered with space */
   background: var(--bg-light);
   padding: 1rem;
-  border-radius: var(--button-radius);
+  border-radius: var(--button-radius); /* Large radius for card-like appearance */
   box-shadow: var(--box-shadow);
-  text-align: center;
+  text-align: center; /* Center legend and submit button */
 }
-.contact-form fieldset { border: none; padding: 0; }
+.contact-form fieldset { border: none; padding: 0; } /* Reset fieldset styles */
 .contact-form legend {
   font-size: 1.8rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
 }
 .contact-form p { margin-bottom: 1.25rem; }
-.contact-form label {
-  display: block;
-  margin-bottom: 0.5rem;
+.contact-form label { /* Labels within form are left-aligned for readability */
   text-align: left;
 }
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: var(--placeholder-color);
-  opacity: 1;
-}
-.faq-item {
+
+/* FAQ (Frequently Asked Questions) Styles */
+.faq-item { /* Individual FAQ entry */
   margin-bottom: 1rem;
   border: 1px solid var(--border-color);
-  border-radius: calc(var(--button-radius) / 2);
-  overflow: hidden;
-  text-align: left;
+  border-radius: calc(var(--button-radius) / 2); /* Consistent smaller radius */
+  overflow: hidden; /* Ensures clean rounded corners with background */
+  text-align: left; /* Content within FAQ aligned left */
 }
-.faq-question {
+.faq-question { /* Clickable question part */
   background-color: var(--muted-bg);
   padding: 0.75rem 1rem;
   cursor: pointer;
   font-weight: bold;
-  margin: 0;
+  margin: 0; /* Remove default margin if it's a heading element */
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Pushes icon to the right */
   align-items: center;
 }
-.faq-question::after {
+.faq-question::after { /* Disclosure icon (e.g., arrow) */
   content: '▼';
   font-size: 0.8em;
   transition: transform 0.3s ease;
 }
-.faq-question.open::after { transform: rotate(180deg); }
+.faq-question.open::after { transform: rotate(180deg); } /* Icon when open */
 
-.faq-answer {
+.faq-answer { /* Answer part, hidden by default */
   padding: 1rem;
   background-color: var(--bg-light);
   border-top: 1px solid var(--border-color);
-  display: none;
+  display: none; /* Controlled by JavaScript to show/hide */
 }
-.faq-answer p, .faq-answer ul, .faq-answer ol { margin-bottom: 0; }
+.faq-answer p, .faq-answer ul, .faq-answer ol { margin-bottom: 0; } /* Reset margin for content within answer */
 
-#weather-search {
+/* Weather Search Section Styles */
+#weather-search { /* Container for the weather search form */
   max-width: 700px;
   margin: 2rem auto;
   background: var(--bg-light);
@@ -536,37 +532,37 @@ tr:nth-child(even) {
 
 #weather-search form {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack elements vertically */
   gap: 0.5rem;
 }
 
-.form-controls-wrapper {
+.form-controls-wrapper { /* Wrapper for search input and associated buttons */
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
   align-items: center;
   gap: 0.5rem;
 }
 
 .form-controls-wrapper input[type="text"] {
-  flex-grow: 1;
-  min-width: 200px;
-  margin-bottom: 0;
+  flex-grow: 1; /* Input field takes available horizontal space */
+  min-width: 200px; /* Minimum width before wrapping or shrinking too much */
+  margin-bottom: 0; /* Override default input margin if any */
 }
 
-.form-controls-wrapper input[type="submit"],
-.form-controls-wrapper button#select-on-map-btn,
-.form-controls-wrapper .icon-button {
-  flex-shrink: 0;
-}
 .form-controls-wrapper input[type="submit"],
 .form-controls-wrapper button#select-on-map-btn {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem; /* Slightly smaller padding for these specific buttons */
+}
+.form-controls-wrapper .icon-button, /* Ensure these buttons don't shrink */
+.form-controls-wrapper input[type="submit"],
+.form-controls-wrapper button#select-on-map-btn {
+  flex-shrink: 0;
 }
 
-
-#current-weather-preview {
+/* Current Weather Preview Styles */
+#current-weather-preview { /* Container for displaying current weather details */
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* Single column by default, responsive overrides below */
   gap: 1rem;
   background: var(--bg-light);
   padding: 1rem;
@@ -574,25 +570,27 @@ tr:nth-child(even) {
   box-shadow: var(--box-shadow);
 }
 #current-weather-preview h2 {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1; /* Title spans all grid columns */
   margin-bottom: 1rem;
 }
-#current-weather-preview p { margin-bottom: 0.5rem; }
+#current-weather-preview p { margin-bottom: 0.5rem; } /* Spacing for paragraphs */
 
-#weekly-forecast {
-  overflow-x: auto;
+/* Weekly Forecast Styles */
+#weekly-forecast { /* Container for weekly forecast, often a slider or scrollable list */
+  overflow-x: auto; /* Allows horizontal scrolling for forecast items if they overflow */
   background: var(--bg-light);
   padding: 1.5rem;
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
 }
 
-#accessibility {
+/* Accessibility Page Styles */
+#accessibility { /* Container for accessibility settings or information page */
   max-width: 800px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background: var(--muted-bg);
-  border-radius: 8px;
+  background: var(--muted-bg); /* Muted background to distinguish from main content */
+  border-radius: 8px; /* Specific radius for this section */
   box-shadow: var(--box-shadow);
 }
 #accessibility h1, #accessibility h2 {
@@ -605,33 +603,34 @@ tr:nth-child(even) {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
-.accessibility-controls {
+.accessibility-controls { /* Container for theme switcher, font size controls etc. */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack controls vertically by default */
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
-.slider-wrapper {
+/* Slider Component Styles */
+.slider-wrapper { /* Outer container for a slider, provides padding for navigation buttons */
   position: relative;
   width: 100%;
-  max-width: 100%;
-  margin: 2rem 0;
-  padding: 0 40px;
+  max-width: 100%; /* Ensure it doesn't overflow its parent */
+  margin: 2rem 0; /* Vertical spacing */
+  padding: 0 40px; /* Horizontal space for prev/next navigation buttons */
 }
-.slider-window {
+.slider-window { /* The visible area of the slider */
   width: 100%;
-  overflow: hidden;
-  border-radius: var(--button-radius);
+  overflow: hidden; /* Hides parts of slides that are outside this window */
+  border-radius: var(--button-radius); /* Rounded corners for the sliding area */
 }
-.slides {
+.slides { /* Flex container holding all individual slides, moves horizontally */
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth sliding animation */
+  will-change: transform; /* Performance hint for browsers */
 }
-.slide {
-  flex-shrink: 0;
+.slide { /* Individual slide item */
+  flex-shrink: 0; /* Prevent slides from shrinking to fit */
   padding: 1rem;
   background: var(--bg-light);
   border-radius: var(--button-radius);
@@ -640,45 +639,46 @@ tr:nth-child(even) {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: relative;
+  position: relative; /* For potential absolutely positioned elements inside a slide */
 }
-.slider-nav {
+.slider-nav { /* Previous/Next navigation buttons for the slider */
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%); /* Vertically center buttons */
   background: var(--primary-color);
   color: var(--button-text-color);
   border: none;
-  border-radius: 50%;
+  border-radius: 50%; /* Circular buttons */
   width: 32px;
   height: 32px;
   font-size: 1.2rem;
   cursor: pointer;
-  z-index: 10;
+  z-index: 10; /* Ensure buttons are above slides */
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.7;
-  transition: all 0.3s ease;
-  user-select: none;
+  opacity: 0.7; /* Slightly transparent by default */
+  transition: all 0.3s ease; /* Smooth transitions for opacity, transform, background */
+  user-select: none; /* Prevent text selection on button click/drag */
 }
 .slider-nav:hover:not(:disabled) {
   opacity: 1;
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.1); /* Slight zoom effect on hover */
   background: var(--accent-color);
 }
-.slider-nav:disabled {
+.slider-nav:disabled { /* Style for disabled navigation buttons */
   opacity: 0.3;
   cursor: not-allowed;
-  background: var(--border-color);
+  background: var(--border-color); /* Visually indicate disabled state */
 }
-.slider-nav.prev { left: 8px; }
-.slider-nav.next { right: 8px; }
+.slider-nav.prev { left: 8px; } /* Position previous button on the left */
+.slider-nav.next { right: 8px; } /* Position next button on the right */
 
-#hourly-forecast .slide {
-  min-height: 140px;
-  justify-content: space-between;
-  padding: 0.75rem 0.5rem;
+/* Hourly Forecast Slider Specific Styles */
+#hourly-forecast .slide { /* Customizations for slides in the hourly forecast */
+  min-height: 140px; /* Ensure consistent slide height */
+  justify-content: space-between; /* Space out content vertically within the slide */
+  padding: 0.75rem 0.5rem; /* Custom padding for content */
 }
 #hourly-forecast .slide time {
   font-weight: 600;
@@ -686,13 +686,13 @@ tr:nth-child(even) {
   color: var(--primary-color);
   margin-bottom: 0.5rem;
 }
-#hourly-forecast .slide img {
+#hourly-forecast .slide img { /* Weather icon within the slide */
   width: 40px;
   height: 40px;
-  object-fit: contain;
-  margin: 0.5rem 0;
+  object-fit: contain; /* Ensure icon scales nicely */
+  margin: 0.5rem 0; /* Vertical spacing for the icon */
 }
-#hourly-forecast .temps {
+#hourly-forecast .temps { /* Container for high/low temperatures */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -707,211 +707,179 @@ tr:nth-child(even) {
 #hourly-forecast .temp-low {
   font-weight: 400;
   font-size: 0.85rem;
-  color: var(--primary-color);
+  color: var(--primary-color); /* Low temperature in primary color for emphasis */
   opacity: 0.8;
 }
 
-#comment-slider {
+/* Comment Slider Specific Styles */
+#comment-slider { /* Wrapper for a testimonial or comment slider */
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto; /* Center the slider */
   padding: 1rem;
 }
 #comment-slider h2 { text-align: center; margin-bottom: 1.5rem; }
-#comment-slider .slide {
+#comment-slider .slide { /* Customizations for comment slides */
   min-height: 120px;
-  justify-content: center;
-  padding: 1.5rem;
+  justify-content: center; /* Center content vertically */
+  padding: 1.5rem; /* More padding for text-heavy content */
 }
-#comment-slider .slide p {
+#comment-slider .slide p { /* Comment text itself */
   margin-bottom: 0.5rem;
   font-style: italic;
   line-height: 1.4;
 }
-#comment-slider .slide .author {
+#comment-slider .slide .author { /* Author of the comment */
   font-weight: 600;
   color: var(--primary-color);
-  font-style: normal;
+  font-style: normal; /* Override italic style if parent paragraph is italic */
   margin-bottom: 0;
 }
 
+/* Footer Styles */
 #footer {
   text-align: center;
   padding: 1rem;
   border-top: 1px solid var(--border-color);
   background: var(--footer-bg);
-  font-size: 0.9em;
+  font-size: 0.9em; /* Slightly smaller text for footer */
 }
 #footer a {
   color: var(--primary-color);
-  text-decoration: underline;
+  text-decoration: underline; /* Underline links in footer for clarity */
 }
 
-@media (min-width: 576px) {
-  #current-weather-preview { grid-template-columns: repeat(2, 1fr); }
-  .slider-wrapper { padding: 0 50px; }
-  .slider-nav { width: 36px; height: 36px; }
-  .slider-nav.prev { left: 12px; }
-  .slider-nav.next { right: 12px; }
-
-  .form-controls-wrapper {
-    flex-wrap: nowrap;
-  }
-  .form-controls-wrapper input[type="text"] {
-    min-width: 250px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container { padding: 0 2rem 2rem; width: 90%; }
-  #header { flex-direction: row; padding: 1rem; }
-  #header #logo { margin-bottom: 0; max-height: 70px; }
-  nav ul { flex-direction: row; justify-content: flex-end; margin-left: auto; width: auto; gap: 1.5rem; }
-  #current-weather-preview { padding: 1.5rem; gap: 1.5rem; }
-  .contact-form { padding: 2rem 2rem; }
-  table { display: table; white-space: normal; }
-  #hero { height: 50vh; }
-  #hero h1 { font-size: 2.75rem; }
-  #hero p { font-size: 1.2rem; }
-  h1 { font-size: 2.25rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.5rem; }
-  .accessibility-controls { flex-direction: row; gap: 1rem; }
-  input[type="text"], input[type="email"], input[type="tel"], textarea, input[type="search"] { max-width: 400px; }
-  #hourly-forecast .slide { min-height: 160px; }
-  #hourly-forecast .slide img { width: 50px; height: 50px; }
-  #hourly-forecast .temp-high { font-size: 1rem; }
-  #hourly-forecast .temp-low { font-size: 0.9rem; }
-}
-
-@media (min-width: 992px) {
-  #current-weather-preview { grid-template-columns: repeat(4, 1fr); }
-  .slider-wrapper { padding: 0 60px; }
-  .slider-nav { width: 40px; height: 40px; font-size: 1.4rem; }
-  .slider-nav.prev { left: 16px; }
-  .slider-nav.next { right: 16px; }
-}
-
-@media (min-width: 1024px) {
-  #main-content { max-width: 1200px; margin: 0 auto; }
-  #hero { height: 60vh; }
-  #hero h1 { font-size: 3.5rem; }
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.75rem; }
-}
-
-@media (min-width: 1200px) {
-  .slider-wrapper { padding: 0 70px; }
-}
-
-#toast-message {
-  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-  background-color: var(--primary-color); color: var(--button-text-color);
-  padding: 10px 20px; border-radius: var(--button-radius); box-shadow: var(--box-shadow);
-  z-index: 2000;
-  display: none;
+/* Utility Styles */
+#toast-message { /* For brief, non-modal notifications */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally at the bottom */
+  background-color: var(--primary-color);
+  color: var(--button-text-color);
+  padding: 10px 20px;
+  border-radius: var(--button-radius);
+  box-shadow: var(--box-shadow);
+  z-index: 2000; /* High z-index to appear above most other content */
+  display: none; /* Controlled by JavaScript to show/hide */
   font-size: 0.9rem;
 }
 
-.sr-only {
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+.sr-only { /* For content that should only be visible to screen readers */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px; /* Move off-screen */
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* Prevent line breaks */
+  border: 0;
 }
 
-#back-to-top {
-  position: fixed; bottom: 20px; right: 20px;
-  display: none;
-  background-color: var(--primary-color); color: var(--button-text-color);
-  border: none; border-radius: 50%; width: 40px; height: 40px;
-  font-size: 1.2rem; text-align: center; line-height: 40px; cursor: pointer;
-  z-index: 1000; box-shadow: var(--box-shadow); opacity: 0.8;
+#back-to-top { /* "Scroll to top" button */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none; /* Controlled by JavaScript */
+  background-color: var(--primary-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 50%; /* Circular button */
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 40px; /* Vertically center icon/text inside */
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: var(--box-shadow);
+  opacity: 0.8; /* Slightly transparent until hover */
   transition: opacity 0.3s ease, background-color var(--transition-fast);
 }
-#back-to-top:hover { opacity: 1; background-color: var(--accent-color); }
+#back-to-top:hover {
+  opacity: 1;
+  background-color: var(--accent-color);
+}
 
-#weather-tooltip {
+#weather-tooltip { /* Tooltip for displaying extra info on weather elements */
   position: absolute;
-  display: none;
-  background-color: var(--bg-dark);
-  color: var(--bg-light);
-  padding: 5px 10px; border-radius: calc(var(--button-radius) / 4);
-  font-size: 0.85rem; z-index: 2000; pointer-events: none;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: none; /* Controlled by JavaScript */
+  background-color: var(--bg-dark); /* Dark background for good contrast (light theme) */
+  color: var(--bg-light); /* Light text (light theme) */
+  padding: 5px 10px;
+  border-radius: calc(var(--button-radius) / 4); /* Small, subtle radius */
+  font-size: 0.85rem;
+  z-index: 2000; /* Above most content */
+  pointer-events: none; /* Tooltip should not interfere with mouse events on underlying elements */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Subtle shadow for depth */
 }
-[data-theme="light"] #weather-tooltip { background-color: var(--bg-dark); color: #fff; }
-[data-theme="dark"] #weather-tooltip { background-color: #444; color: var(--text-color); }
+/* Theme-specific tooltip styles */
+[data-theme="dark"] #weather-tooltip {
+  background-color: #444; /* Custom dark gray for dark theme tooltip background */
+  color: var(--text-color); /* Dark theme's light text color */
+}
 [data-theme="high-contrast"] #weather-tooltip {
-  background-color: var(--text-color);
-  color: var(--bg-light);
-  border: 1px solid var(--bg-light);
+  background-color: var(--text-color); /* White background */
+  color: var(--bg-light);             /* Black text */
+  border: 1px solid var(--bg-light);  /* Black border, provides edge on non-black backgrounds if any */
 }
 
-.aqi-value {
+/* AQI (Air Quality Index) Value Styles */
+.aqi-value { /* General styling for AQI display badges */
   font-weight: bold;
   padding: 0.2em 0.5em;
-  border-radius: 4px;
-  color: #fff;
-  background-color: var(--aqi-unknown-bg);
-  display: inline-block;
+  border-radius: 4px; /* Small radius for badge-like appearance */
+  color: #fff; /* Default white text, overridden by specific AQI levels or themes */
+  background-color: var(--aqi-unknown-bg); /* Default to unknown AQI background */
+  display: inline-block; /* Allows padding and respects text flow */
   line-height: 1.2;
   text-align: center;
 }
 
+/* AQI level specific styles */
 .aqi-value.aqi-good { background-color: var(--aqi-good); color: #fff; }
-[data-theme="high-contrast"] .aqi-value.aqi-good { color: #000; }
+[data-theme="high-contrast"] .aqi-value.aqi-good { color: #000; } /* Black text for HC good AQI for max contrast */
 
-.aqi-value.aqi-fair { background-color: var(--aqi-fair); color: #000; }
-[data-theme="dark"] .aqi-value.aqi-fair { color: #000; }
-[data-theme="high-contrast"] .aqi-value.aqi-fair { color: #000; }
-
-.aqi-value.aqi-moderate { background-color: var(--aqi-moderate); color: #000; }
-
-.aqi-value.aqi-poor { background-color: var(--aqi-poor); color: #000; }
-
-.aqi-value.aqi-very-poor { background-color: var(--aqi-very-poor); color: #fff; }
+.aqi-value.aqi-fair { background-color: var(--aqi-fair); color: #000; } /* Black text for fair AQI */
+.aqi-value.aqi-moderate { background-color: var(--aqi-moderate); color: #000; } /* Black text for moderate AQI */
+.aqi-value.aqi-poor { background-color: var(--aqi-poor); color: #000; } /* Black text for poor AQI */
+.aqi-value.aqi-very-poor { background-color: var(--aqi-very-poor); color: #fff; } /* White text for very poor AQI */
 
 .aqi-value.aqi-unknown,
-.aqi-value.aqi-na {
+.aqi-value.aqi-na { /* N/A or Unknown AQI values */
   background-color: var(--aqi-unknown-bg);
-  color: var(--aqi-unknown);
-}
-[data-theme="dark"] .aqi-value.aqi-unknown,
-[data-theme="dark"] .aqi-value.aqi-na {
-  color: var(--text-color);
-}
-[data-theme="high-contrast"] .aqi-value.aqi-unknown,
-[data-theme="high-contrast"] .aqi-value.aqi-na {
-  color: var(--aqi-unknown);
+  color: var(--aqi-unknown); /* Text color determined by theme-specific --aqi-unknown variable */
 }
 
-.modal {
-  display: none;
+/* Modal Styles */
+.modal { /* Full-screen overlay for modal dialogs */
+  display: none; /* Controlled by JavaScript */
   position: fixed;
-  z-index: 1500;
+  z-index: 1500; /* Above most content, below toasts/tooltips if needed */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
-  padding-top: 60px;
+  overflow: auto; /* Enable scroll if modal content is too long */
+  background-color: rgba(0,0,0,0.6); /* Semi-transparent black overlay */
+  padding-top: 60px; /* Space from top before modal content starts */
 }
 
-.modal-content {
+.modal-content { /* The actual modal dialog box */
   background-color: var(--bg-light);
   color: var(--text-color);
-  margin: 5% auto;
+  margin: 5% auto; /* Centered with margin from top/bottom */
   padding: 20px;
   border: 1px solid var(--border-color);
-  width: 80%;
-  max-width: 700px;
-  border-radius: 8px;
-  position: relative;
+  width: 80%; /* Responsive width */
+  max-width: 700px; /* Maximum width for larger screens */
+  border-radius: 8px; /* Consistent small radius for modals */
+  position: relative; /* For positioning the close button absolutely inside */
   box-shadow: var(--box-shadow);
 }
 
-.close-modal-btn {
+.close-modal-btn { /* Close button (e.g., 'X') for the modal */
   color: var(--text-color);
   position: absolute;
   top: 10px;
@@ -923,15 +891,75 @@ tr:nth-child(even) {
 
 .close-modal-btn:hover,
 .close-modal-btn:focus {
-  color: var(--primary-color);
+  color: var(--primary-color); /* Change color on hover/focus for better feedback */
   text-decoration: none;
   cursor: pointer;
 }
 
-#leaflet-map-container {
-  height: 400px;
+/* Leaflet Map Container Styles */
+#leaflet-map-container { /* Specific styles for a Leaflet map container */
+  height: 400px; /* Fixed height for the map */
   width: 100%;
-  margin-top: 15px;
-  border-radius: 4px;
+  margin-top: 15px; /* Space above the map */
+  border-radius: 4px; /* Small radius for map container */
   border: 1px solid var(--border-color);
+}
+
+/* Responsive Media Queries */
+@media (min-width: 576px) { /* Small devices (landscape phones, etc.) */
+  #current-weather-preview { grid-template-columns: repeat(2, 1fr); } /* Two columns for weather preview */
+  .slider-wrapper { padding: 0 50px; } /* Increased padding for larger slider navigation buttons */
+  .slider-nav { width: 36px; height: 36px; }
+  .slider-nav.prev { left: 12px; }
+  .slider-nav.next { right: 12px; }
+
+  .form-controls-wrapper {
+    flex-wrap: nowrap; /* Prevent wrapping of search controls on slightly larger screens */
+  }
+  .form-controls-wrapper input[type="text"] {
+    min-width: 250px; /* Allow text input to be larger */
+  }
+}
+
+@media (min-width: 768px) { /* Medium devices (tablets) */
+  .container { padding: 0 2rem 2rem; width: 90%; } /* Wider container, more padding */
+  #header { flex-direction: row; padding: 1rem; } /* Header items arranged in a row */
+  #header #logo { margin-bottom: 0; max-height: 70px; } /* Adjust logo for row layout */
+  nav ul { flex-direction: row; justify-content: flex-end; margin-left: auto; width: auto; gap: 1.5rem; } /* Horizontal navigation */
+  #current-weather-preview { padding: 1.5rem; gap: 1.5rem; } /* More padding and gap for weather preview */
+  .contact-form { padding: 2rem 2rem; } /* More padding for contact form */
+  table { display: table; white-space: normal; } /* Revert to standard table layout */
+  #hero { height: 50vh; } /* Taller hero section */
+  #hero h1 { font-size: 2.75rem; } /* Larger hero heading */
+  #hero p { font-size: 1.2rem; } /* Larger hero subheading */
+  h1 { font-size: 2.25rem; } /* Larger base heading sizes */
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  .accessibility-controls { flex-direction: row; gap: 1rem; } /* Horizontal layout for accessibility controls */
+  input[type="text"], input[type="email"], input[type="tel"], textarea, input[type="search"] { max-width: 400px; } /* Max width for text inputs */
+  #hourly-forecast .slide { min-height: 160px; } /* Taller hourly forecast slides */
+  #hourly-forecast .slide img { width: 50px; height: 50px; } /* Larger icons in hourly forecast */
+  #hourly-forecast .temp-high { font-size: 1rem; }
+  #hourly-forecast .temp-low { font-size: 0.9rem; }
+}
+
+@media (min-width: 992px) { /* Large devices (desktops) */
+  #current-weather-preview { grid-template-columns: repeat(4, 1fr); } /* Four columns for weather preview */
+  .slider-wrapper { padding: 0 60px; } /* Even more padding for slider nav */
+  .slider-nav { width: 40px; height: 40px; font-size: 1.4rem; }
+  .slider-nav.prev { left: 16px; }
+  .slider-nav.next { right: 16px; }
+}
+
+@media (min-width: 1024px) { /* Slightly larger desktops / small laptops */
+  #main-content { max-width: 1200px; margin: 0 auto; } /* Center main content area for wide screens */
+  #hero { height: 60vh; } /* Even taller hero */
+  #hero h1 { font-size: 3.5rem; }
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+}
+
+@media (min-width: 1200px) { /* Extra large devices (large desktops) */
+  .slider-wrapper { padding: 0 70px; } /* Widest slider padding for largest screens */
 }
