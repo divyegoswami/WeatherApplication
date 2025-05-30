@@ -1,36 +1,23 @@
+// jQuery enhancements for the weather app
 $(function() {
     // --- Flags and Constants ---
-
-    // Flag to indicate if a scroll animation is currently in progress.
-    // Prevents conflicts if multiple scroll-related actions are triggered.
-    let isAnimatingScroll = false;
-
-    // Minimum delay (in milliseconds) between throttled scroll event executions.
-    // Helps optimize performance by limiting the frequency of scroll event handling.
-    const SCROLL_THROTTLE_LIMIT = 150;
+    let isAnimatingScroll = false; // Tracks if a scroll animation is active.
+    const SCROLL_THROTTLE_LIMIT = 150; // Min delay for throttled scroll events (ms).
 
     // --- Cached jQuery Selectors ---
-    // Caching frequently used jQuery selectors improves performance by reducing DOM traversals
-    // and makes the code more readable.
-    const $window = $(window); // Represents the browser window.
-    const $document = $(document); // Represents the HTML document.
-    const $htmlBody = $('html, body'); // Selects both <html> and <body> for cross-browser scroll animation.
-    const $header = $('#header'); // Selects the site header element.
+    const $window = $(window); // Caches the window object.
+    const $document = $(document); // Caches the document object.
+    const $htmlBody = $('html, body'); // Selects html and body for scroll animations.
+    const $header = $('#header'); // Selects the site header.
 
     // --- Utility Functions ---
 
-    /**
-     * Throttles a function to limit its execution frequency.
-     * This is useful for performance-intensive event handlers like 'scroll' or 'resize'.
-     * @param {Function} func - The function to be throttled.
-     * @param {number} limit - The minimum time interval (in ms) between function calls.
-     * @returns {Function} A throttled version of the input function.
-     */
+    // Throttles a function to limit its execution frequency.
     function throttle(func, limit) {
-        let inThrottle; // Flag to track if the function is currently in its throttle cooldown period.
+        let inThrottle;
         return function() {
-            const context = this; // Preserve the context ('this') of the original function.
-            const args = arguments; // Preserve the arguments passed to the original function.
+            const context = this;
+            const args = arguments;
             if (!inThrottle) {
                 func.apply(context, args);
                 inThrottle = true;
@@ -41,76 +28,50 @@ $(function() {
 
     // --- Feature Initializations ---
 
-    /**
-     * Fades in the main weather sections smoothly once they are available in the DOM.
-     * This enhances visual appeal and improves the perceived loading performance.
-     */
+    // Fades in main weather sections for a smooth visual effect.
     function showWeatherSections() {
-        const $sections = $('#current-weather-preview, #weekly-forecast, #hourly-forecast');
-        if ($sections.length > 0) {
-            // Hide sections initially and then fade them in.
-            $sections.hide().fadeIn(800);
-        }
+        $('#current-weather-preview, #weekly-forecast, #hourly-forecast').hide().fadeIn(800);
     }
 
-    /**
-     * Calculates the vertical scroll offset for a target element.
-     * It can optionally adjust this offset if a sticky header is present and visible,
-     * ensuring the target element isn't obscured by the header.
-     * @param {jQuery} targetElement - The jQuery object of the element to scroll to.
-     * @returns {number} The calculated vertical offset from the top of the document.
-     */
+    // Calculates scroll offset for a target, adjusting for a sticky header.
     function getScrollTargetOffset(targetElement) {
         let offset = targetElement.offset().top;
-        // Check if the header is sticky and visible.
-        if ($header.hasClass('sticky') && $header.is(':visible')) {
-            // Placeholder: Optionally adjust 'offset' by subtracting the sticky header's height.
-            // Example: offset -= $header.outerHeight();
+        // Adjusts offset if a sticky header is visible.
+        if ($header.length && $header.hasClass('sticky') && $header.is(':visible')) {
+            offset -= $header.outerHeight();
         }
         return offset;
     }
 
-    /**
-     * Enables smooth scrolling for internal anchor links (e.g., <a href="#some-id">).
-     * It excludes the '#back-to-top' link, which has its own dedicated handler.
-     */
+    // Enables smooth scrolling for internal anchor links.
     function enableSmoothScroll() {
-        // Select all anchor links whose href starts with '#' but are not '#back-to-top'.
         $('a[href^="#"]').not('#back-to-top').on('click', function(e) {
             const targetSelector = $(this).attr('href');
-            // Ensure the target selector is valid and the target element exists.
-            if (targetSelector.length > 1 && $(targetSelector).length) {
-                e.preventDefault(); // Prevent the default jump-scroll behavior.
-                const $targetElement = $(targetSelector);
+            const $targetElement = $(targetSelector);
+
+            if (targetSelector.length > 1 && $targetElement.length) {
+                e.preventDefault(); // Prevents default anchor jump.
                 const targetOffset = getScrollTargetOffset($targetElement);
 
-                isAnimatingScroll = true; // Set flag to indicate scroll animation is active.
+                isAnimatingScroll = true;
                 $htmlBody.animate({ scrollTop: targetOffset }, 800, function() {
-                    isAnimatingScroll = false; // Reset flag when animation completes.
-                    // After scrolling, if a sticky header exists, re-evaluate its state.
+                    isAnimatingScroll = false;
                     if ($header.length) {
-                        handleStickyHeader(true); // Force update sticky header status.
+                        handleStickyHeader(true); // Updates sticky header state post-scroll.
                     }
-                    // Improve accessibility by focusing on the target element.
-                    // tabindex -1 allows elements not normally focusable to receive focus.
+                    // Focuses on the target element for accessibility.
                     $targetElement.attr('tabindex', -1).focus();
                 });
             }
         });
     }
 
-    /**
-     * Manages the sticky state of the header based on scroll position.
-     * It adds or removes a 'sticky' class to the header.
-     * @param {boolean} [forceUpdate=false] - If true, updates header state regardless of scroll animation.
-     */
+    // Manages the sticky state of the header on scroll.
     const handleStickyHeader = (forceUpdate = false) => {
-        // If not forcing an update and a scroll animation is in progress, do nothing.
-        if (!forceUpdate && isAnimatingScroll) return;
-        // If the header element doesn't exist, do nothing.
-        if (!$header.length) return;
+        if (!forceUpdate && isAnimatingScroll) return; // Skips if animating scroll unless forced.
+        if (!$header.length) return; // Skips if header doesn't exist.
 
-        // Add 'sticky' class if scrolled more than 100px, otherwise remove it.
+        // Toggles 'sticky' class based on scroll position.
         if ($window.scrollTop() > 100) {
             $header.addClass('sticky');
         } else {
@@ -118,27 +79,19 @@ $(function() {
         }
     };
 
-    /**
-     * Initializes the sticky header functionality.
-     * It binds the throttled 'handleStickyHeader' function to the window's scroll event
-     * and performs an initial check on page load.
-     */
+    // Initializes sticky header functionality.
     function stickyHeader() {
-        if ($header.length === 0) return; // Do nothing if no header element is found.
-        // Throttle the scroll event handler for performance.
+        if (!$header.length) return; // Skips if header doesn't exist.
+        // Attaches throttled scroll handler for sticky header.
         $window.on('scroll', throttle(handleStickyHeader, SCROLL_THROTTLE_LIMIT));
-        handleStickyHeader(true); // Initial check for sticky state on page load.
+        handleStickyHeader(true); // Checks initial sticky state.
     }
 
-    /**
-     * Sets up real-time and on-submission form validation for the feedback form.
-     * Displays inline error messages and visual indicators (valid/invalid classes).
-     */
+    // Sets up form validation for the feedback form.
     function setupFormValidation() {
         const $form = $('#feedback-form');
-        if ($form.length === 0) return; // Do nothing if the form doesn't exist.
+        if ($form.length === 0) return; // Skips if form doesn't exist.
 
-        // Cache jQuery objects for form input fields.
         const $inputs = {
             name: $('#name'),
             email: $('#email'),
@@ -147,56 +100,38 @@ $(function() {
             message: $('#message')
         };
 
-        // Define validation functions (regex patterns and simple checks).
+        // Defines validation patterns.
         const validators = {
-            name: val => /^[A-Za-z\s'-]+$/.test(val) && val.trim().length > 0, // Allows letters, spaces, apostrophes, hyphens.
-            email: val => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val), // Standard email format.
-            phone: val => /^\d{10}$/.test(val), // 10-digit phone number.
-            required: val => val.trim().length > 0 // Checks if the field is not empty.
+            name: val => /^[A-Za-z\s'-]+$/.test(val) && val.trim().length > 0,
+            email: val => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val),
+            phone: val => /^\d{10}$/.test(val),
+            required: val => val.trim().length > 0
         };
 
-        /**
-         * Creates a <span> element for displaying an error message.
-         * @param {string} msg - The error message text.
-         * @returns {jQuery} A jQuery object representing the error message span.
-         */
-        function makeError(msg) {
-            return $('<span>').addClass('error-msg').text(msg);
-        }
+        // Validates a single form input field.
+        function checkInput($el, validatorFn, errorMessage, isRequired = true) {
+            $el.next('.error-msg').remove(); // Clears previous error message.
+            const value = $el.val().trim();
+            let isValid = true;
 
-        /**
-         * Validates a single form input field.
-         * Shows/hides error messages and toggles 'valid'/'invalid' CSS classes.
-         * @param {jQuery} $el - The jQuery object of the input element to validate.
-         * @param {Function} testFn - The validation function to use for this input.
-         * @param {string} msg - The error message to display if validation fails (and not empty).
-         * @param {boolean} [isRequired=true] - Whether the field is mandatory.
-         * @returns {boolean} True if the input is valid, false otherwise.
-         */
-        function checkInput($el, testFn, msg, isRequired = true) {
-            $el.next('.error-msg').remove(); // Remove any existing error message for this field.
-            const val = $el.val().trim();
-            let valid = true;
-
-            if (isRequired && val === '') {
-                $el.after(makeError('This field is required.'));
-                valid = false;
-            } else if (val !== '' && !testFn(val)) { // Only validate non-empty fields against testFn if not required check.
-                $el.after(makeError(msg));
-                valid = false;
+            if (isRequired && value === '') {
+                $el.after($('<span>').addClass('error-msg').text('This field is required.'));
+                isValid = false;
+            } else if (value !== '' && validatorFn && !validatorFn(value)) {
+                $el.after($('<span>').addClass('error-msg').text(errorMessage));
+                isValid = false;
             }
 
-            // Toggle classes based on validity, but only if the field has been touched or is not required.
-            if (val !== '' || !isRequired) {
-                $el.toggleClass('valid', valid).toggleClass('invalid', !valid);
+            // Toggles validation classes if field has content or is invalid.
+            if (value !== '' || !isValid) {
+                $el.toggleClass('valid', isValid).toggleClass('invalid', !isValid);
             } else {
-                // If field is empty and not strictly required (e.g. during initial live validation), remove classes.
-                $el.removeClass('valid invalid');
+                $el.removeClass('valid invalid'); // Clears classes if empty and valid.
             }
-            return valid;
+            return isValid;
         }
 
-        // Live validation on input or change events for relevant fields.
+        // Enables live validation on input/change.
         $form.on('input change', 'input, textarea', function() {
             const $el = $(this);
             const id = $el.attr('id');
@@ -210,21 +145,21 @@ $(function() {
                 case 'phone':
                     checkInput($el, validators.phone, 'Use a 10-digit number.');
                     break;
-                case 'subject': // Subject and message are only checked for 'required' on live input.
+                case 'subject': // Validates only for requirement on live input.
                 case 'message':
                     checkInput($el, validators.required, 'This field is required.');
                     break;
             }
         });
 
-        // Handle form submission.
+        // Handles form submission.
         $form.on('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission.
-            $('.error-msg').remove(); // Clear all previous error messages.
-            $('input, textarea', this).removeClass('invalid valid'); // Reset validation classes.
+            e.preventDefault(); // Prevents default submission.
+            $('.error-msg', this).remove(); // Clears all error messages.
+            $('input, textarea', this).removeClass('invalid valid'); // Resets classes.
             let allValid = true;
 
-            // Perform validation for all fields.
+            // Validates all fields on submission.
             if (!checkInput($inputs.name, validators.name, 'Use letters, spaces, apostrophes, or hyphens.')) allValid = false;
             if (!checkInput($inputs.email, validators.email, 'Invalid email format.')) allValid = false;
             if (!checkInput($inputs.phone, validators.phone, 'Use a 10-digit number.')) allValid = false;
@@ -232,8 +167,8 @@ $(function() {
             if (!checkInput($inputs.message, validators.required, 'Message is required.')) allValid = false;
 
             if (allValid) {
-                alert('Details Submitted!'); // Placeholder for successful submission.
-                // Construct a mailto link with form data.
+                alert('Details Submitted!'); // Placeholder for success.
+                // Creates and triggers a mailto link.
                 const mailtoSubject = encodeURIComponent($inputs.subject.val());
                 const mailtoBody = encodeURIComponent(
                     `Name: ${$inputs.name.val()}\n` +
@@ -241,37 +176,30 @@ $(function() {
                     `Phone: ${$inputs.phone.val()}\n\n` +
                     `${$inputs.message.val()}`
                 );
-                const link = `mailto:dgoswami1@learn.athabascau.ca?subject=${mailtoSubject}&body=${mailtoBody}`;
-                window.location.href = link; // Open default email client.
+                window.location.href = `mailto:dgoswami1@learn.athabascau.ca?subject=${mailtoSubject}&body=${mailtoBody}`;
 
-                $form[0].reset(); // Reset the form fields.
-                $('input, textarea', this).removeClass('valid invalid'); // Clear validation classes.
+                $form[0].reset(); // Resets the form.
+                $('input, textarea', this).removeClass('valid invalid'); // Clears classes.
             } else {
-                // If not all fields are valid, focus on the first invalid input.
+                // Focuses on the first invalid field.
                 $(this).find('input.invalid, textarea.invalid').first().focus();
             }
         });
     }
 
-    /**
-     * Enables collapsible/expandable answers for FAQ items.
-     * Toggles an 'open' class and uses a slide animation for the answer.
-     */
+    // Enables collapsible FAQ answers.
     function setupFAQToggle() {
         $('.faq-question').on('click', function() {
-            $(this).toggleClass('open'); // Toggle 'open' class for styling (e.g., arrow icon).
-            $(this).next('.faq-answer').slideToggle(300); // Animate the display of the answer.
+            $(this).toggleClass('open'); // Toggles class for styling.
+            $(this).next('.faq-answer').slideToggle(300); // Animates answer visibility.
         });
     }
 
-    /**
-     * Displays temporary "toast" notifications for theme or contrast mode changes.
-     * The toast message appears, stays for a short duration, then fades out.
-     */
+    // Displays temporary toast notifications for theme changes.
     function setupThemeToast() {
         $('#toggle-theme-control, #high-contrast').on('click', function() {
             const buttonId = this.id;
-            // Use a small delay to allow theme attributes on <html> to update before reading them.
+            // Waits for theme attribute to update before reading.
             setTimeout(() => {
                 const currentTheme = $('html').attr('data-theme') || 'light';
                 let message = '';
@@ -279,119 +207,96 @@ $(function() {
                 if (buttonId === 'toggle-theme-control') {
                     message = currentTheme === 'dark' ? 'Dark mode enabled' : 'Light mode enabled';
                 } else if (buttonId === 'high-contrast') {
-                    // Note: High contrast might set data-theme to 'high-contrast' or revert to 'light'.
-                    // The message logic should align with how `toggle-theme.js` handles these states.
                     message = currentTheme === 'high-contrast' ? 'High contrast mode enabled' : 'High contrast mode disabled';
                 }
 
                 if (message) {
-                    $('#toast-message').remove(); // Remove any existing toast.
-                    // Create and display the new toast message.
+                    $('#toast-message').remove(); // Removes existing toast.
+                    // Creates and shows new toast message.
                     $('<div>').attr('id', 'toast-message')
                         .text(message)
                         .appendTo('body')
                         .fadeIn(400)
-                        .delay(2000) // Keep toast visible for 2 seconds.
-                        .fadeOut(400, function() { $(this).remove(); }); // Fade out and remove.
+                        .delay(2000)
+                        .fadeOut(400, function() { $(this).remove(); });
                 }
-            }, 100); // 100ms delay.
+            }, 100);
         });
     }
 
-    /**
-     * Handles loading weather data from localStorage and announcing updates for accessibility.
-     * Uses a MutationObserver to detect and announce dynamic changes to weather information.
-     */
+    // Handles loading weather data from localStorage and announces updates.
     function handleWeatherCache() {
-        const $announcer = $('#live-announcer'); // ARIA live region for screen readers.
-        if (!$announcer.length) return;
+        const $announcer = $('#live-announcer'); // ARIA live region.
 
-        // Attempt to load cached weather data on page load.
+        // Loads cached weather data.
         const cachedWeatherData = localStorage.getItem('cachedWeather');
         if (cachedWeatherData) {
             try {
                 const { name: cachedLocationName } = JSON.parse(cachedWeatherData);
                 if (cachedLocationName) {
-                    // Populate input fields with cached location.
                     $('#location, #search-hero').val(cachedLocationName);
-                    $announcer.text(`Weather loaded for ${cachedLocationName}.`);
+                    if ($announcer.length) $announcer.text(`Weather loaded for ${cachedLocationName}.`);
                 }
             } catch (err) {
-                console.error('Error parsing weather cache:', err);
+                console.error('Error parsing weather cache:', err); // Essential error logging.
             }
         }
 
-        // Observe the current weather preview section for changes.
+        // Observes weather preview for changes to announce.
         const currentWeatherPreviewElement = document.getElementById('current-weather-preview');
-        if (currentWeatherPreviewElement) {
-            const observer = new MutationObserver(mutations => {
-                mutations.forEach(mutation => {
-                    // Check if the location text within the preview has changed.
-                    const $locationElement = $('#current-weather-preview p:nth-of-type(1) span');
-                    if ($locationElement.length) {
-                        const locationText = $locationElement.text();
-                        // Announce updates based on the location text content.
-                        if (locationText === 'Error') {
-                            $announcer.text('Error loading weather data.');
-                        } else if (locationText === 'Loading...') {
-                            $announcer.text('Loading weather data.');
-                        } else if (locationText && locationText !== 'N/A') {
-                            $announcer.text(`Current weather updated for ${locationText}.`);
-                        }
-                    }
-                });
+        if (currentWeatherPreviewElement && $announcer.length) {
+            const observer = new MutationObserver(() => {
+                const $locationElement = $('#current-weather-preview p:nth-of-type(1) span');
+                if ($locationElement.length) {
+                    const locationText = $locationElement.text();
+                    // Announces weather data status.
+                    if (locationText === 'Error') $announcer.text('Error loading weather data.');
+                    else if (locationText === 'Loading...') $announcer.text('Loading weather data.');
+                    else if (locationText && locationText !== 'N/A') $announcer.text(`Current weather updated for ${locationText}.`);
+                }
             });
-            // Configure observer to watch for changes in child nodes, subtree, and character data.
             observer.observe(currentWeatherPreviewElement, { childList: true, subtree: true, characterData: true });
         }
     }
 
-    /**
-     * Initializes and displays a real-time digital clock in the UI.
-     * Updates every second.
-     */
+    // Initializes and displays a real-time digital clock.
     function startClock() {
         const $clockElement = $('#clock');
-        if ($clockElement.length) {
+        if ($clockElement.length) { // Checks if clock element exists.
             const updateTime = () => {
-                const now = new Date();
-                // Format time as HH:MM:SS.
-                $clockElement.text(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+                // Updates clock with current time.
+                $clockElement.text(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
             };
-            setInterval(updateTime, 1000); // Update every second.
-            updateTime(); // Initial call to display time immediately.
+            setInterval(updateTime, 1000); // Updates every second.
+            updateTime(); // Initial display.
         }
     }
 
-    /**
-     * Adds a "Back to Top" button that appears on scroll.
-     * Clicking the button smoothly scrolls the page to the top.
-     */
+    // Adds a "Back to Top" button.
     function setupBackToTop() {
-        // If a back-to-top button already exists (e.g. hardcoded), do nothing.
-        if ($('#back-to-top').length > 0) return;
+        if ($('#back-to-top').length > 0) return; // Skips if button already exists.
 
-        // Create the button dynamically.
+        // Creates the button.
         const $backToTopBtn = $('<button>')
             .attr('id', 'back-to-top')
             .attr('aria-label', 'Back to top')
-            .html('▲') // Upwards arrow character.
+            .html('▲')
             .appendTo('body')
-            .hide(); // Initially hidden.
+            .hide();
 
-        // Handle button click: scroll to top.
+        // Handles button click to scroll to top.
         $backToTopBtn.on('click', function() {
             isAnimatingScroll = true;
             $htmlBody.animate({ scrollTop: 0 }, 800, function() {
                 isAnimatingScroll = false;
-                if ($header.length) handleStickyHeader(true); // Re-check sticky header.
-                $('#logo').focus(); // Set focus to a sensible element at the top (e.g., logo).
+                if ($header.length) handleStickyHeader(true); // Updates sticky header.
+                $('#logo').focus(); // Focuses on a top element.
             });
         });
 
-        // Show/hide the button based on scroll position.
+        // Shows/hides button based on scroll position.
         const handleBackToTopVisibility = () => {
-            if (isAnimatingScroll) return; // Don't interfere if already scrolling.
+            if (isAnimatingScroll) return; // Skips if animating.
             if ($window.scrollTop() > 300) {
                 $backToTopBtn.fadeIn();
             } else {
@@ -399,52 +304,47 @@ $(function() {
             }
         };
 
-        // Throttle the visibility check on scroll.
         $window.on('scroll', throttle(handleBackToTopVisibility, SCROLL_THROTTLE_LIMIT));
-        handleBackToTopVisibility(); // Initial check on page load.
+        handleBackToTopVisibility(); // Initial check.
     }
 
-    /**
-     * Sets up a tooltip for the current weather icon.
-     * The tooltip displays the weather description (from the icon's 'alt' attribute)
-     * on mouse hover and follows the mouse cursor.
-     */
+    // Sets up a tooltip for the current weather icon.
     function setupWeatherTooltip() {
         const $weatherIcon = $('#current-weather-icon-img');
-        if ($weatherIcon.length) {
-            let $tooltip = $('#weather-tooltip');
-            // If tooltip element doesn't exist, create it.
-            if (!$tooltip.length) {
-                $tooltip = $('<div>').attr('id', 'weather-tooltip').appendTo('body');
-            }
+        if (!$weatherIcon.length) return; // Skips if icon doesn't exist.
 
-            // Show tooltip on mouse enter.
-            $weatherIcon.on('mouseenter', function(e) {
-                const descriptionText = $(this).attr('alt'); // Get description from alt text.
-                if (descriptionText?.trim()) { // Check if alt text exists and is not empty.
-                    $tooltip.text(descriptionText)
-                        .css({ top: e.pageY + 15, left: e.pageX + 15 }) // Position near cursor.
-                        .fadeIn(200);
-                } else {
-                    $tooltip.hide(); // Hide if no alt text.
-                }
-            });
-
-            // Update tooltip position on mouse move.
-            $weatherIcon.on('mousemove', function(e) {
-                if ($tooltip.is(':visible')) {
-                    $tooltip.css({ top: e.pageY + 15, left: e.pageX + 15 });
-                }
-            });
-
-            // Hide tooltip on mouse leave.
-            $weatherIcon.on('mouseleave', function() {
-                $tooltip.fadeOut(200);
-            });
+        let $tooltip = $('#weather-tooltip');
+        // Creates tooltip element if it doesn't exist.
+        if (!$tooltip.length) {
+            $tooltip = $('<div>').attr('id', 'weather-tooltip').appendTo('body');
         }
+
+        // Shows tooltip on mouse enter.
+        $weatherIcon.on('mouseenter', function(e) {
+            const descriptionText = $(this).attr('alt');
+            if (descriptionText?.trim()) {
+                $tooltip.text(descriptionText)
+                    .css({ top: e.pageY + 15, left: e.pageX + 15 }) // Positions near cursor.
+                    .fadeIn(200);
+            } else {
+                $tooltip.hide(); // Hides if no alt text.
+            }
+        });
+
+        // Updates tooltip position on mouse move.
+        $weatherIcon.on('mousemove', function(e) {
+            if ($tooltip.is(':visible')) {
+                $tooltip.css({ top: e.pageY + 15, left: e.pageX + 15 });
+            }
+        });
+
+        // Hides tooltip on mouse leave.
+        $weatherIcon.on('mouseleave', function() {
+            $tooltip.fadeOut(200);
+        });
     }
 
-    // --- Initialize all enhancements once the DOM is ready ---
+    // --- Initialize all enhancements ---
     showWeatherSections();
     enableSmoothScroll();
     stickyHeader();
