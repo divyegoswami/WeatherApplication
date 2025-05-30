@@ -1,68 +1,49 @@
-/* -----------------------------
- * 1. RESET & FOUNDATION
- * Universal reset for margins, padding, and box-sizing.
- * This ensures a consistent base styling across all browsers
- * by removing default browser styles.
- * ----------------------------- */
-
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Includes padding and border in the element's total width and height. */
+  box-sizing: border-box;
 }
 
-/* -----------------------------
- * 2. THEME VARIABLES
- * Defines CSS Custom Properties (variables) for consistent theming.
- * :root targets the <html> element and makes these variables globally available.
- * ----------------------------- */
-
 :root {
-  /* Core design tokens: fundamental visual elements of the design. */
-  --primary-color: #062b4c;        /* Main brand color, often used for headers, buttons. */
-  --accent-color: #6cb2eb;         /* Secondary color for highlights, calls to action. */
-  --text-color: #333333;           /* Default text color for readability. */
-  --bg-light: #ffffff;             /* Light background color for main content areas. */
-  --bg-dark: #222222;              /* Dark background color, often used in dark themes or specific sections. */
-  --border-color: #cccccc;         /* Default border color for elements like inputs, tables. */
-  --muted-bg: #f8f9fa;             /* A subtle background color for less prominent sections. */
-  --footer-bg: #f9f9f9;            /* Specific background color for the footer. */
-  --button-text-color: #fff;       /* Default text color for buttons, ensuring contrast with primary-color bg. */
-  --transition-fast: 0.2s ease;    /* Standard duration for quick animations and transitions. */
-  --button-radius: 40px;           /* Border radius for buttons, promoting a consistent look. */
-  --base-font-size: 16px;          /* Base font size in pixels, used as a reference for rem units. */
+  --primary-color: #062b4c;
+  --accent-color: #6cb2eb;
+  --text-color: #333333;
+  --bg-light: #ffffff;
+  --bg-dark: #222222;
+  --border-color: #cccccc;
+  --muted-bg: #f8f9fa;
+  --footer-bg: #f9f9f9;
+  --button-text-color: #fff;
+  --transition-fast: 0.2s ease;
+  --button-radius: 40px;
+  --base-font-size: 16px;
   --hero-bg: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
-    url("../images/hero-bg.png") center/cover no-repeat; /* Background for the hero section. */
+    url("../images/hero-bg.png") center/cover no-repeat;
 
-  /* AQI Colors: Specific colors for Air Quality Index indicators. */
   --aqi-good: #4CAF50;
   --aqi-fair: #8BC34A;
   --aqi-moderate: #FFC107;
   --aqi-poor: #FF9800;
   --aqi-very-poor: #f44336;
-  --aqi-unknown: var(--text-color);  /* Text color for unknown AQI status. */
-  --aqi-unknown-bg: #9e9e9e;       /* Background color for unknown AQI status badge. */
+  --aqi-unknown: var(--text-color);
+  --aqi-unknown-bg: #9e9e9e;
 }
 
-/* Light theme settings (default).
- * Overrides variables defined in :root for the light theme.
- * Applied when the <body> or <html> element has `data-theme="light"`. */
 [data-theme="light"] {
   --primary-color: #062b4c;
   --accent-color: #6cb2eb;
   --text-color: #333333;
-  --placeholder-color: #757575;     /* Color for placeholder text in form fields. */
+  --placeholder-color: #757575;
   --bg-light: #ffffff;
   --bg-dark: #222222;
   --border-color: #cccccc;
   --button-text-color: #fff;
-  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Standard box shadow for elevated elements. */
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --muted-bg: #f8f9fa;
   --footer-bg: #f9f9f9;
 
-  /* AQI colors for light theme (can be same as :root if not specified otherwise). */
   --aqi-good: #4CAF50;
   --aqi-fair: #8BC34A;
   --aqi-moderate: #FFC107;
@@ -72,25 +53,21 @@
   --aqi-unknown-bg: #bdbdbd;
 }
 
-/* Dark theme settings.
- * Overrides variables for the dark theme.
- * Applied when `data-theme="dark"` is set. */
 [data-theme="dark"] {
-  --primary-color: #6cb2eb;         /* Primary color adjusted for dark background. */
-  --accent-color: #ffd60a;          /* Accent color adjusted for dark background. */
-  --text-color: #e5e5e5;            /* Light text color for readability on dark backgrounds. */
-  --placeholder-color: #aaa;         /* Placeholder color for dark theme. */
-  --bg-light: #1c1c1e;              /* Main background, now a dark color. */
-  --bg-dark: #2c2c2e;               /* An even darker shade for secondary dark backgrounds. */
-  --border-color: #3a3a3c;          /* Border color suited for dark theme. */
-  --button-text-color: #062b4c;     /* Dark text color for buttons if their background becomes light. */
-  --box-shadow: 0 2px 8px rgba(255, 255, 255, 0.047); /* Subtle shadow for dark theme. */
-  --muted-bg: #141414;              /* Muted background for dark theme. */
-  --footer-bg: #1c1c1e;             /* Footer background for dark theme. */
+  --primary-color: #6cb2eb;
+  --accent-color: #ffd60a;
+  --text-color: #e5e5e5;
+  --placeholder-color: #aaa;
+  --bg-light: #1c1c1e;
+  --bg-dark: #2c2c2e;
+  --border-color: #3a3a3c;
+  --button-text-color: #062b4c;
+  --box-shadow: 0 2px 8px rgba(255, 255, 255, 0.047);
+  --muted-bg: #141414;
+  --footer-bg: #1c1c1e;
   --hero-bg: linear-gradient(rgba(6, 43, 76, 0.6), rgba(6, 43, 76, 0.6)),
-    url("../images/hero-bg-dark.png") center/cover no-repeat; /* Dark theme hero background. */
+    url("../images/hero-bg-dark.png") center/cover no-repeat;
 
-  /* AQI colors adjusted for better visibility in dark theme. */
   --aqi-good: #66BB6A;
   --aqi-fair: #9CCC65;
   --aqi-moderate: #FFEE58;
@@ -100,211 +77,228 @@
   --aqi-unknown-bg: #424242;
 }
 
-/* High contrast accessibility theme settings.
- * Overrides variables for a high contrast theme, prioritizing readability.
- * Applied when `data-theme="high-contrast"` is set. */
 [data-theme="high-contrast"] {
-  --primary-color: #ffff00;       /* Yellow for high visibility. */
-  --accent-color: #00ffff;        /* Cyan for high visibility. */
-  --text-color: #ffffff;          /* White text on black background. */
-  --placeholder-color: #bbbbbb;    /* Lighter gray for placeholder text. */
-  --bg-light: #000000;            /* Black background for main content. */
-  --bg-dark: #000000;             /* Black for other background areas. */
-  --border-color: #ffffff;        /* White borders for high contrast. */
-  --button-text-color: #000000;   /* Black text on bright button backgrounds. */
-  --box-shadow: 0 0 0 2px var(--text-color); /* Outline style shadow for clear boundaries. */
+  --primary-color: #ffff00;
+  --accent-color: #00ffff;
+  --text-color: #ffffff;
+  --placeholder-color: #bbbbbb;
+  --bg-light: #000000;
+  --bg-dark: #000000;
+  --border-color: #ffffff;
+  --button-text-color: #000000;
+  --box-shadow: 0 0 0 2px var(--text-color);
   --muted-bg: #000000;
   --footer-bg: #000000;
-  --hero-bg: url("../images/hero-bg-high-contrast.png") center/cover no-repeat; /* High contrast hero background. */
+  --hero-bg: url("../images/hero-bg-high-contrast.png") center/cover no-repeat;
 
-  /* AQI colors with maximum contrast. */
-  --aqi-good: #00FF00;            /* Bright green. */
-  --aqi-fair: #ADFF2F;            /* Green-yellow. */
-  --aqi-moderate: #FFFF00;        /* Bright yellow. */
-  --aqi-poor: #FFA500;            /* Bright orange. */
-  --aqi-very-poor: #FF0000;         /* Bright red. */
-  --aqi-unknown: #000000;         /* Black text for unknown AQI badge. */
-  --aqi-unknown-bg: #ffffff;      /* White background for unknown AQI badge. */
+  --aqi-good: #00FF00;
+  --aqi-fair: #ADFF2F;
+  --aqi-moderate: #FFFF00;
+  --aqi-poor: #FFA500;
+  --aqi-very-poor: #FF0000;
+  --aqi-unknown: #000000;
+  --aqi-unknown-bg: #ffffff;
 }
 
-/* -----------------------------
- * 3. BASE TYPOGRAPHY & LAYOUT
- * Basic styling for HTML elements, typography, and overall page structure.
- * ----------------------------- */
-
 html {
-  font-size: var(--base-font-size); /* Sets the root font size, allowing `rem` units to be based on 16px. */
+  font-size: var(--base-font-size);
 }
 
 html,
 body {
-  height: 100%; /* Ensures html and body take up the full viewport height, crucial for sticky footer. */
+  height: 100%;
 }
 
 body {
-  display: flex;                /* Enables flexbox model for the body. */
-  flex-direction: column;       /* Stacks child elements (header, main, footer) vertically. */
-  min-height: 100vh;            /* Ensures body is at least the full viewport height. */
-  font-family: sans-serif;      /* Sets a default sans-serif font stack. */
-  color: var(--text-color);     /* Applies the themed text color. */
-  background: var(--bg-light);  /* Applies the themed light background color. */
-  line-height: 1.6;             /* Sets a comfortable line height for readability. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: sans-serif;
+  color: var(--text-color);
+  background: var(--bg-light);
+  line-height: 1.6;
 }
 
-/* Basic margin for headings, paragraphs, and lists for vertical rhythm. */
 h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5em; }
 p, ul, ol, blockquote { margin-bottom: 1em; }
-ul, ol { padding-left: 1.25em; } /* Standard indentation for lists. */
+ul, ol { padding-left: 1.25em; }
 a {
-  color: var(--primary-color); /* Links use the primary theme color. */
-  text-decoration: none;      /* Removes default underline from links. */
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
-/* -----------------------------
- * 4. LAYOUT CONTAINERS
- * Defines common layout containers for structuring content.
- * ----------------------------- */
-
 .container {
-  flex: 1; /* Allows the main content container to grow and fill available space (for sticky footer). */
+  flex: 1;
   width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
-  margin: 0 auto; /* Centers the container on the page. */
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 .section {
-  margin-bottom: 2rem; /* Provides consistent vertical spacing between sections. */
+  margin-bottom: 2rem;
 }
-
-/* -----------------------------
- * 5. HEADER & NAVIGATION
- * Styling for the site header and navigation menu.
- * ----------------------------- */
 
 #header {
   display: flex;
-  flex-direction: column; /* Stacks logo and nav vertically on small screens. */
+  flex-direction: column;
   align-items: center;
-  background: var(--primary-color); /* Header background uses primary theme color. */
+  background: var(--primary-color);
   padding: 1rem;
-  transition: box-shadow 0.3s ease; /* Smooth transition for box-shadow (e.g., sticky header). */
+  transition: box-shadow 0.3s ease;
 }
 
 #header #logo {
-  max-height: 60px; /* Constrains the logo height. */
-  margin-bottom: 0.75rem; /* Space below logo on small screens. */
+  max-height: 60px;
+  margin-bottom: 0.75rem;
 }
 
 nav ul {
   display: flex;
-  flex-direction: column; /* Nav items stack vertically on small screens. */
+  flex-direction: column;
   align-items: center;
-  gap: 1rem; /* Spacing between navigation items. */
-  list-style: none; /* Removes default list bullets. */
-  padding-left: 0; /* Resets default padding for ul. */
-  width: 100%; /* Nav takes full width on small screens. */
+  gap: 1rem;
+  list-style: none;
+  padding-left: 0;
+  width: 100%;
 }
 
 nav a {
   font-size: 1.2rem;
   font-weight: 500;
-  color: var(--button-text-color); /* Nav links use button text color for contrast against primary-color header. */
+  color: var(--button-text-color);
   text-decoration: none;
   transition: opacity var(--transition-fast);
-}
-/* Specific override for dark theme nav link color if the default button text color isn't suitable. */
-[data-theme="dark"] nav a {
-    color: var(--text-color); /* Uses general text color for better visibility in dark mode header. */
-}
-/* Specific override for high-contrast theme nav link color. */
-[data-theme="high-contrast"] nav a {
-    color: var(--text-color); /* Uses general text color for high-contrast mode header. */
 }
 
 nav a:hover,
 nav a:focus {
-  opacity: 0.8; /* Slight visual feedback on hover/focus. */
+  opacity: 0.8;
 }
 
-/* Styles for the sticky header functionality. */
 #header.sticky {
-  position: fixed; /* Fixes the header to the top of the viewport. */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 1000; /* Ensures header stays above other content. */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Adds a subtle shadow when sticky. */
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
-/* -----------------------------
- * 6. BUTTON STYLES
- * Defines global styles for buttons and button-like inputs.
- * Includes styles for accessibility theme buttons.
- * ----------------------------- */
 
 button,
 input[type="button"],
 input[type="submit"],
-.accessibility-controls button { /* Targets standard buttons and buttons within accessibility controls. */
-  display: inline-flex; /* Allows alignment of text/icons within the button. */
+.accessibility-controls button {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary-color); /* Button background uses primary theme color. */
-  color: var(--button-text-color); /* Button text color from theme. */
+  background: var(--primary-color);
+  color: var(--button-text-color);
   border: none;
-  border-radius: var(--button-radius); /* Consistent rounded corners. */
-  padding: 0.75rem 1.5rem; /* Comfortable padding. */
-  min-height: 44px; /* Minimum height for touch targets. */
-  font: inherit; /* Inherits font from parent for consistency. */
+  border-radius: var(--button-radius);
+  padding: 0.75rem 1.5rem;
+  min-height: 44px;
+  font: inherit;
   font-weight: 600;
   cursor: pointer;
   transition: background-color var(--transition-fast),
-    transform var(--transition-fast); /* Smooth transitions for hover effects. */
+    transform var(--transition-fast);
   text-align: center;
-  white-space: nowrap; /* Prevents text from wrapping inside buttons. */
+  white-space: nowrap;
 }
 
 button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 .accessibility-controls button:hover {
-  background: var(--accent-color); /* Changes background to accent color on hover. */
-  transform: translateY(-1px); /* Slight upward lift on hover. */
+  background: var(--accent-color);
+  transform: translateY(-1px);
 }
-/* Ensures button text remains readable on accent-color background during hover in dark mode. */
 [data-theme="dark"] button:hover,
 [data-theme="dark"] input[type="button"]:hover,
 [data-theme="dark"] input[type="submit"]:hover,
 [data-theme="dark"] .accessibility-controls button:hover {
-    color: var(--bg-light); /* Uses a color that contrasts with the dark theme's accent color. */
+    color: var(--bg-light);
 }
-/* Ensures button text remains readable on accent-color background during hover in high-contrast mode. */
 [data-theme="high-contrast"] button:hover,
 [data-theme="high-contrast"] input[type="button"]:hover,
 [data-theme="high-contrast"] input[type="submit"]:hover,
 [data-theme="high-contrast"] .accessibility-controls button:hover {
-    color: var(--bg-light); /* Uses a color that contrasts with high-contrast accent color. */
+    color: var(--bg-light);
 }
 
 button:focus,
 input[type="button"]:focus,
 input[type="submit"]:focus,
 .accessibility-controls button:focus {
-  outline: 2px dashed var(--accent-color); /* Clear focus indicator for accessibility. */
+  outline: 2px dashed var(--accent-color);
   outline-offset: 2px;
 }
 
-/* -----------------------------
- * 7. FORM ELEMENTS
- * Styling for form labels, input fields, textareas, and validation states.
- * ----------------------------- */
+.icon-button {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--primary-color);
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.icon-button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.icon-button:hover,
+.icon-button:focus {
+  background-color: var(--accent-color);
+  color: var(--button-text-color);
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+[data-theme="dark"] .icon-button {
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+[data-theme="dark"] .icon-button:hover,
+[data-theme="dark"] .icon-button:focus {
+    background-color: var(--accent-color);
+    color: var(--bg-light);
+    border-color: var(--accent-color);
+}
+
+[data-theme="high-contrast"] .icon-button {
+    border-color: var(--text-color);
+    color: var(--text-color);
+    background-color: var(--bg-light);
+}
+[data-theme="high-contrast"] .icon-button:hover,
+[data-theme="high-contrast"] .icon-button:focus {
+    background-color: var(--text-color);
+    color: var(--bg-light);
+    border-color: var(--text-color);
+}
+
+.icon-button:focus-visible {
+    outline: 2px dashed var(--accent-color);
+    outline-offset: 2px;
+}
 
 label {
   font-weight: bold;
-  display: block; /* Makes labels take full width for better spacing above inputs. */
+  display: block;
   margin-bottom: 0.25rem;
 }
 
@@ -312,155 +306,177 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 textarea,
-input[type="search"] { /* Common styling for various text-based input fields. */
+input[type="search"] {
   font: inherit;
   padding: 0.75rem;
   border: 1px solid var(--border-color);
-  border-radius: calc(var(--button-radius) / 2); /* Consistent radius, half of button radius. */
-  width: 100%; /* Inputs take full width of their container by default. */
+  border-radius: calc(var(--button-radius) / 2);
+  width: 100%;
   max-width: 100%;
-  font-size: 1rem; /* Standardized font size for inputs. */
-  background-color: var(--bg-light); /* Input background matches theme. */
-  color: var(--text-color); /* Input text color matches theme. */
+  font-size: 1rem;
+  background-color: var(--bg-light);
+  color: var(--text-color);
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--placeholder-color); /* Themed placeholder text color. */
-  opacity: 1; /* Ensures placeholder is not too faint. */
+  color: var(--placeholder-color);
+  opacity: 1;
 }
 
-/* Styling for error messages associated with form fields. */
 .error-msg {
-  color: #d9534f; /* Red color for error messages. */
+  color: #d9534f;
   font-size: 0.875em;
   display: block;
   margin-top: 5px;
 }
-/* Styling for valid input fields. */
 input.valid, textarea.valid {
-  border-color: #5cb85c !important; /* Green border for valid fields. */
+  border-color: #5cb85c !important;
 }
-/* Styling for invalid input fields. */
 input.invalid, textarea.invalid {
-  border-color: #d9534f !important; /* Red border for invalid fields. */
+  border-color: #d9534f !important;
 }
 
-/* -----------------------------
- * 8. TABLE STYLES
- * Defines basic styling for tables.
- * ----------------------------- */
 table {
-  display: block;      /* Allows horizontal scrolling on small screens. */
-  overflow-x: auto;    /* Enables horizontal scrollbar if content overflows. */
-  white-space: nowrap; /* Prevents text wrapping in cells, aiding horizontal scroll. */
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
   width: 100%;
-  border-collapse: collapse; /* Merges cell borders for a cleaner look. */
+  border-collapse: collapse;
   margin-bottom: 1em;
 }
 th, td {
   padding: 0.75rem;
-  border: 1px solid var(--muted-bg); /* Uses muted background color for cell borders. */
-  text-align: left; /* Aligns text to the left in cells. */
+  border: 1px solid var(--muted-bg);
+  text-align: left;
 }
 th {
-  background: var(--primary-color); /* Table headers use primary theme color. */
-  color: var(--button-text-color); /* Text color for contrast on header background. */
+  background: var(--primary-color);
+  color: var(--button-text-color);
 }
-/* Zebra striping for table rows for improved readability. */
 tr:nth-child(even) {
-  background: var(--muted-bg); /* Alternating rows have a muted background. */
+  background: var(--muted-bg);
 }
 
-/* -----------------------------
- * 9. HERO SECTION
- * Styling for the prominent hero banner, typically at the top of the homepage.
- * ----------------------------- */
 #hero {
   position: relative;
-  width: 100vw; /* Full viewport width. */
+  width: 100vw;
   left: 50%;
-  margin-left: -50vw; /* Centers the full-width element. */
-  height: 40vh; /* Takes 40% of the viewport height. */
-  background: var(--hero-bg); /* Themed background image/gradient. */
+  margin-left: -50vw;
+  height: 40vh;
+  background: var(--hero-bg);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0 1rem; /* Horizontal padding. */
+  padding: 0 1rem;
 }
 #hero h1 {
   font-size: 2rem;
-  color: #fff; /* White text for readability on dark hero background. */
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); /* Shadow for text legibility. */
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   margin-bottom: 0.5rem;
 }
 #hero p {
   font-size: 1rem;
-  color: #f0f0f0; /* Slightly off-white text. */
+  color: #f0f0f0;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
-#hero form {
-  display: flex;
-  flex-direction: column; /* Stacks label and input vertically. */
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  width: 100%;
-  max-width: 350px; /* Constrains width of the search form. */
+
+.hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 450px;
+    justify-content: center;
 }
+
+#hero .hero-search-form {
+    flex-grow: 1;
+    margin-top: 0;
+    display: flex;
+}
+
 #hero .search-label {
   color: #fff;
   font-size: 1.2rem;
   text-align: center;
 }
-/* Styling for the search input field within the hero section. */
 #hero .search-button {
   background-color: #fff;
-  color: var(--text-color); /* Uses theme text color for the input text. */
+  color: var(--text-color);
   border: 1px solid var(--accent-color);
-  border-radius: var(--button-radius); /* Consistent rounded corners. */
+  border-radius: var(--button-radius);
   height: 3rem;
   width: 100%;
-  max-width: 350px;
   text-align: center;
-  padding: 0.75rem; /* Consistent padding. */
+  padding: 0.75rem;
 }
 #hero .search-button:hover {
-  transform: translateY(-1px); /* Slight lift on hover. */
+  transform: translateY(-1px);
 }
-/* Dark theme specific styling for hero search input. */
 [data-theme="dark"] #hero .search-button {
-    color: var(--text-color); /* Ensures text is visible. */
+    color: var(--text-color);
 }
 [data-theme="dark"] #hero .search-button::placeholder {
-    color: var(--placeholder-color); /* Ensures placeholder is visible. */
+    color: var(--placeholder-color);
 }
-/* High-contrast theme specific styling for hero search input. */
 [data-theme="high-contrast"] #hero .search-button {
     color: var(--text-color);
-    background-color: var(--bg-dark); /* Ensures input background is dark. */
-    border-color: var(--text-color); /* White border for contrast. */
+    background-color: var(--bg-dark);
+    border-color: var(--text-color);
 }
 [data-theme="high-contrast"] #hero .search-button::placeholder {
     color: var(--placeholder-color);
 }
 
-/* -----------------------------
- * 10. CONTACT PAGE
- * Specific styles for the contact form and FAQ section.
- * ----------------------------- */
+#get-current-location-hero-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #fff;
+    color: var(--primary-color);
+}
+#get-current-location-hero-btn:hover,
+#get-current-location-hero-btn:focus {
+    background-color: #fff;
+    color: var(--accent-color);
+}
+
+[data-theme="dark"] #get-current-location-hero-btn {
+    background-color: rgba(70, 70, 70, 0.8);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+[data-theme="dark"] #get-current-location-hero-btn:hover,
+[data-theme="dark"] #get-current-location-hero-btn:focus {
+    background-color: var(--bg-dark);
+    color: var(--accent-color);
+}
+
+[data-theme="high-contrast"] #get-current-location-hero-btn {
+    background-color: var(--bg-light);
+    border-color: var(--text-color);
+    color: var(--text-color);
+}
+[data-theme="high-contrast"] #get-current-location-hero-btn:hover,
+[data-theme="high-contrast"] #get-current-location-hero-btn:focus {
+    background-color: var(--text-color);
+    color: var(--bg-light);
+}
+
+
 .contact-form {
-  max-width: 500px; /* Limits width of the contact form. */
-  margin: 2rem auto; /* Centers the form with vertical spacing. */
+  max-width: 500px;
+  margin: 2rem auto;
   background: var(--bg-light);
   padding: 1rem;
   border-radius: var(--button-radius);
-  box-shadow: var(--box-shadow); /* Adds themed shadow. */
+  box-shadow: var(--box-shadow);
   text-align: center;
 }
-.contact-form fieldset { border: none; padding: 0; } /* Removes default fieldset styling. */
+.contact-form fieldset { border: none; padding: 0; }
 .contact-form legend {
   font-size: 1.8rem;
   color: var(--primary-color);
@@ -470,54 +486,47 @@ tr:nth-child(even) {
 .contact-form label {
   display: block;
   margin-bottom: 0.5rem;
-  text-align: left; /* Aligns labels to the left within the form. */
+  text-align: left;
 }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: var(--placeholder-color); /* Uses themed placeholder color. */
+  color: var(--placeholder-color);
   opacity: 1;
 }
-/* Styling for FAQ items (accordion). */
 .faq-item {
   margin-bottom: 1rem;
   border: 1px solid var(--border-color);
   border-radius: calc(var(--button-radius) / 2);
-  overflow: hidden; /* Important for rounded corners with background. */
+  overflow: hidden;
   text-align: left;
 }
 .faq-question {
   background-color: var(--muted-bg);
   padding: 0.75rem 1rem;
-  cursor: pointer; /* Indicates it's clickable. */
+  cursor: pointer;
   font-weight: bold;
   margin: 0;
   display: flex;
-  justify-content: space-between; /* Positions icon to the right. */
+  justify-content: space-between;
   align-items: center;
 }
-/* Arrow icon for accordion, changes on open/close. */
 .faq-question::after {
-  content: '▼'; /* Down arrow. */
+  content: '▼';
   font-size: 0.8em;
   transition: transform 0.3s ease;
 }
-.faq-question.open::after { transform: rotate(180deg); } /* Rotates arrow when open. */
+.faq-question.open::after { transform: rotate(180deg); }
 
 .faq-answer {
   padding: 1rem;
   background-color: var(--bg-light);
   border-top: 1px solid var(--border-color);
-  display: none; /* Hidden by default, shown via JavaScript. */
+  display: none;
 }
-.faq-answer p, .faq-answer ul, .faq-answer ol { margin-bottom: 0; } /* Resets margin for content within answer. */
-
-/* -----------------------------
- * 11. FORECAST PAGE & CURRENT WEATHER
- * Styles for the weather search form, current weather display, and weekly forecast.
- * ----------------------------- */
+.faq-answer p, .faq-answer ul, .faq-answer ol { margin-bottom: 0; }
 
 #weather-search {
-  max-width: 700px; /* Wider container for search input and buttons. */
+  max-width: 700px;
   margin: 2rem auto;
   background: var(--bg-light);
   padding: 1.5rem;
@@ -525,38 +534,39 @@ tr:nth-child(even) {
   box-shadow: var(--box-shadow);
 }
 
-/* Styles for the form within #weather-search. */
 #weather-search form {
   display: flex;
-  flex-direction: column; /* Stacks label above the input/button group. */
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-/* Wrapper for form input and associated action buttons (e.g., Search, Select on Map). */
 .form-controls-wrapper {
   display: flex;
-  flex-wrap: wrap; /* Allows items to wrap onto the next line on smaller screens. */
-  align-items: center; /* Vertically aligns input and buttons. */
-  gap: 0.5rem; /* Space between input field and buttons. */
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .form-controls-wrapper input[type="text"] {
-  flex-grow: 1; /* Input field takes up available horizontal space. */
-  min-width: 200px; /* Minimum width to ensure usability. */
-  margin-bottom: 0; /* Removes default margin if input is a direct flex item. */
+  flex-grow: 1;
+  min-width: 200px;
+  margin-bottom: 0;
 }
 
-/* Ensures buttons in this form context maintain their padding and don't shrink too much. */
+.form-controls-wrapper input[type="submit"],
+.form-controls-wrapper button#select-on-map-btn,
+.form-controls-wrapper .icon-button {
+  flex-shrink: 0;
+}
 .form-controls-wrapper input[type="submit"],
 .form-controls-wrapper button#select-on-map-btn {
-  flex-shrink: 0; /* Prevents buttons from shrinking disproportionately. */
-  padding: 0.75rem 1rem; /* Slightly adjusted padding for buttons in this row. */
+  padding: 0.75rem 1rem;
 }
 
-/* Styles for the current weather preview section. */
+
 #current-weather-preview {
   display: grid;
-  grid-template-columns: 1fr; /* Single column by default. */
+  grid-template-columns: 1fr;
   gap: 1rem;
   background: var(--bg-light);
   padding: 1rem;
@@ -564,24 +574,19 @@ tr:nth-child(even) {
   box-shadow: var(--box-shadow);
 }
 #current-weather-preview h2 {
-  grid-column: 1 / -1; /* Makes the heading span all columns. */
+  grid-column: 1 / -1;
   margin-bottom: 1rem;
 }
 #current-weather-preview p { margin-bottom: 0.5rem; }
 
-/* Styles for the weekly forecast section. */
 #weekly-forecast {
-  overflow-x: auto; /* Allows horizontal scrolling for weekly forecast items. */
+  overflow-x: auto;
   background: var(--bg-light);
   padding: 1.5rem;
   border-radius: var(--button-radius);
   box-shadow: var(--box-shadow);
 }
 
-/* -----------------------------
- * 12. ACCESSIBILITY PAGE
- * Styles for the accessibility settings page content.
- * ----------------------------- */
 #accessibility {
   max-width: 800px;
   margin: 2rem auto;
@@ -600,38 +605,33 @@ tr:nth-child(even) {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
-/* Container for accessibility control buttons (e.g., theme switchers). */
 .accessibility-controls {
   display: flex;
-  flex-direction: column; /* Stacks controls vertically on small screens. */
+  flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
-/* -----------------------------
- * 13. IMPROVED SLIDER SYSTEM
- * Generic styles for a content slider/carousel.
- * ----------------------------- */
 .slider-wrapper {
-  position: relative; /* Needed for absolute positioning of navigation buttons. */
+  position: relative;
   width: 100%;
   max-width: 100%;
   margin: 2rem 0;
-  padding: 0 40px; /* Space for navigation buttons on the sides. */
+  padding: 0 40px;
 }
 .slider-window {
   width: 100%;
-  overflow: hidden; /* Hides parts of slides that are outside the window. */
+  overflow: hidden;
   border-radius: var(--button-radius);
 }
 .slides {
-  display: flex; /* Arranges slides in a row. */
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth slide transition. */
-  will-change: transform; /* Performance hint for browsers. */
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 .slide {
-  flex-shrink: 0; /* Prevents slides from shrinking to fit. */
+  flex-shrink: 0;
   padding: 1rem;
   background: var(--bg-light);
   border-radius: var(--button-radius);
@@ -640,50 +640,45 @@ tr:nth-child(even) {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: relative; /* For potential absolutely positioned elements within a slide. */
+  position: relative;
 }
-/* Navigation buttons (previous/next) for the slider. */
 .slider-nav {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%); /* Vertically centers the buttons. */
+  transform: translateY(-50%);
   background: var(--primary-color);
   color: var(--button-text-color);
   border: none;
-  border-radius: 50%; /* Circular buttons. */
+  border-radius: 50%;
   width: 32px;
   height: 32px;
   font-size: 1.2rem;
   cursor: pointer;
-  z-index: 10; /* Ensures buttons are above slides. */
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.7;
   transition: all 0.3s ease;
-  user-select: none; /* Prevents text selection on button click. */
+  user-select: none;
 }
 .slider-nav:hover:not(:disabled) {
   opacity: 1;
-  transform: translateY(-50%) scale(1.1); /* Slight zoom effect on hover. */
+  transform: translateY(-50%) scale(1.1);
   background: var(--accent-color);
 }
 .slider-nav:disabled {
   opacity: 0.3;
-  cursor: not-allowed; /* Indicates button is not interactive. */
+  cursor: not-allowed;
   background: var(--border-color);
 }
-.slider-nav.prev { left: 8px; } /* Positions previous button. */
-.slider-nav.next { right: 8px; } /* Positions next button. */
+.slider-nav.prev { left: 8px; }
+.slider-nav.next { right: 8px; }
 
-/* -----------------------------
- * 14. HOURLY FORECAST SPECIFIC STYLES
- * Customizations for the slider when used for hourly forecasts.
- * ----------------------------- */
 #hourly-forecast .slide {
-  min-height: 140px; /* Minimum height for hourly forecast items. */
-  justify-content: space-between; /* Distributes space between time, icon, and temps. */
-  padding: 0.75rem 0.5rem; /* Adjusted padding for compact items. */
+  min-height: 140px;
+  justify-content: space-between;
+  padding: 0.75rem 0.5rem;
 }
 #hourly-forecast .slide time {
   font-weight: 600;
@@ -691,13 +686,13 @@ tr:nth-child(even) {
   color: var(--primary-color);
   margin-bottom: 0.5rem;
 }
-#hourly-forecast .slide img { /* Weather icon styling. */
+#hourly-forecast .slide img {
   width: 40px;
   height: 40px;
   object-fit: contain;
   margin: 0.5rem 0;
 }
-#hourly-forecast .temps { /* Container for high/low temperatures. */
+#hourly-forecast .temps {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -716,12 +711,8 @@ tr:nth-child(even) {
   opacity: 0.8;
 }
 
-/* -----------------------------
- * 15. COMMENT SLIDER SPECIFIC STYLES
- * Customizations for the slider when used for displaying comments or testimonials.
- * ----------------------------- */
 #comment-slider {
-  max-width: 1200px; /* Wider slider for comments. */
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   padding: 1rem;
@@ -729,8 +720,8 @@ tr:nth-child(even) {
 #comment-slider h2 { text-align: center; margin-bottom: 1.5rem; }
 #comment-slider .slide {
   min-height: 120px;
-  justify-content: center; /* Centers content vertically. */
-  padding: 1.5rem; /* More padding for comment text. */
+  justify-content: center;
+  padding: 1.5rem;
 }
 #comment-slider .slide p {
   margin-bottom: 0.5rem;
@@ -744,116 +735,93 @@ tr:nth-child(even) {
   margin-bottom: 0;
 }
 
-/* -----------------------------
- * 16. FOOTER
- * Styling for the site footer.
- * ----------------------------- */
 #footer {
   text-align: center;
   padding: 1rem;
   border-top: 1px solid var(--border-color);
-  background: var(--footer-bg); /* Themed footer background. */
-  font-size: 0.9em; /* Slightly smaller font size for footer text. */
+  background: var(--footer-bg);
+  font-size: 0.9em;
 }
 #footer a {
   color: var(--primary-color);
-  text-decoration: underline; /* Underlines links in the footer for clarity. */
+  text-decoration: underline;
 }
 
-/* -----------------------------
- * 17. RESPONSIVE BREAKPOINTS
- * Media queries to adjust layout and styles for different screen sizes.
- * ----------------------------- */
-
-/* Small devices (tablets, 576px and up) */
 @media (min-width: 576px) {
-  #current-weather-preview { grid-template-columns: repeat(2, 1fr); } /* Two columns for current weather. */
-  .slider-wrapper { padding: 0 50px; } /* More space for slider nav buttons. */
+  #current-weather-preview { grid-template-columns: repeat(2, 1fr); }
+  .slider-wrapper { padding: 0 50px; }
   .slider-nav { width: 36px; height: 36px; }
   .slider-nav.prev { left: 12px; }
   .slider-nav.next { right: 12px; }
 
-  /* Adjust form controls wrapper on slightly larger screens */
   .form-controls-wrapper {
-    flex-wrap: nowrap; /* Prevent wrapping if space allows, keeping input and buttons in one line. */
+    flex-wrap: nowrap;
   }
   .form-controls-wrapper input[type="text"] {
-    min-width: 250px; /* Increased minimum width for the text input. */
+    min-width: 250px;
   }
 }
 
-/* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  .container { padding: 0 2rem 2rem; width: 90%; } /* Wider container with more padding. */
-  #header { flex-direction: row; padding: 1rem; } /* Header items (logo, nav) in a row. */
+  .container { padding: 0 2rem 2rem; width: 90%; }
+  #header { flex-direction: row; padding: 1rem; }
   #header #logo { margin-bottom: 0; max-height: 70px; }
-  nav ul { flex-direction: row; justify-content: flex-end; margin-left: auto; width: auto; gap: 1.5rem; } /* Horizontal nav aligned to right. */
+  nav ul { flex-direction: row; justify-content: flex-end; margin-left: auto; width: auto; gap: 1.5rem; }
   #current-weather-preview { padding: 1.5rem; gap: 1.5rem; }
   .contact-form { padding: 2rem 2rem; }
-  table { display: table; white-space: normal; } /* Reverts table to standard block display, text wrapping allowed. */
-  #hero { height: 50vh; } /* Taller hero section. */
+  table { display: table; white-space: normal; }
+  #hero { height: 50vh; }
   #hero h1 { font-size: 2.75rem; }
   #hero p { font-size: 1.2rem; }
-  h1 { font-size: 2.25rem; } /* Larger heading sizes. */
+  h1 { font-size: 2.25rem; }
   h2 { font-size: 1.75rem; }
   h3 { font-size: 1.5rem; }
-  .accessibility-controls { flex-direction: row; gap: 1rem; } /* Accessibility controls in a row. */
-  input[type="text"], input[type="email"], input[type="tel"], textarea, input[type="search"] { max-width: 400px; } /* Max width for form inputs. */
-  #hourly-forecast .slide { min-height: 160px; } /* Taller hourly forecast slides. */
+  .accessibility-controls { flex-direction: row; gap: 1rem; }
+  input[type="text"], input[type="email"], input[type="tel"], textarea, input[type="search"] { max-width: 400px; }
+  #hourly-forecast .slide { min-height: 160px; }
   #hourly-forecast .slide img { width: 50px; height: 50px; }
   #hourly-forecast .temp-high { font-size: 1rem; }
   #hourly-forecast .temp-low { font-size: 0.9rem; }
 }
 
-/* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  #current-weather-preview { grid-template-columns: repeat(4, 1fr); } /* Four columns for current weather. */
-  .slider-wrapper { padding: 0 60px; } /* Even more space for slider nav. */
+  #current-weather-preview { grid-template-columns: repeat(4, 1fr); }
+  .slider-wrapper { padding: 0 60px; }
   .slider-nav { width: 40px; height: 40px; font-size: 1.4rem; }
   .slider-nav.prev { left: 16px; }
   .slider-nav.next { right: 16px; }
 }
 
-/* Extra large devices (large desktops, 1024px and up - often for content max-width) */
 @media (min-width: 1024px) {
-  #main-content { max-width: 1200px; margin: 0 auto; } /* Constrains main content width and centers it. */
-  #hero { height: 60vh; } /* Even taller hero. */
+  #main-content { max-width: 1200px; margin: 0 auto; }
+  #hero { height: 60vh; }
   #hero h1 { font-size: 3.5rem; }
-  h1 { font-size: 2.5rem; } /* Further increase in heading sizes. */
+  h1 { font-size: 2.5rem; }
   h2 { font-size: 2rem; }
   h3 { font-size: 1.75rem; }
 }
 
-/* Extra extra large devices (wider desktops, 1200px and up) */
 @media (min-width: 1200px) {
-  .slider-wrapper { padding: 0 70px; } /* Maximum padding for slider nav. */
+  .slider-wrapper { padding: 0 70px; }
 }
 
-/* -----------------------------
- * 18. JQUERY ENHANCEMENTS STYLES
- * Styles for UI elements enhanced or controlled by JavaScript (jQuery).
- * ----------------------------- */
-
-/* Style for toast messages (brief, auto-expiring notifications). */
 #toast-message {
-  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); /* Centered at bottom of screen. */
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
   background-color: var(--primary-color); color: var(--button-text-color);
   padding: 10px 20px; border-radius: var(--button-radius); box-shadow: var(--box-shadow);
-  z-index: 2000; /* High z-index to appear above other content. */
-  display: none; /* Hidden by default, shown by JS. */
+  z-index: 2000;
+  display: none;
   font-size: 0.9rem;
 }
 
-/* Utility class to visually hide elements but keep them accessible to screen readers. */
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-/* Style for "back to top" button. */
 #back-to-top {
-  position: fixed; bottom: 20px; right: 20px; /* Fixed at bottom-right of screen. */
-  display: none; /* Hidden by default, shown by JS on scroll. */
+  position: fixed; bottom: 20px; right: 20px;
+  display: none;
   background-color: var(--primary-color); color: var(--button-text-color);
   border: none; border-radius: 50%; width: 40px; height: 40px;
   font-size: 1.2rem; text-align: center; line-height: 40px; cursor: pointer;
@@ -862,113 +830,89 @@ tr:nth-child(even) {
 }
 #back-to-top:hover { opacity: 1; background-color: var(--accent-color); }
 
-/* Style for weather tooltips (small informational popups). */
 #weather-tooltip {
-  position: absolute; /* Positioned by JS relative to a target element. */
-  display: none; /* Hidden by default. */
+  position: absolute;
+  display: none;
   background-color: var(--bg-dark);
-  color: var(--bg-light); /* Light text on dark tooltip background. */
+  color: var(--bg-light);
   padding: 5px 10px; border-radius: calc(var(--button-radius) / 4);
-  font-size: 0.85rem; z-index: 2000; pointer-events: none; /* Tooltip doesn't intercept mouse events. */
+  font-size: 0.85rem; z-index: 2000; pointer-events: none;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
-/* Theme-specific tooltip styling. */
 [data-theme="light"] #weather-tooltip { background-color: var(--bg-dark); color: #fff; }
 [data-theme="dark"] #weather-tooltip { background-color: #444; color: var(--text-color); }
 [data-theme="high-contrast"] #weather-tooltip {
-  background-color: var(--text-color); /* White background in HC. */
-  color: var(--bg-light); /* Black text in HC. */
-  border: 1px solid var(--bg-light); /* Black border. */
+  background-color: var(--text-color);
+  color: var(--bg-light);
+  border: 1px solid var(--bg-light);
 }
-
-/* -----------------------------
- * 19. AQI STYLES
- * Styles for displaying Air Quality Index (AQI) values as colored badges.
- * ----------------------------- */
 
 .aqi-value {
   font-weight: bold;
-  padding: 0.2em 0.5em; /* Padding for a badge-like appearance. */
+  padding: 0.2em 0.5em;
   border-radius: 4px;
-  color: #fff; /* Default text color, white, for good contrast on most AQI backgrounds. */
-  background-color: var(--aqi-unknown-bg); /* Default background for unknown AQI. */
-  display: inline-block; /* Ensures padding and background apply correctly. */
-  line-height: 1.2; /* Adjusted line height for badge text. */
+  color: #fff;
+  background-color: var(--aqi-unknown-bg);
+  display: inline-block;
+  line-height: 1.2;
   text-align: center;
 }
 
-/* AQI Good: Green background, white text. */
 .aqi-value.aqi-good { background-color: var(--aqi-good); color: #fff; }
-[data-theme="high-contrast"] .aqi-value.aqi-good { color: #000; } /* Black text for HC good. */
+[data-theme="high-contrast"] .aqi-value.aqi-good { color: #000; }
 
-/* AQI Fair: Lighter green/yellow background, black text for better contrast. */
 .aqi-value.aqi-fair { background-color: var(--aqi-fair); color: #000; }
-[data-theme="dark"] .aqi-value.aqi-fair { color: #000; } /* Ensure black text in dark theme too. */
-[data-theme="high-contrast"] .aqi-value.aqi-fair { color: #000; } /* Black text for HC fair. */
+[data-theme="dark"] .aqi-value.aqi-fair { color: #000; }
+[data-theme="high-contrast"] .aqi-value.aqi-fair { color: #000; }
 
-/* AQI Moderate: Yellow background, black text. */
 .aqi-value.aqi-moderate { background-color: var(--aqi-moderate); color: #000; }
 
-/* AQI Poor: Orange background, black text. */
 .aqi-value.aqi-poor { background-color: var(--aqi-poor); color: #000; }
 
-/* AQI Very Poor: Red background, white text. */
 .aqi-value.aqi-very-poor { background-color: var(--aqi-very-poor); color: #fff; }
 
-/* AQI Unknown or N/A: Uses themed unknown AQI colors. */
 .aqi-value.aqi-unknown,
 .aqi-value.aqi-na {
   background-color: var(--aqi-unknown-bg);
-  color: var(--aqi-unknown); /* Themed text color for unknown status. */
+  color: var(--aqi-unknown);
 }
-/* Dark theme specific text color for unknown AQI. */
 [data-theme="dark"] .aqi-value.aqi-unknown,
 [data-theme="dark"] .aqi-value.aqi-na {
-  color: var(--text-color); /* Uses general dark theme text color. */
+  color: var(--text-color);
 }
-/* High-contrast theme specific text color for unknown AQI. */
 [data-theme="high-contrast"] .aqi-value.aqi-unknown,
 [data-theme="high-contrast"] .aqi-value.aqi-na {
-  color: var(--aqi-unknown); /* Uses HC specific unknown AQI text color (black). */
+  color: var(--aqi-unknown);
 }
 
-/* -----------------------------
- * 20. MAP MODAL STYLES
- * Styles for the modal dialog used to display a map for location selection.
- * The #select-on-map-btn button itself should inherit global button styles.
- * ----------------------------- */
-
-/* Modal container: overlay and positioning. */
 .modal {
-  display: none; /* Hidden by default, shown via JavaScript. */
-  position: fixed; /* Stays in place during scroll. */
-  z-index: 1500; /* Appears above most other content, but below toast/tooltips if necessary. */
+  display: none;
+  position: fixed;
+  z-index: 1500;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* Enables scroll if modal content is too tall. */
-  background-color: rgba(0,0,0,0.6); /* Semi-transparent black background overlay. */
-  padding-top: 60px; /* Space from top for the modal content. */
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  padding-top: 60px;
 }
 
-/* Modal content box: the actual dialog. */
 .modal-content {
-  background-color: var(--bg-light); /* Themed background. */
-  color: var(--text-color); /* Themed text color. */
-  margin: 5% auto; /* Centered vertically (approximately) and horizontally. */
+  background-color: var(--bg-light);
+  color: var(--text-color);
+  margin: 5% auto;
   padding: 20px;
   border: 1px solid var(--border-color);
-  width: 80%; /* Responsive width. */
-  max-width: 700px; /* Maximum width for larger screens. */
-  border-radius: 8px; /* Rounded corners. */
-  position: relative; /* For positioning the close button. */
-  box-shadow: var(--box-shadow); /* Themed shadow. */
+  width: 80%;
+  max-width: 700px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: var(--box-shadow);
 }
 
-/* Close button ('x') for the modal. */
 .close-modal-btn {
-  color: var(--text-color); /* Themed text color. */
+  color: var(--text-color);
   position: absolute;
   top: 10px;
   right: 20px;
@@ -979,16 +923,15 @@ tr:nth-child(even) {
 
 .close-modal-btn:hover,
 .close-modal-btn:focus {
-  color: var(--primary-color); /* Changes color on hover/focus for feedback. */
+  color: var(--primary-color);
   text-decoration: none;
   cursor: pointer;
 }
 
-/* Container for the Leaflet map within the modal. */
 #leaflet-map-container {
-  height: 400px; /* Fixed height for the map. */
+  height: 400px;
   width: 100%;
-  margin-top: 15px; /* Space above the map. */
+  margin-top: 15px;
   border-radius: 4px;
   border: 1px solid var(--border-color);
 }
